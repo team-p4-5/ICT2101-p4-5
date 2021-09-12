@@ -1,0 +1,68 @@
+<!-- dashboard.html -->
+
+<!--
+    Created on : 12 Sep 2021, 18:30:00
+    Author     : Bernard, Xiu Qi
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'base.html' %}
+    <body>
+        <div class="pos-f-t">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
+                <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="../static/images/startup.logo" height="70"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('profile') }}">{{ active_user }}'s Profile</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('hardwarespecs') }}">Components</a>
+                        </li>
+                    </ul>
+
+                    <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <section id="control">
+            <div class ="container">
+                <div class="col-sm-10 col-sm-offset-1"></div>
+                <h6 class="display-4">Control/Backlogs</h6>
+            </div>
+        </section>
+        <section id="controller">
+            <div class="container">
+                <div class="col-sm-20 col-sm-offset-1"></div>
+
+                <h5 class="card-title">Instructions</h5>
+                <p class="card-text">Please press one direction button at a time.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+                <canvas width="650" height="400" id="mycanvas">
+                </canvas>
+                <script>var canvas = document.getElementByld("myCanvas");
+                </script>
+                <br>
+                <h6> Remote Controller </h6>
+            </div>
+       </section>
+    </body>
+
+    <footer>
+        <p><em>Copyright &copy; Robotic Coding Car Control 2021.</em></p>
+    </footer>

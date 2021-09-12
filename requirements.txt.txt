@@ -1,0 +1,5 @@
+Flask==1.1.2
+Flask-WTF==0.15.1
+gevent==21.8.0
+Jinja2==2.11.2
+rich==10.9.0

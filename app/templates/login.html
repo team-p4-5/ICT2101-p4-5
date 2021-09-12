@@ -1,0 +1,56 @@
+<!-- login.html -->
+
+<!--
+    Created on : 12 Sep 2021, 18:30:00
+    Author     : Bernard, Xiu Qi
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'base.html' %}
+    <body>
+        <div class="pos-f-t">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
+                <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="../static/images/startup.logo" height="70"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main class="container">
+                <h1>Student Login</h1>
+                <p>
+                    To sign up a new account, please go to the
+                    <a href="{{ url_for('register') }}"> Register Page</a>
+                </p>
+                <form action="{{ url_for('login') }}" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                        <label for="password">Username:</label>
+                        <input class="form-control" type="text" id="username"
+                               name="username" placeholder="Enter Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input class="form-control" type="password" id="password"
+                               name="password" placeholder="Enter Password" required>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </body>
+
+    <footer>
+        <p><em>Copyright &copy; Robotic Coding Car Control 2021.</em></p>
+    </footer>
+</html>
