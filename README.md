@@ -4,6 +4,6 @@
 1. Open cmd and navigate to root directory of project (where requirements.txt is)
 2. Run `pip install -r requirements.txt`
 ## Running the program
-1. Open CMD **as Admin**and navigate to root directory of project (where run.py is)
+1. Open CMD **as Admin** and navigate to root directory of project (where run.py is)
 2. Run `python run.py`
 
