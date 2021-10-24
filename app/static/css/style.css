@@ -5,45 +5,75 @@
     Author     : Bernard
 */
 html,
-body{
+body
+{
     height: 100%;
 }
-img{
+img
+{
     max-width: 100%;
 }
 /* cover */
-#cover {
-    background: #222 url('../images/kids1.jpg') center center no-repeat;
+#cover 
+{
+    background: #222 url('img/homecar.jpg') center center no-repeat;
     background-size: cover;
-    color: purple;
+    color: white;
     height: 100%;
     text-align: center;
     display: flex;
     align-items: center;
     
 }
-#cover-caption{
+#cover-caption
+{
     width: 100%;
 }
-.section-content{
+.section-content
+{
     padding: 5rem 0;
 }
-#about{
-    background: url('../images/rainbow.jpg') center center no-repeat;
-    background-size: cover;
+#about
+{
+    background: url('img/magnificent.gif') center center no-repeat;
+    background-size: cover;   
 }
-.about-text{
+
+.about-text
+{
     background: rgba(0,0,0,0.2);
     color: white;
     padding: 1.875rem;
 }
-.feature-content{
-    padding: 8rem 0;
+.feature-content
+{
+    padding: 5rem 0;
     overflow: hidden;
 }
-footer{
+.component-content{
+    padding: 5rem 0;
+}
+.card-group
+{
+    padding: 5rem 0;
+}
+
+.carouselExampleIndicators 
+{
+  width:auto;
+  height:auto;
+}
+
+footer
+{
     border-top: groove;
+    background-color: #202326;
     font-style: italic;
+    color: white;
     font-size: .9en;
     padding: 15px;
 }
+
+
+
+
