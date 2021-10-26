@@ -218,6 +218,14 @@ def hardwarespecs():
     # Return page for profile
     return render_template('hardwarespecs.html', active_user=active_user)
 
+@app.route('/leaderboard')
+def leaderboard():
+    # # Check for Session
+    if not session.get('active'):
+        return render_template('login.html')
+
+    # Return page for profile
+    return render_template('leaderboard.html', active_user=active_user)
 
 # Function to get a list of all connected cars
 @app.route('/getcars')
