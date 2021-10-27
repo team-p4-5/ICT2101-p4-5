@@ -48,7 +48,7 @@ def index():
 
     else:
         try:
-            return redirect('/home')
+            return redirect('/feature')
 
         except:
             # if session expire, set the session to False
@@ -240,6 +240,24 @@ def leaderboard():
 
     # Return page for profile
     return render_template('leaderboard.html', active_user=active_user)
+
+@app.route('/feature')
+def feature():
+    # # Check for Session
+    if not session.get('active'):
+        return render_template('login.html')
+
+    # Return page for profile
+    return render_template('feature.html', active_user=active_user)
+
+@app.route('/control')
+def control():
+    # # Check for Session
+    if not session.get('active'):
+        return render_template('login.html')
+
+    # Return page for profile
+    return render_template('control.html', active_user=active_user)
 
 # Function to get a list of all connected cars
 @app.route('/getcars')

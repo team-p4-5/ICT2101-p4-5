@@ -16,27 +16,21 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('profile') }}">{{ active_user }}'s Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ url_for('hardwarespecs') }}">Components</a>
-                        </li>
-                    </ul>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('feature') }}">Main</a>
+                    </li><!-- comment -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('control') }}">Control</a>
+                    </li><!-- comment -->
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+                </form>
 
-                    <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
-                    </form>
-                </div>
+            </div>
             </nav>
         </div>
         <main class="container">
