@@ -44,7 +44,7 @@ active_user = ""           # string var to contain name of currently logged in u
 def index():
     # Check for Session
     if not session.get('active'):
-        return render_template('login.html')
+        return render_template('index.html')
 
     else:
         try:
@@ -116,6 +116,11 @@ def registeraccount():
                 flash("Password mismatch. Try again!")
                 return redirect('/register')
 
+@app.route('/login')
+def loginpage():
+    # Return page for dashboard
+    return render_template('login.html')
+
 
 @app.route('/login', methods=["POST"])
 def login():
@@ -177,6 +182,15 @@ def page_not_found(e):
 def internal_server_error(e):
     # note that we set the 500 status explicitly
     return render_template('500.html'), 500
+
+@app.route('/index')
+def indexpage():
+    # # Check for Session
+    if not session.get('active'):
+        return render_template('login.html')
+
+    # Return page for dashboard
+    return render_template('index.html', active_user=active_user)
 
 
 @app.route('/home')
