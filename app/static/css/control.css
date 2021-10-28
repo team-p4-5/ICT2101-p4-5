@@ -7,11 +7,12 @@ and open the template in the editor.
     Created on : 10 Sep 2021, 1:32:22 pm
     Author     : Bernard
 */
-@import url('https//fonts.googleapis.com/css2?family=Poppins:wght@200;300');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300');
+
 /*Background Wallpaper*/
 #backimage 
 {
-    background: #222 url('img/coding.jpg') center center no-repeat;
+    background: #222 url('../images/coding.jpg') center center no-repeat;
     background-size: cover;
     align-items: center;
 }
