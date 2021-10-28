@@ -44,7 +44,7 @@ active_user = ""           # string var to contain name of currently logged in u
 def index():
     # Check for Session
     if not session.get('active'):
-        return render_template('index.html')
+        return render_template('home.html')
 
     else:
         try:
