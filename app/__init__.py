@@ -183,16 +183,6 @@ def internal_server_error(e):
     # note that we set the 500 status explicitly
     return render_template('500.html'), 500
 
-@app.route('/index')
-def indexpage():
-    # # Check for Session
-    if not session.get('active'):
-        return render_template('login.html')
-
-    # Return page for dashboard
-    return render_template('index.html', active_user=active_user)
-
-
 @app.route('/home')
 def home():
     # # Check for Session
@@ -245,7 +235,7 @@ def leaderboard():
 def feature():
     # # Check for Session
     if not session.get('active'):
-        return render_template('login.html')
+        return render_template('feature.html')
 
     # Return page for profile
     return render_template('feature.html', active_user=active_user)
@@ -254,7 +244,7 @@ def feature():
 def control():
     # # Check for Session
     if not session.get('active'):
-        return render_template('login.html')
+        return render_template('control.html')
 
     # Return page for profile
     return render_template('control.html', active_user=active_user)
