@@ -5,6 +5,7 @@
     Author     : Bernard
 */
 html,
+
 body
 {
     height: 100%;
@@ -16,7 +17,7 @@ img
 /* cover */
 #cover 
 {
-    background: #222 url('img/homecar.jpg') center center no-repeat;
+    background: #222 url('../image/homecar.jpg') center center no-repeat;
     background-size: cover;
     color: white;
     height: 100%;
@@ -25,6 +26,7 @@ img
     align-items: center;
     
 }
+
 #cover-caption
 {
     width: 100%;
@@ -35,7 +37,7 @@ img
 }
 #about
 {
-    background: url('img/magnificent.gif') center center no-repeat;
+    background: url('../image/magnificent.gif') center center no-repeat;
     background-size: cover;   
 }
 
@@ -73,7 +75,6 @@ footer
     font-size: .9en;
     padding: 15px;
 }
-
 
 
 
