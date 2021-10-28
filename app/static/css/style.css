@@ -17,7 +17,7 @@ img
 /* cover */
 #cover 
 {
-    background: #222 url('../image/homecar.jpg') center center no-repeat;
+    background: #222 url('../images/homecar.jpg') center center no-repeat;
     background-size: cover;
     color: white;
     height: 100%;
@@ -37,7 +37,7 @@ img
 }
 #about
 {
-    background: url('../image/magnificent.gif') center center no-repeat;
+    background: url('../images/magnificent.gif') center center no-repeat;
     background-size: cover;   
 }
 
