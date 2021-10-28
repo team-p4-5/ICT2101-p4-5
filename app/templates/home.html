@@ -8,156 +8,47 @@
 <!DOCTYPE html>
 <html lang="en">
     {% include 'base.html' %}
+    <link rel="stylesheet" href="../static/js/jquery-3.4.1.min.js">
+    <link rel="stylesheet" href="../static/js/bootstrap.4.4.1.js.bootstrap.bundle.min.js">
     <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
+          <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="../static/images/startup.logo" height="70"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('feature') }}">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                    </li>
+                    <li     class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    </li>
+                </ul>
+
+
+            <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+            </form>
+            </div>
+        </nav>
         <section id="cover">
             <div id="cover-caption">
                 <div class="container">
                     <div class="col-sm-10 col-sm-offset-1"></div>
-                    <h1 class="display-3">Robotic Coding Car Control</h1><!-- comment -->
+                    <h1 class="display-3">Little Runner</h1><!-- comment -->
                     <p>Coding is Fun. Play as you learn!</p>
+
                     <br><!-- break -->
                 </div>
-            </div><!-- comment -->
-        </section>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
-            <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="../static/images/startup.logo" height="70"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('profile') }}">{{ active_user }}'s Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('hardwarespecs') }}">Components</a>
-                    </li>
-                </ul>
-
-                <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
-                </form>
-            </div>
-        </nav>
-
-        <section id="what-we-do">
-            <div class="section-content">
-                <div class="container">
-                    <h2>Product Scope</h2>
-                    <p class="lead">The software is a block programmer that is used to teach children how to do simple command structures, by telling the car to turn left, followed by right by piecing together a line of commands. This will allow children to learn in a fun way on how to think logically to guide the car through the maze to reach the destination.</p>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card-group">
-                                <div class="card border-primary ">
-                                    <div class="card-body text-primary">
-                                        <div class="card-block">
-                                            <h6 class="card-title">Creative &amp; Design</h6>
-                                        </div>
-                                        <img src="../static/images/car1.jpg" alt=""><!-- comment -->
-                                        <div class="card-block">
-                                            <p class="card-text">The product is able to inspire students to have innovative and creativity ideas to design their very own car. <p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card border-primary ">
-                                    <div class="card-body text-primary">
-                                        <div class="card-block">
-                                            <h6 class="card-title">Sophisticated &amp; Simple Installation</h6><!-- comment -->
-
-                                        </div>
-                                        <img src="../static/images/car2.jpg" alt="a "><!-- comment -->
-                                        <div class="card-block">
-                                            <p class="card-text">The structure of car is .... <p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card border-primary ">
-                                    <div class="card-body text-primary">
-                                        <div class="card-block">
-                                            <h6 class="card-title">Education &amp; Fun </h6><!-- comment -->
-
-                                        </div>
-                                        <img src="../static/images/car3.jpg" alt=""><!-- comment -->
-                                        <div class="card-block">
-                                            <p class="card-text">Effectiveness of education through the use of technology can be enhanced by meaningful gamification which draws the interest of students and promotes active participation.<p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="section features-6">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="info info-horizontal info-hover-primary">
-                                <div class="description pl-4">
-                                    <h2 class="title">Inspiration</h2>
-                                    <h5 class="title">For Developers</h5>
-                                    <p>The time is now for it to be okay to be great. People in this world shun people for being great. For being a bright color. For standing out. But the time is now.</p>
-                                    <a href="#" class="text-info">Learn more</a>
-                                </div>
-                            </div>
-                            <div class="info info-horizontal info-hover-primary mt-5">
-                                <div class="description pl-4">
-                                    <h5 class="title">For Designers</h5>
-                                    <p>There’s nothing I really wanted to do in life that I wasn’t able to get good at. That’s my skill. I’m not really specifically talented at anything except for the ability to learn.</p>
-                                    <a href="#" class="text-info">Learn more</a>
-                                </div>
-                            </div>
-                            <div class="info info-horizontal info-hover-primary mt-5">
-                                <div class="description pl-4">
-                                    <h5 class="title">For Beginners</h5>
-                                    <p>That’s what I do. That’s what I’m here for. Don’t be afraid to be wrong because you can’t learn anything from a compliment. If everything I did failed - which it doesn't.</p>
-                                    <a href="#" class="text-info">Learn more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-10 mx-md-auto">
-                            <img src="../static/images/car4.jpg" width="100%">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <section id="about">
-            <div class="section-content">
-                <div class="container">
-                    <div class="col-md-6">
-                        <div class="about-text">
-                            <h3>About Us </h3>
-                            <p class="lead">ICT2102/2201 P4-5 Team Members:</p>
-                            <p> Team Leader : Xxxxxxxx (200000000)</p>
-                            <p> Team Members:</p>
-                            <p>Xxxxxxxx (200000000)</p>
-                            <p>Xxxxxxxx (200000000)</p>
-                            <p>Xxxxxxxx (200000000)</p>
-                            <p>Xxxxxxxx (200000000)</p>
-                            <h5>Follow us on the web</h5><!-- comment -->
-                            <a href="https://twitter.com/" class="btn btn-sm btn-secondary-outline">twitter</a>
-                            <a href="https://www.facebook.com/login/" class="btn btn-sm btn-secondary-outline">facebook</a>
-                            <a href="https://www.youtube.com/" class="btn btn-sm btn-secondary-outline">youtube</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
-    </body>
+ </body>
+       <footer>
+            <p><em>Copyright &copy; Little Runner Car Control 2021.</em></p>
+        </footer>
 
-
-    <footer>
-        <p><em>Copyright &copy; Robotic Coding Car Control 2021.</em></p>
-    </footer>
