@@ -249,6 +249,15 @@ def control():
     # Return page for profile
     return render_template('control.html', active_user=active_user)
 
+@app.route('/control2')
+def control2():
+    # # Check for Session
+    if not session.get('active'):
+        return render_template('control2.html')
+
+    # Return page for profile
+    return render_template('control2.html', active_user=active_user)
+
 # Function to get a list of all connected cars
 @app.route('/getcars')
 def getcars():
