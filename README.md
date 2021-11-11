@@ -6,4 +6,5 @@
 ## Running the program
 1. Open CMD **as Admin** and navigate to root directory of project (where run.py is)
 2. Run `python run.py`
+3. Open any web browser any navigate to "localhost"
 
