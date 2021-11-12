@@ -40,7 +40,7 @@ Any changes to the repository MUST be first done on a `ui/<feature_name>`, `back
 2. Issues for feature components are **ADVICED** to be created to help with tracking feature progress
 3. Issue titles **MUST** start with `[<feature_type>/<feature_name>]`
 4. Issues **MUST** be assigned to **at least ONE** team member
-5. Issues **MUST** be given an appropriate label (e.g. `UI` / `backend` / `documentation`)
+5. Issues **MUST** be given the appropriate label(s) (e.g. `ui` / `backend` / `management` / `hotfix`)
 6. Issues **MUST** be assigned to the `M3` milestone
 7. Issues **MUST NOT** be closed until corresponding feature is completed and merged with `dev` or `main` branch
 ### Feature Branch Management
@@ -123,9 +123,8 @@ git push
 12. Input meaningful merge **_title_** and **_message_**
 13. Click on the `Confirm merge` button
 
-
 ### V. Making changes / hotfixes to a completed Feature (closed issue)
-1. Create a **HIGH-priority** `[<feature_type>/<feature_name>] [HOTFIX]` issue on team's GitHub project board
+1. Create a **HIGH-priority** `[<feature_type>/<feature_name>] [HOTFIX]` issue on team's GitHub project board with the appropriate feature label and `hotfix` label
 2. Upon completing the hotfix implementation, commit and push **WORKING** version of feature
 ```bash
 # Commit changes with a meaningful commit message
@@ -136,6 +135,14 @@ git push
 ```
 3. Perform procedure (III) for merging hotfixed feature branch into dev
 4. Close the corresponding [HOTFIX] issue
+
+### VI. Approving a Pull Request
+1. Open the PR where you have been assigned as a Reviewer
+2. Select the `Add your review` button
+3. After reviewing the changes, select the `Review changes` button
+4. Input a review **_comment_** in the popup window
+5. Select the `Approve` radio button
+6. Select the `Submit review` button
 
 ---
 ## User Acceptance Test
