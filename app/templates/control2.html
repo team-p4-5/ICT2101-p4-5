@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     {% include 'controlbase.html' %}
-
+    <link href="../static/css/tooltip.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
     <style>
         body {
             background-color: #fff;
@@ -13,6 +14,8 @@
             font-size: 140%;
         }
     </style>
+
+
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
     <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="startup.logo" height="70"></a>
@@ -44,6 +47,8 @@
 
     <!--Background wallpaper-->
     <section id="backimage">
+        <div class="container">
+
         <div id="backimage-caption"></div>
 
         <!--Challenge panel -->
@@ -53,13 +58,14 @@
                     <div class="row">
                         <div class="col-auto">
                             <h4>Challenge</h4>
+                            <button class="btn btn-primary" onClick="window.location.reload()">Start instruction manual again</button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body text-dark bg-light mb-2">
                     <div class="row">
                         <div class="menu">
-                            <label for="selection">Select :</label><!--Select challenge difficulty-->
+                            <label class="second" for="selection">Select :</label><!--Select challenge difficulty-->
 
                             <select id="selection">
 
@@ -153,7 +159,8 @@
                     </div>
                 </div>
                 <!-- History Link-->
-                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">History </a>
+                <a href=""  data-bs-toggle="modal" data-bs-target="#staticBackdrop">History </a>
+                <p class="fourth"></p>
             </div>
         </section>
 
@@ -316,7 +323,7 @@
                             <h4>Instruction</h4>
                         </div>
                         <div class="row justify-content-center">
-                            <!--    <div class="col-auto">
+                            <!--    <div class="col-auto">-->
                             <!-- Rounded switch to toggle to pair with car-->
                             <!--         <h7>Pair</h7>
                                      <input type="checkbox" id="switch"class="checkbox"/>
@@ -327,9 +334,9 @@
                             <!--Car pairing selection-->
                             <div class="col-auto">
                                 <div class="available">
-                                    <label for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
+                                    <label class="first" for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
 
-                                    <select id="selection">
+                                    <select id="carSelection">
 
                                         <option selected>Car ID</option>
                                         <option value="carId1">Car A</option>
@@ -368,6 +375,7 @@
                         <button onclick="showCode1()">Show Python</button>
                         <button onclick="runCode()">Test code</button>
                     </p>
+                    <div class="third"></div>
 
                     <div id="blocklyDiv" style="height: 450px; width: 450px;"></div>
                     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
@@ -629,7 +637,7 @@
         </section>
         </div>
 
-
+    </div>
     </section>
 </body>
 
@@ -637,6 +645,106 @@
 <footer>
     <p><em>Copyright &copy; Little Runner Car Control 2021.</em></p>
 </footer>
+
+<script src="../static/js/tour.js"></script>
+<script>
+  const tour = new Tour("demo");
+  tour.addStep('step1', {
+    title: "Step 1",
+    text: "Select the available car in the dropdown selection to Pair at Instruction Panel. Then press PAIR button to pair with the robotic car\n",
+    hook: ".first",
+    timer: 10000, // will show for 10 seconds before going to the next step
+    onShow: function() {
+
+    },
+    onHide: function() {
+
+    },
+    buttons: [
+        {
+            text: "Skip",
+            action: "tour.previous()"
+        },
+        {
+            text: "Next",
+            action: "tour.next()"
+        }
+    ],
+    links: [
+
+    ]
+});
+  tour.addStep('step2', {
+    title: "Step 2",
+    text: "Select different levels.(Easy,Medium or Hard)",
+    hook: ".second",
+    timer: 10000, // will show for 10 seconds before going to the next step
+    onShow: function() {
+
+    },
+    onHide: function() {
+
+    },
+    buttons: [
+        {
+            text: "Previous",
+            action: "tour.previous()"
+        },
+        {
+            text: "Next",
+            action: "tour.next()"
+        }
+    ],
+    links: [
+
+    ]
+});
+  tour.addStep('step3', {
+    title: "Step 3",
+    text: "Drag icons and set in the Control Panel. Click button EXECUTE to execute the commands",
+    hook: ".third",
+    timer: 10000, // will show for 10 seconds before going to the next step
+    onHide: function() {
+
+    },
+    buttons: [
+        {
+            text: "Previous",
+            action: "tour.previous()"
+        },
+        {
+            text: "Next",
+            action: "tour.next()"
+        }
+    ],
+    links: [
+
+    ]
+});
+    tour.addStep('step4', {
+    title: "Step 4", // will show for 10 seconds before going to the next step
+    text: "Click on the HISTORY link at the Challenge Dashboard to view the History",
+    hook: ".fourth",
+    timer: 10000,
+    onHide: function() {
+
+    },
+    buttons: [
+        {
+            text: "Previous",
+            action: "tour.previous()"
+        },
+        {
+            text: "Finish",
+            action: "tour.stop()"
+        }
+    ],
+    links: [
+
+    ]
+});
+  tour.start();
+</script>
 <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
         {
