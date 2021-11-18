@@ -76,5 +76,38 @@ footer
     padding: 15px;
 }
 
+#adminhtml
+{
+    height:100vh;
+}
+#admin-nav
+{
+    background: rgba(0,0,0,0.8);
+    height:8vh;
+}
 
+#admin-body
+{
+    background-image: url('../images/adminpagebackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#admin-content-container
+{
+    height:84vh;
+}
+#admin-content-row-size
+{
+    height:100%
+}
+#admin-login-form
+{
+    background: rgba(0,0,0,0.9);
+}
+#admin-footer
+{
+    background: rgba(0,0,0,0.8);
+    border-top: none;
+    height:8vh;
+}
 
