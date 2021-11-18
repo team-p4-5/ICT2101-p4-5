@@ -291,3 +291,9 @@ def queuecommands():
         # Append the newly received commands from Web UI into the comms object's "commands" list
         for command in commands.split(','):
             c2_comms_obj.commands.append(command)
+
+
+@app.route('/editchallengesettings')
+def editchallengesettings():
+    # Return page for dashboard
+    return render_template('editchallengesettings.html')
