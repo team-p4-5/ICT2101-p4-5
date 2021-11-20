@@ -1,4 +1,3 @@
-
 (function ($) {
     "use strict";
     var input = $('.validate-input .input100');

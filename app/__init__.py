@@ -261,6 +261,7 @@ def control2():
 
 @app.route('/register_player')
 def register_player():
+
     # Check for Session
     if not session.get('active'):
         return render_template('registerplayername.html')
