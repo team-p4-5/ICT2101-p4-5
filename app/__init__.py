@@ -259,6 +259,15 @@ def control2():
     # Return page for profile
     return render_template('control2.html', active_user=active_user)
 
+@app.route('/register_player')
+def register_player():
+    # Check for Session
+    if not session.get('active'):
+        return render_template('registerplayername.html')
+
+    # Return page for register_player
+    return render_template('registerplayername.html', active_user=active_user)
+
 # Function to get a list of all connected cars
 @app.route('/getcars')
 def getcars():
