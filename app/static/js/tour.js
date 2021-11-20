@@ -74,7 +74,7 @@ class Tour {
     });
         tour.addStep('step4', {
         title: "Step 4", // will show for 10 seconds before going to the next step
-        text: "Click on the 'History' button at the Challenge Dashboard to view the History",
+        text: "Click on the 'History' button to view past commands that you sent to the car",
         hook: ".fourth",
         timer: 10000,
         onHide: function() {
@@ -96,7 +96,7 @@ class Tour {
     });
         tour.addStep('step5', {
         title: "Step 5", // will show for 10 seconds before going to the next step
-        text: "Click on the ‘View Leaderboard’ button to view past record times by others!",
+        text: "Click on the 'Leaderboard’ button to view past record times by others!",
         hook: ".fifth",
         timer: 10000,
         onHide: function() {
