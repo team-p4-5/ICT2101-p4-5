@@ -2,7 +2,7 @@ class Tour {
     inittooltip(){
         tour.addStep('step1', {
         title: "Step 1",
-        text: "Select the available car in the dropdown selection to Pair at Instruction Panel. Then press PAIR button to pair with the robotic car\n",
+        text: "Select the available car in the dropdown selection to Pair at Instruction Panel. Then press 'PAIR' button to pair with the robotic car\n",
         hook: ".first",
         timer: 10000, // will show for 10 seconds before going to the next step
         onShow: function() {
@@ -27,7 +27,7 @@ class Tour {
     });
       tour.addStep('step2', {
         title: "Step 2",
-        text: "Select different levels.(Easy,Medium or Hard)",
+        text: "Select different levels. (Easy, Medium or Hard)",
         hook: ".second",
         timer: 10000, // will show for 10 seconds before going to the next step
         onShow: function() {
@@ -74,8 +74,30 @@ class Tour {
     });
         tour.addStep('step4', {
         title: "Step 4", // will show for 10 seconds before going to the next step
-        text: "Click on the HISTORY link at the Challenge Dashboard to view the History",
+        text: "Click on the 'History' button at the Challenge Dashboard to view the History",
         hook: ".fourth",
+        timer: 10000,
+        onHide: function() {
+
+        },
+        buttons: [
+            {
+                text: "Previous",
+                action: "tour.previous()"
+            },
+            {
+                text: "Next",
+                action: "tour.next()"
+            }
+        ],
+        links: [
+
+        ]
+    });
+        tour.addStep('step5', {
+        title: "Step 5", // will show for 10 seconds before going to the next step
+        text: "Click on the ‘View Leaderboard’ button to view past record times by others!",
+        hook: ".fifth",
         timer: 10000,
         onHide: function() {
 
@@ -94,6 +116,7 @@ class Tour {
 
         ]
     });
+
     }
     constructor(name) {
         this.name = name;
