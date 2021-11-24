@@ -1,18 +1,13 @@
 function leaderboard() {
-	var leaderboard = document.getElementById('leaderboard');
+	    var leaderboard = document.getElementById('leaderboard');
         var tbody = leaderboard.querySelector('tbody');
         var printresult = '';
 
-        var player1 = {name:"KWThePro",time:"00:05:05"};
-        var player2 = {name:"Serena",time:"00:12:10"};
-        var player3 = {name:"Chek",time:"00:18:20"};
-        var player4 = {name:"Thiru",time:"00:16:25"};
-
         var players = [
-        player1,
-        player2,
-        player3,
-        player4
+        name:"KWThePro",time:"00:05:05",
+        name:"Serena",time:"00:12:10",
+        name:"Chek",time:"00:18:20",
+        name:"Thiru",time:"00:16:25"
         ];
 
         <!-- Sorting of score -->
@@ -25,6 +20,5 @@ function leaderboard() {
         }
 
         tbody.innerHTML = printresult;
-        }
-
+}
 leaderboard();
