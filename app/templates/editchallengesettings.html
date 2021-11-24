@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" name="adminhtml" id="adminhtml">
-    {% include 'base.html' %}
+    {% include 'adminbase.html' %}
     <body name="admin-body" id="admin-body">
             <nav class="navbar navbar-expand-lg navbar-dark " id="admin-nav" name="admin-nav">
                 <a class="navbar-brand" href="../static/images/logo.png" name="admin-logo" id="admin-logo"><img src="../static/images/logo.png" alt="../static/images/startup.logo" height="20"></a>
@@ -11,7 +11,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="">Logout <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </div>
@@ -34,6 +34,7 @@
                                 <select class="form-control" name="challengelevel" id="challengelevel">
                                         <option value="easy">Easy</option>
                                         <option value="normal">Normal</option>
+                                        <option value="hard">hard</option>
 
                                 </select>
                             </div>
