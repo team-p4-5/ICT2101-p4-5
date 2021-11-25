@@ -44,8 +44,6 @@
 </nav>
 <body>
 
-
-
     <!--Background wallpaper-->
     <section id="backimage">
         <div class="container">
@@ -297,23 +295,27 @@
                             <h5 class="modal-title" id="staticBackdropLabel1">Leaderboard Dashboard</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div id="difficultytab" class="nav nav-tabs " role="tablist">
-              <li class="active">
-                  <button class="btn btn-primary" href="#first" role="tab" data-toggle="tab">
-                    Easy
-                </button>
-                  <button class="btn btn-primary" href="#second" role="tab" data-toggle="tab">
-                    Medium
-                </button>
-                <button class="btn btn-primary" href="#third" role="tab" data-toggle="tab">
-                    Hard
-                </button>
-              </li>
-            </div>
-            <!-- Tab panes -->
-            <div class="tab-content">
-              <div class="tab-pane fade active in" id="first">
-                   <table id="leaderboard" width="100%">
+                    <div class="modal-body">
+                        <div class="lbcontainer">
+                        <div class="lbbox">
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab1" checked>
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab2">
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab3">
+                            <ul class="tab-list">
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab1">Easy</label>
+                                </li>
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab2">Medium</label>
+                                </li>
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab3">Hard</label>
+                                </li>
+                            </ul>
+
+                            <div class="tab-container">
+                            <div class="tab-content">
+                            <table id="leaderboard1" width="100%">
                             <thead>
                                 <th>Player Name</th>
                                 <th>Record Time</th>
@@ -321,41 +323,38 @@
                         <tbody>
                         </tbody>
                         </table>
-              </div>
-              <!-- End first Tab-->
-
-              <div class="tab-pane fade" id="second">
-                   <table id="leaderboard2" width="100%">
+                            </div>
+                            <div class="tab-content">
+                                 <table id="leaderboard2" width="100%">
                             <thead>
                                 <th>Player Name</th>
                                 <th>Record Time</th>
                             </thead>
-                        <tbody2>
-                        </tbody2>
+                        <tbody>
+                        </tbody>
                         </table>
-
-              </div>
-              <!-- End second Tab-->
-
-              <div class="tab-pane fade" id="third">
-                   <table id="leaderboard3" width="100%">
+                            </div>
+                            <div class="tab-content">
+                             <table id="leaderboard3" width="100%">
                             <thead>
                                 <th>Player Name</th>
                                 <th>Record Time</th>
                             </thead>
-                        <tbody3>
-                        </tbody3>
+                        <tbody>
+                        </tbody>
                         </table>
-              <!-- End third Tab -->
-
-            </div>
-                                <script src="../static/js/leaderboard.js"></script>
+                            </div>
+                            </div>
                         </div>
+                    </div>
+
+                <script src="../static/js/leaderboard.js"></script>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
         <!--Control Panel-->
@@ -389,6 +388,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
                 <!-- for future development
                 <div class="card-body text-dark bg-warning mb-2" >
 
