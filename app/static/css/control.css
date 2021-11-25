@@ -27,66 +27,8 @@ body
     height:100vh;
     background:#F00;
 }
-/*Tooltips setup*/
-ul
-{
-    cursor: pointer;
-}
-/*Tooltip profile*/
-ui li
-{
-    position: relative;
-    list-style:none;
-    width:20px;
-    height:20px;
-    background: #f5c6cb;
-    margin: 0 20px;
-    border-radius: 50%;
-    transition: 0.5s;
-    cursor: pointer;
 
-}
-/*tooltip hover
-ul li:hover
-{
-    background:#86ff3b;
-    box-shadow: 0 0 0 4px #333,
-                0 0 0 6px #86ff3b;
-}*/
 
-/*tooltip's box profile*/
-ul li .content
-{
-    position:absolute;
-    bottom: -40px;
-    width: 450px;/*width of the box*/
-    background: #d3d9df;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.5s;
-    transform: translateX(-50%) translateY(-50px);
-}
-/*tooltip before mouse hover */
-ul li .content:before
-{
-    content:'';
-    position: absolute;
-    width:30px;
-    height:30px;
-    background: #d3d9df;
-    bottom: 0px;
-}
-
-/*tooltip after mouse hover */
-ul li:hover .content
-{
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(-50%) translateY(0px);
-}
 
 /*component.html image profile*/
 .image
@@ -361,15 +303,15 @@ p
 {
     height: 20px;
     width: 25%;
-    margin: 10px 0;
-    float: left;
+    margin: 5px 0;
+    float: right;
 }
 
 .led-box p 
 {
     font-size: 10px;
     text-align: center;
-    margin: 1em;
+    margin: .5em;
 }
 .led-red 
 {
