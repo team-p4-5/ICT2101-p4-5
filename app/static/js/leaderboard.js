@@ -16,7 +16,7 @@ function leaderboard() {
         player4
     ];
 
-        < !--Sorting of score-- >
+        //Sorting of score
         players.sort(function (a, b) {
             return a.time.localeCompare(b.time);
         });
