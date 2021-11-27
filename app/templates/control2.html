@@ -303,52 +303,55 @@
                         <input type="radio" class="tab-toggle" name="tab-toggle" id="tab3">
                             <ul class="tab-list">
                                 <li class="tab-item">
-                                <label class="tab-trigger" for="tab1">Easy</label>
+                                <label class="tab-trigger" for="tab1" id="easytab">Easy</label>
                                 </li>
                                 <li class="tab-item">
-                                <label class="tab-trigger" for="tab2">Medium</label>
+                                <label class="tab-trigger" for="tab2" id="mediumtab">Medium</label>
                                 </li>
                                 <li class="tab-item">
-                                <label class="tab-trigger" for="tab3">Hard</label>
+                                <label class="tab-trigger" for="tab3" id="hardtab">Hard</label>
                                 </li>
                             </ul>
 
                             <div class="tab-container">
                             <div class="tab-content">
-                            <table id="leaderboard1" width="100%">
+                            <table id="easyleaderboard" width="100%">
                             <thead>
                                 <th>Player Name</th>
                                 <th>Record Time</th>
+                                <th>Difficulty</th>
                             </thead>
-                        <tbody>
+                        <tbody id="easytbody">
                         </tbody>
                         </table>
                             </div>
                             <div class="tab-content">
-                                 <table id="leaderboard2" width="100%">
+                                 <table id="mediumleaderboard" width="100%">
                             <thead>
                                 <th>Player Name</th>
                                 <th>Record Time</th>
+                                <th>Difficulty</th>
                             </thead>
-                        <tbody>
+                        <tbody id="mediumtbody">
                         </tbody>
                         </table>
                             </div>
                             <div class="tab-content">
-                             <table id="leaderboard3" width="100%">
+                             <table id="difficultleaderboard" width="100%">
                             <thead>
                                 <th>Player Name</th>
                                 <th>Record Time</th>
+                                <th>Difficulty</th>
                             </thead>
-                        <tbody>
+                        <tbody id="hardtbody">
                         </tbody>
                         </table>
                             </div>
                             </div>
                         </div>
                     </div>
-
-                <script src="../static/js/leaderboard.js"></script>
+                            <script src="../static/js/leaderboard.js"></script>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
