@@ -348,30 +348,27 @@
                                 <div class="available">
                                     <label class="first" for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
 
-                                    <select id="carSelection">
+                                    <select id="selection_pair">
 
                                         <option selected>Car ID</option>
-                                        <option value="carId1">Car A</option>
-                                        <option value="carId2">Car B</option>
-                                        <option value="carId3">Car C</option>
-                                        <option value="carId4">Car D</option>
+                                        <option value="carId1">test</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row justify-content-md-start">
-                                <div class="col">
-                                    <button type="pair" class="btn btn-success me-md-2">Pair</button>
+                                <div class="col-auto">
+                                    <button id="pairButton" type="pair" class="btn btn-success me-md-2">Pair</button>
                                 </div>
                                 <!--- Pairing light status-->
                                 <div class="row justify-content-end">
                                     <div class="col-auto">
                                         <div class="led-box">
-                                            <div class="led-green"></div>
+                                            <div id="green"></div>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="led-box">
-                                            <div class="led-red"></div>
+                                            <div id="red"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -663,6 +660,15 @@
   const tour = new Tour("demo");
   tour.inittooltip();
   tour.start();
+</script>
+
+<script>
+    //const tour = new Tour("demo");//start challenge
+  //  const pairing_tour = new Tour("demo");//start challenge
+   // pairing_tour.inittooltip();
+   // pairing_tour.start();
+    initPairingListener();
+
 </script>
 
 <!-- Block Javascripts -->
