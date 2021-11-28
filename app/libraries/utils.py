@@ -14,20 +14,18 @@ from rich.console import Console
 
 """
 Initialises Console and Prompt objects from rich library.
-Used for printing and formatting 
+Used for printing and formatting
 """
 pretty.install()
 console = Console()
 prompt = Prompt()
 
 """
-User Account Management
+Database Management
 """
-CHARACTERS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-CREDENTIALS_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), "creds.txt")
-USERNAME = 0        # first field for each credential stores username of a registered user
-SALT = 1            # second field for each credential stores the salt for this user's password
-HASHED_PSW = 2      # third field for each credential stores the SHA512 hashed password
+DEFAULT_CHALLENGE_SETTINGS = "3,4,5"
+CHALLENGE_SETTINGS_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), "settings.txt")
+CHALLENGE_RECORDS_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), "records.txt")
 
 """
 C2 Server Information
