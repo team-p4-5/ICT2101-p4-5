@@ -28,6 +28,23 @@ CHALLENGE_SETTINGS_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__
 CHALLENGE_RECORDS_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), "records.txt")
 
 """
+Administrator
+"""
+ADMIN_NAME = "admin"
+ADMIN_PASS = "admin"
+
+
+"""
+ChallengeSettings
+"""
+EASY_MODE = "easy"
+MEDIUM_MODE = "medium"
+HARD_MODE = "hard"
+EASY = 0
+MEDIUM = 1
+HARD = 2
+
+"""
 C2 Server Information
 """
 C2_PASSPHRASE = str.encode("ICT2101_P4_5_SERVER")
@@ -35,7 +52,7 @@ C2_HOSTIP = "0.0.0.0"
 C2_PORT = 47656
 C2_SOCKET_BUFSIZE = 1024
 PING_INTERVAL = 10
-
+NORMAL_RESPONSE = "Z"
 
 def print_divider(message):
     console.rule(message)

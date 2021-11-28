@@ -107,7 +107,7 @@ class DatabaseManagement():
 		if len(f_contents) >= 1:
 			list_of_records = list()
 			for record in f_contents:
-				if record is not "\n":
+				if record != "\n":
 					name,time,difficulty = record.strip().split(',')
 					list_of_records.append({'name':name, 'time':time, 'difficulty':difficulty})
 			return list_of_records
