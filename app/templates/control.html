@@ -15,6 +15,8 @@
     }
 </style>
 
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
     <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="startup.logo" height="70"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +27,9 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="{{ url_for('feature') }}">Main</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('leaderboard') }}">LeaderBoard</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
@@ -39,366 +44,349 @@
 
     <!--Background wallpaper-->
     <section id="backimage">
-        <div id="backimage-caption"></div>
+        <div class="container">
 
-        <!--Challenge panel -->
-        <section id="challenge-panel">
-            <div class=" card border-dark">
-                <div class="card text-dark bg-light">
-                    <div class="row">
-                        <div class="col-auto">
-                            <h4>Challenge</h4>
-                            <button class="btn btn-primary" onClick="window.location.reload()">Start instruction manual again</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body text-dark bg-light mb-2">
-                    <div class="row">
-                        <div class="menu">
-                            <label class="second" for="selection">Select :</label><!--Select challenge difficulty-->
+            <div id="backimage-caption"></div>
 
-                            <select id="selection">
-
-                                <option selected>level </option>
-                                <option value="Easy">Easy</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hard">Hard</option>
-
-                            </select>
-                        </div>
-                        <div class="col">
-                            <button type="button" id="generateButton" class=" btn-success me-sm-2">Generate</button>
-                            <button type="button" id="startButton" class=" btn-info me-sm-2 started">Start</button>
-                            <button type="button" id="stopButton" class=" btn-danger me-sm-2">Stop</button>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="Easy" class="data">
-                            <!--Challenge Easy dropdown-->
-                            <div class="row justify-content-start">
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="Medium" class="data">
-                            <!--Challenge Medium dropdown-->
-                            <div class="row justify-content-start">
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="Hard" class="data">
-                            <!--Challenge Hard dropdown-->
-                            <div class="row justify-content-start">
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <h6> </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="watch">
-                            <div class="minuteDiv">
-                                <h1 class="minute_time">00</h1>
-                                <p class="minuteTitle">Min :</p>
-                            </div>
-                            <div class="secondDiv">
-                                <h1 class="second_time">00</h1>
-                                <p class="secondTitle">: Sec</p>
+            <!--Challenge panel -->
+            <section id="challenge-panel">
+                <div class=" card border-dark">
+                    <div class="card text-dark bg-light">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h4>Challenge</h4>
+                                <button class="btn btn-primary" onClick="window.location.reload()">Start instruction manual again</button>
                             </div>
                         </div>
                     </div>
+                    <div class="card-body text-dark bg-light mb-2">
+                        <div class="row">
+                            <div class="menu">
+                                <label class="second" for="selection">Select :</label><!--Select challenge difficulty-->
 
-                    <div class="row gx-5">
+                                <select id="selection">
 
-                        <!-- History Link-->
-                        <div class="col">
-                            <a href="" class="fourth" data-bs-toggle="modal" data-bs-target="#staticBackdrop">History </a>
-                        </div>
-                        <!-- Leaderboard Link-->
-                        <div class="col">
-                            <a href="" class="fifth" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Leaderboard </a>
-                        </div>
-                    </div>
+                                    <option selected>level </option>
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
 
-                </div>
-            </div>
-        </section>
-
-        <!-- History DashBoard popup  -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header popupheader">
-                        <h5 class="modal-title" id="staticBackdropLabel">History Dashboard</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Hello, are you ready for another bout? I mean obstacle course, I am waiting for your challenge.
-                        Please don't disappoint me. Don't be afraid. Take the challenge. That does not kill you, will make
-                        you stronger. Even Superman has his weakness, come and exploit my weakness and conquer your fear.
-                        Never say never, because limits, like fears, are often just an illusion. So don't think too long.
-                        Take the challenge and clear all obstacles. You can do it. Yeah!!! Click me and select a challenge.
-                        Failures are part of the journey to success.
-                        (Think about um, the generations
-                        And ah, say we want to make it a better place for our children
-                        And our children's children so that they, they
-                        They, they know it's a better world for them
-                        And think if they can make it a better place)
-                        There's a place in your heart
-                        And I know that it is love
-                        And this place it was brighter than tomorrow
-                        And if you really try
-                        You'll find there's no need to cry
-                        In this place you'll feel there's no hurt or sorrow
-                        There are ways to get there
-                        If you care enough for the living
-                        Make a little space
-                        Make a better place
-                        Heal the world
-                        Make it a better place
-                        For you and for me, and the entire human race
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        If you want to know why
-                        There's love that cannot lie
-                        Love is strong
-                        It only cares of joyful giving
-                        If we try we shall see
-                        In this bliss we cannot feel
-                        Fear of dread, we stop existing and start living
-                        Then it feels that always
-                        Love's enough for us growing
-                        Make a better world
-                        So make a better world
-                        Heal the world
-                        Make it a better place
-                        For you and for me, and the entire human race
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        And the dream we were conceived in will reveal a joyful face
-                        And the world we once believed in will shine again in grace
-                        Then why do we keep strangling life
-                        Wound this earth, crucify its soul?
-                        Though it's plain to see, this world is heavenly
-                        Be god's glow
-                        We could fly so high
-                        Let our spirits never die
-                        In my heart I feel you are all my brothers
-                        Create a world with no fear
-                        Together we cry happy tears
-                        See the nations turn their swords into plowshares
-                        We could really get there
-                        If you cared enough for the living
-                        Make a little space
-                        To make a better place
-                        Heal the world
-                        Make it a better place
-                        For you and for me, and the entire human race
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        Heal the world
-                        Make it a better place
-                        For you and for me, and the entire human race
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        Heal the world (heal the world)
-                        Make it a better place
-                        For you and for me, and the entire human race
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        You and for me (for a better place)
-                        You and for me (make a better place)
-                        You and for me (make a better place)
-                        You and for me (heal the world we live in)
-                        You and for me (save it for our children)
-                        You and for me (heal the world we live in)
-                        You and for me (save it for our children)
-                        You and for me (heal the world we live in)
-                        You and for me (save it for our children)
-                        You and for me (heal the world we live in)
-                        You and for me (save it for our children)
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Leaderboard DashBoard popup  -->
-        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header popupheader">
-                        <h5 class="modal-title" id="staticBackdropLabel1">Leaderboard Dashboard</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table id="leaderboard" width="100%">
-                            <thead>
-                            <th>Player Name</th>
-                            <th>Elapsed Time</th>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <script src="../static/js/leaderboard.js"></script>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Control Panel-->
-        <section id="control-panel">
-
-            <div class="card border-dark">
-                <div class="card text-dark bg-warning border-dark">
-                    <div class="row ">
-
-                        <div class="col-auto">
-                            <h4>Control Panel</h4>
-                        </div>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                </select>
+                            </div>
                             <div class="col">
-                                <button type="execute" class="btn btn-success me-md-2">Execute</button>
-                                <button type="submit" class="btn btn-primary">Clear</button>
-                                <button type="Brake" class="btn btn-danger">E-Brake</button>
+                                <button type="button" id="generateButton" class=" btn-success me-sm-2">Generate</button>
+                                <button type="button" id="startButton" class=" btn-info me-sm-2 started">Start</button>
+                                <button type="button" id="stopButton" class=" btn-danger me-sm-2">Stop</button>
                             </div>
+                        </div>
+                        <div class="content">
+                            <div id="Easy" class="data">
+                                <!--Challenge Easy dropdown-->
+                                <div class="row justify-content-start">
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="Medium" class="data">
+                                <!--Challenge Medium dropdown-->
+                                <div class="row justify-content-start">
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="Hard" class="data">
+                                <!--Challenge Hard dropdown-->
+                                <div class="row justify-content-start">
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch">
+                                <div class="minuteDiv">
+                                    <h1 class="minute_time">00</h1>
+                                    <p class="minuteTitle">Min :</p>
+                                </div>
+                                <div class="secondDiv">
+                                    <h1 class="second_time">00</h1>
+                                    <p class="secondTitle">: Sec</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gx-5">
+
+                            <!-- History Link-->
+                            <div class="col">
+                                <a href="" class="fourth" data-bs-toggle="modal" data-bs-target="#staticBackdrop">History </a>
+                            </div>
+                            <!-- Leaderboard Link-->
+                            <div class="col">
+                                <a href="" class="fifth" style="text-align: right;">Leaderboard </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- History DashBoard popup  -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header popupheader">
+                            <h5 class="modal-title" id="staticBackdropLabel">History Dashboard</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Hello, are you ready for another bout? I mean obstacle course, I am waiting for your challenge.
+                            Please don't disappoint me. Don't be afraid. Take the challenge. That does not kill you, will make
+                            you stronger. Even Superman has his weakness, come and exploit my weakness and conquer your fear.
+                            Never say never, because limits, like fears, are often just an illusion. So don't think too long.
+                            Take the challenge and clear all obstacles. You can do it. Yeah!!! Click me and select a challenge.
+                            Failures are part of the journey to success.
+                            (Think about um, the generations
+                            And ah, say we want to make it a better place for our children
+                            And our children's children so that they, they
+                            They, they know it's a better world for them
+                            And think if they can make it a better place)
+                            There's a place in your heart
+                            And I know that it is love
+                            And this place it was brighter than tomorrow
+                            And if you really try
+                            You'll find there's no need to cry
+                            In this place you'll feel there's no hurt or sorrow
+                            There are ways to get there
+                            If you care enough for the living
+                            Make a little space
+                            Make a better place
+                            Heal the world
+                            Make it a better place
+                            For you and for me, and the entire human race
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            If you want to know why
+                            There's love that cannot lie
+                            Love is strong
+                            It only cares of joyful giving
+                            If we try we shall see
+                            In this bliss we cannot feel
+                            Fear of dread, we stop existing and start living
+                            Then it feels that always
+                            Love's enough for us growing
+                            Make a better world
+                            So make a better world
+                            Heal the world
+                            Make it a better place
+                            For you and for me, and the entire human race
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            And the dream we were conceived in will reveal a joyful face
+                            And the world we once believed in will shine again in grace
+                            Then why do we keep strangling life
+                            Wound this earth, crucify its soul?
+                            Though it's plain to see, this world is heavenly
+                            Be god's glow
+                            We could fly so high
+                            Let our spirits never die
+                            In my heart I feel you are all my brothers
+                            Create a world with no fear
+                            Together we cry happy tears
+                            See the nations turn their swords into plowshares
+                            We could really get there
+                            If you cared enough for the living
+                            Make a little space
+                            To make a better place
+                            Heal the world
+                            Make it a better place
+                            For you and for me, and the entire human race
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            Heal the world
+                            Make it a better place
+                            For you and for me, and the entire human race
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            Heal the world (heal the world)
+                            Make it a better place
+                            For you and for me, and the entire human race
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            You and for me (for a better place)
+                            You and for me (make a better place)
+                            You and for me (make a better place)
+                            You and for me (heal the world we live in)
+                            You and for me (save it for our children)
+                            You and for me (heal the world we live in)
+                            You and for me (save it for our children)
+                            You and for me (heal the world we live in)
+                            You and for me (save it for our children)
+                            You and for me (heal the world we live in)
+                            You and for me (save it for our children)
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
-                <!-- for future development
-                <div class="card-body text-dark bg-warning mb-2" >
+            </div>
 
-                </div>-->
-        </section>
+            <!--Control Panel-->
+            <section id="control-panel">
 
-        <!--Instruction Panel-->
-
-        <section id="instruction-panel">
-            <div class=" card border-dark ">
-                <div class="card text-dark bg-light ">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="col-auto">
-                            <h4>Instruction</h4>
-                        </div>
-                        <div class="row justify-content-center">
+                <div class="card border-dark">
+                    <div class="card text-dark bg-warning border-dark">
+                        <div class="row ">
 
                             <div class="col-auto">
-                                <div class="available">
-                                    <label class="first" for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
-
-                                    <select id="selection_pair">
-
-                                        <option selected>Car ID</option>
-                                        <option value="carId1">Car A</option>
-                                        <option value="carId2">Car B</option>
-                                        <option value="carId3">Car C</option>
-                                        <option value="carId4">Car D</option>
-                                    </select>
+                                <h4>Control Panel</h4>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <div class="col">
+                                    <button type="execute" class="btn btn-success me-md-2">Execute</button>
+                                    <button type="submit" class="btn btn-primary">Clear</button>
+                                    <button type="Brake" class="btn btn-danger">E-Brake</button>
                                 </div>
                             </div>
-                            <div class="row justify-content-md-start">
+                        </div>
+                    </div>
+                    <!-- for future development
+                    <div class="card-body text-dark bg-warning mb-2" >
+
+                    </div>-->
+            </section>
+
+            <!--Instruction Panel-->
+
+            <section id="instruction-panel">
+                <div class=" card border-dark ">
+                    <div class="card text-dark bg-light ">
+                        <div class="row justify-content-md-start">
+                            <div class="col-auto">
+                                <h4>Instruction</h4>
+                            </div>
+                            <div class="row justify-content-center">
+                                <!--    <div class="col-auto">-->
+                                <!-- Rounded switch to toggle to pair with car-->
+                                <!--         <h7>Pair</h7>
+                                         <input type="checkbox" id="switch"class="checkbox"/>
+                                         <label for="switch" class="toggle">
+                                             <p>OFF  /  ON</p>
+                                         </label>
+                                     </div>-->
+                                <!--Car pairing selection-->
                                 <div class="col-auto">
-                                    <button id="pairButton" type="pair" class="btn btn-success me-md-2 pairing">Pair</button>
-                                </div>
-                                <!--- Pairing light status-->
-                                <div class="row justify-content-end">
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-green"></div>
-                                        </div>
+                                    <div class="available">
+                                        <label class="first" for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
+
+                                        <select id="carSelection">
+
+                                            <option selected>Car ID</option>
+                                            <option value="carId1">Car A</option>
+                                            <option value="carId2">Car B</option>
+                                            <option value="carId3">Car C</option>
+                                            <option value="carId4">Car D</option>
+                                        </select>
                                     </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-red"></div>
+                                </div>
+                                <div class="row justify-content-md-start">
+                                    <div class="col">
+                                        <button type="pair" class="btn btn-success me-md-2">Pair</button>
+                                    </div>
+                                    <!--- Pairing light status-->
+                                    <div class="row justify-content-end">
+                                        <div class="col-auto">
+                                            <div class="led-box">
+                                                <div class="led-green"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="led-box">
+                                                <div class="led-red"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!--commands icons to drag over-->
+                    <!--commands icons to drag over-->
+                    <div class="card-body text-dark bg-light mb-2">
+                        <p>
+                            <button onclick="showCode()">Show JavaScript</button>
+                            <button onclick="showCode1()">Show Python</button>
+                            <button onclick="runCode()">Test code</button>
+                        </p>
+                        <div class="third"></div>
 
-                <div class="card-body text-dark bg-light mb-2">
-                    <p>
-                        <button onclick="showCode()">Show JavaScript</button>
-                        <button onclick="showCode1()">Show Python</button>
-                        <button onclick="runCode()">Test code</button>
-                    </p>
-                    <div class="third"></div>
-
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div id="blocklyDiv" style="height: 500px; width: 600px; object-fit:cover;"></div>
+                        <div id="blocklyDiv" style="height: 450px; width: 450px;"></div>
                         <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
                             <category name="Logic" colour="%{BKY_LOGIC_HUE}">
                                 <!-- If logic blocks -->
@@ -652,117 +640,92 @@
                                 </category>
                             </category>
                         </xml>
+
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
-
+        </div>
     </section>
+</body>
 
 
-    <footer>
-        <p><em>Copyright &copy; Little Runner Car Control 2021.</em></p>
-    </footer>
-    <!-- Tooltip Javascripts -->
-    <script src="../static/js/tour.js"></script>
-    
+<footer>
+    <p><em>Copyright &copy; Little Runner Car Control 2021.</em></p>
+</footer>
+<!-- Tooltip Javascripts -->
+<script src="../static/js/tour.js"></script>
+<script>
+    const tour = new Tour("demo");
+    tour.inittooltip();
+    tour.start();
+</script>
+<script>
 
+    initlistener();
 
-    <script>
-        const tour = new Tour("demo");
-        tour.inittooltip();
-        tour.start();
+</script>
 
-        const tour2 = new Tour("demo");//challenge selection
-        const tour3 = new Tour("demo");//start challenge
-
-
-        //select challenge
-
-        $("#startButton").on('click', function () {
-            if ($('#selection').val() === 'level') {
-                alert('Invalid Input! Please select the level');
-                return false;
-            }
-
-            const step3 = new Step(
-                'Start', 'Start', 'Challenge Started', '.started', 1000, function () { }, function () { }, [{ text: "Close", action: "tour3.stop()" }], []
-            );
-
-            tour3.steps.push(step3);
-            tour3.start();
-
-            Timer.changeTimer();
+<!-- Block Javascripts -->
+<script>
+    var demoWorkspace = Blockly.inject('blocklyDiv',
+        {
+            media: '../static/media/',
+            toolbox: document.getElementById('toolbox')
         });
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+        demoWorkspace);
 
-        $('#stopButton').on('click', function () {
-            Timer.stopTimer();
-        
+    function showCode() {
+        // Generate JavaScript code and display it.
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+        alert(code);
+    }
+
+    function runCode() {
+        // Generate JavaScript code and run it.
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP =
+            'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try {
+            eval(code);
+        } catch (e) {
+            alert(e);
+        }
+    }
+    var demoWorkspace1 = Blockly.inject('blocklyDiv',
+        {
+            media: '../static/media/',
+            toolbox: document.getElementById('toolbox')
         });
-        
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+        demoWorkspace1);
 
-    </script>
+    function showCode1() {
+        // Generate Python code and display it.
+        Blockly.Python.INFINITE_LOOP_TRAP = null;
+        var code = Blockly.Python.workspaceToCode(demoWorkspace1);
+        alert(code);
+    }
 
-    <!-- Blockly Javascripts -->
-    <script>
-        var demoWorkspace = Blockly.inject('blocklyDiv',
-            {
-                media: '../static/media/',
-                toolbox: document.getElementById('toolbox')
-            });
-        Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
-            demoWorkspace);
-
-        function showCode() {
-            // Generate JavaScript code and display it.
-            Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-            var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
-            alert(code);
+    function runCode1() {
+        // Generate Python code and run it.
+        window.LoopTrap = 1000;
+        Blockly.Python.INFINITE_LOOP_TRAP =
+            'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.Python.workspaceToCode(demoWorkspace1);
+        Blockly.Python.INFINITE_LOOP_TRAP = null;
+        try {
+            eval(code);
+        } catch (e) {
+            alert(e);
         }
-
-        function runCode() {
-            // Generate JavaScript code and run it.
-            window.LoopTrap = 1000;
-            Blockly.JavaScript.INFINITE_LOOP_TRAP =
-                'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
-            var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
-            Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-            try {
-                eval(code);
-            } catch (e) {
-                alert(e);
-            }
-        }
-        var demoWorkspace1 = Blockly.inject('blocklyDiv',
-            {
-                media: '../static/media/',
-                toolbox: document.getElementById('toolbox')
-            });
-        Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
-            demoWorkspace1);
-
-        function showCode1() {
-            // Generate Python code and display it.
-            Blockly.Python.INFINITE_LOOP_TRAP = null;
-            var code = Blockly.Python.workspaceToCode(demoWorkspace1);
-            alert(code);
-        }
-
-        function runCode1() {
-            // Generate Python code and run it.
-            window.LoopTrap = 1000;
-            Blockly.Python.INFINITE_LOOP_TRAP =
-                'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
-            var code = Blockly.Python.workspaceToCode(demoWorkspace1);
-            Blockly.Python.INFINITE_LOOP_TRAP = null;
-            try {
-                eval(code);
-            } catch (e) {
-                alert(e);
-            }
-        }
-    </script>
+    }
+</script>
 
 </body>
 </html>
