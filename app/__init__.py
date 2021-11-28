@@ -1,7 +1,7 @@
 """
 Author:  @ Ho Xiu Qi
 Date:    12th September 2021
-Updated: 27th November 2021
+Updated: 28th November 2021
 
 Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions.
 Form Validation with WTForms.
@@ -16,28 +16,25 @@ from flask import Flask, render_template, request, redirect, flash, session, jso
 from flask_wtf.csrf import CSRFProtect
 
 # Custom Script Imports
-from .libraries.Listener import *  # C2 Comms (e.g. Handle Pi connections to C2)
+from .libraries.Listener import *            # C2 Comms (e.g. Handle Pi connections to C2)
+from .libraries.DatabaseManagement import *  # DB Management (e.g. retrieval & saving of challenge settings / records)
 
 # C2 server (listener) object
 c2_q = queue.Queue()
 c2_comms_obj = C2Server(c2_q)
 c2_comms_obj.onThread(c2_comms_obj.start())
 
-# Setup
+# DatabaseManagement object instantiation
+db = DatabaseManagement()
+
+# Flask Setup
 app = Flask(__name__)   # initialise the flask app
 app.config['SECRET_KEY'] = os.urandom(24)  # create the secret key
 
 csrf = CSRFProtect(app) # protect the app from CSRF
 csrf.init_app(app)      # initialise csrf protection for the app
 
-
-# # Ensure credentials file is created
-# if not os.path.isfile(CREDENTIALS_FILE):
-#     with open(CREDENTIALS_FILE, 'w') as f:
-#         pass
-
 # Global Variables
-# registered_users = dict()     # list to contain all registered users for the Web UI
 active_user = ""           # string var to contain name of currently logged in user
 
 
@@ -49,7 +46,7 @@ def index():
         return render_template('registerplayername.html')
 
     else:
-        try:
+        try:           
             return redirect('/feature')
 
         except:
