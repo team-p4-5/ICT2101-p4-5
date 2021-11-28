@@ -18,14 +18,34 @@ from flask_wtf.csrf import CSRFProtect
 # Custom Script Imports
 from .libraries.Listener import *            # C2 Comms (e.g. Handle Pi connections to C2)
 from .libraries.DatabaseManagement import *  # DB Management (e.g. retrieval & saving of challenge settings / records)
+from .libraries.Administrator import *       # Administrator account logon management
+from .libraries.ChallengeSettings import *   # ChallengeSettings management
+from .libraries.Challenge import *           # Challenge management
+from .libraries.Student import *             # Student management
+
+# DatabaseManagement Object
+db_conn = DatabaseManagement()
+
+# AdministratorManagement Object
+adm_manager = AdministratorManagement()
+
+# ChallengeSettingsMangement Object
+settings_manager = ChallengeSettingsManagement()
+
+# ChallengeManagement Object
+challenge_manager = ChallengeManagement()
+
+# LeaderboardManagement Object
+leaderboard_manager = LeaderboardManagement()
+
+# StudentManagement & StudentActionManagement Object
+student_manager = StudentManagement()
+student_action_manager = StudentActionManagement()
 
 # C2 server (listener) object
 c2_q = queue.Queue()
 c2_comms_obj = C2Server(c2_q)
 c2_comms_obj.onThread(c2_comms_obj.start())
-
-# DatabaseManagement object instantiation
-db = DatabaseManagement()
 
 # Flask Setup
 app = Flask(__name__)   # initialise the flask app
@@ -46,15 +66,13 @@ def index():
         return render_template('registerplayername.html')
 
     else:
-        try:           
+        try:
             return redirect('/feature')
 
-        except:
+        except Exception:
             # if session expire, set the session to False
             session['active'] = False
-            flash('Session Expire')
             return redirect('/')
-
 
 # Function that queues commands received from WebUI into the C2 server's "commands" list
 @app.route('/register', methods=["POST"])
@@ -68,7 +86,7 @@ def register():
         session['active'] = True
 
         # Create new Student object with given name
-
+        
 
         # Set active Student's name
         global active_user
@@ -267,7 +285,6 @@ def feature():
         return redirect('/')
 
     # Return page for profile
-    print(active_user)
     return render_template('feature.html', active_user=active_user)
 
 @app.route('/control')
@@ -286,7 +303,6 @@ def control2():
         return redirect('/')
 
     # Return page for profile
-    print("[!] Session: "+str(session.get('active')))
     return render_template('control2.html', active_user=active_user)
 
 # Function to get a list of all connected cars
