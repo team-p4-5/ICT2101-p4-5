@@ -3,25 +3,13 @@
     {% include 'adminbase.html' %}
 
     <body name="admin-body" id="admin-body">
-            <nav class="navbar navbar-expand-lg navbar-dark " id="admin-nav" name="admin-nav">
-                <a class="navbar-brand" href="../static/images/logo.png" name="admin-logo" id="admin-logo"><img src="../static/images/logo.png" alt="../static/images/startup.logo" height="20"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                    </ul>
-                </div>
+            <nav class="navbar navbar-expand-lg navbar-dark" id="admin-nav" name="admin-nav">
+                <a class="navbar-brand" href="{{ url_for('index') }}" name="admin-logo" id="admin-logo"><img src="../static/images/logo.png" alt="../static/images/startup.logo" height="70"></a>
             </nav>
             <main class="container" id="admin-content-container" name="admin-content-container">
 
                 <div class = "row justify-content-center" id="admin-content-row-size" name="admin-content-row-size">
                     <div class="col-6 text-white rounded my-auto " id="admin-login-form" name="admin-login-form" >
-
 
                         <form action="{{ url_for('login') }}" method="post">
                             <h1 class="text-center">Admin Login</h1>

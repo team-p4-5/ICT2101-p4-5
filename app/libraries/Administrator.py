@@ -52,6 +52,7 @@ class AdministratorManagement():
 		:param password: String representation of password supplied by user
 		:return: Returns True if logon success (correct credentials), else False
 		"""
-		if admin_obj.getName() == username and admin_obj.getPassword() == password:
-			return True
+		if admin_obj.getName() == username:
+			if admin_obj.getPassword() == password:
+				return True
 		return False
