@@ -1,7 +1,7 @@
 """
 Author:  @ Ho Xiu Qi
 Date:    12th September 2021
-Updated: 11th November 2021
+Updated: 28th November 2021
 
 Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions.
 Form Validation with WTForms.
@@ -16,154 +16,200 @@ from flask import Flask, render_template, request, redirect, flash, session, jso
 from flask_wtf.csrf import CSRFProtect
 
 # Custom Script Imports
-from .libraries.Listener import *  # C2 Comms (e.g. Handle Pi connections to C2)
+from .libraries.Listener import *            # C2 Comms (e.g. Handle Pi connections to C2)
+from .libraries.DatabaseManagement import *  # DB Management (e.g. retrieval & saving of challenge settings / records)
+from .libraries.Administrator import *       # Administrator account logon management
+from .libraries.ChallengeSettings import *   # ChallengeSettings management
+from .libraries.Challenge import *           # Challenge management
+from .libraries.Student import *             # Student management
+
+# DatabaseManagement Object
+db_conn = DatabaseManagement()
+
+# AdministratorManagement Object
+adm_manager = AdministratorManagement()
+
+# ChallengeSettingsMangement Object
+settings_manager = ChallengeSettingsManagement()
+
+# ChallengeManagement Object
+challenge_manager = ChallengeManagement()
+
+# LeaderboardManagement Object
+leaderboard_manager = LeaderboardManagement()
+
+# StudentManagement & StudentActionManagement Object
+student_manager = StudentManagement()
+student_action_manager = StudentActionManagement()
 
 # C2 server (listener) object
 c2_q = queue.Queue()
 c2_comms_obj = C2Server(c2_q)
 c2_comms_obj.onThread(c2_comms_obj.start())
 
-# Setup
+# Flask Setup
 app = Flask(__name__)   # initialise the flask app
 app.config['SECRET_KEY'] = os.urandom(24)  # create the secret key
 
 csrf = CSRFProtect(app) # protect the app from CSRF
 csrf.init_app(app)      # initialise csrf protection for the app
 
-
-# Ensure credentials file is created
-if not os.path.isfile(CREDENTIALS_FILE):
-    with open(CREDENTIALS_FILE, 'w') as f:
-        pass
-
 # Global Variables
-registered_users = dict()     # list to contain all registered users for the Web UI
 active_user = ""           # string var to contain name of currently logged in user
 
 
+# Index page route handler (direct to register page if no session, else direct to feature page)
 @app.route('/')
 def index():
     # Check for Session
     if not session.get('active'):
-        return render_template('home.html')
+        return render_template('registerplayername.html')
 
     else:
         try:
             return redirect('/feature')
 
-        except:
+        except Exception:
             # if session expire, set the session to False
             session['active'] = False
-            flash('Session Expire')
             return redirect('/')
 
-
-# Function to update list of registered usernames
-def updateRegisteredUsers():
-    with open(CREDENTIALS_FILE, 'r') as f:
-        # Go through all users
-        for credential in f.readlines():
-            user = credential.split(',')[USERNAME]
-            salt = credential.split(',')[SALT]
-            hash = credential.split(',')[HASHED_PSW]
-
-            # Add any registered user that is in CREDENTIALS_FILE but not in global var 'registered_users'
-            if user not in registered_users.keys():
-                registered_users[user] = {'salt': salt, 'hash': hash}
-
-
-@app.route('/register')
+# Function that queues commands received from WebUI into the C2 server's "commands" list
+@app.route('/register', methods=["POST"])
 def register():
-    # Return page for dashboard
-    return render_template('register.html')
-
-
-@app.route('/registeraccount', methods=["POST"])
-def registeraccount():
     if request.method == "POST":
         params = request.form
         # Get the comma separated commands as one string
-        username = params.get("username")
-        password = params.get("password")
-        cfm_pass = params.get("password_confirm")
+        student = params.get("name")
 
-        # Call function to ensure we have the latest list of usernames
-        updateRegisteredUsers()
+        # Create the session
+        session['active'] = True
 
-        # If user account already exist
-        if username in registered_users.keys():
-            flash(f"User '{username}' already exists!")
-            return redirect('/register')
-        # Else, new user trying to register
-        else:
-            # If passwords match
-            if password == cfm_pass:
-                # Generate random salt
-                salt = ''.join(random.choice(CHARACTERS) for i in range(16))
+        # Create new Student object with given name
+        
 
-                # Hash the salt + password using <SHA512>
-                hashed_password = hashlib.sha512(salt.encode('utf8') + password.encode('utf8')).hexdigest()
+        # Set active Student's name
+        global active_user
+        active_user = student
+        return redirect('/')
 
-                # Store the username, salt and hashed password in the file system
-                with open(CREDENTIALS_FILE, 'a') as f:
-                    f.write(username+","+salt+","+hashed_password+"\n")
+# @app.route('/register_player')
+# def register_player():
 
-                # Notify register account's success
-                flash(f"Registered '{username}' successfully")
-                return redirect('/register')
+#     # Check for Session
+#     if not session.get('active'):
+#         return render_template('registerplayername.html')
 
-            # Passwords don't match (typo by user)
-            else:
-                flash("Password mismatch. Try again!")
-                return redirect('/register')
-
-@app.route('/login')
-def loginpage():
-    # Return page for dashboard
-    return render_template('login.html')
+#     # Return page for register_player
+#     return render_template('registerplayername.html', active_user=active_user)
 
 
-@app.route('/login', methods=["POST"])
-def login():
-    if request.method == "POST":
-        # Call function to ensure we have the latest list of usernames
-        updateRegisteredUsers()
+# # Function to update list of registered usernames
+# def updateRegisteredUsers():
+#     with open(CREDENTIALS_FILE, 'r') as f:
+#         # Go through all users
+#         for credential in f.readlines():
+#             user = credential.split(',')[USERNAME]
+#             salt = credential.split(',')[SALT]
+#             hash = credential.split(',')[HASHED_PSW]
 
-        # Get parameters from the POST form
-        params = request.form
-        # Get the comma separated commands as one string
-        username = params.get("username")
-        password = params.get("password")
+#             # Add any registered user that is in CREDENTIALS_FILE but not in global var 'registered_users'
+#             if user not in registered_users.keys():
+#                 registered_users[user] = {'salt': salt, 'hash': hash}
 
-        # If user exists
-        if username in registered_users.keys():
-            # Get the salt of the user
-            stored_salt = registered_users[username]['salt']
-            # Calculate the hash of user's specified password
-            calculated_hash = hashlib.sha512(stored_salt.encode('utf8') + password.encode('utf8')).hexdigest()
-            stored_hash = registered_users[username]['hash']
 
-            psw_match = True
+# @app.route('/register')
+# def register():
+#     # Return page for dashboard
+#     return render_template('register.html')
 
-            for i in range(len(calculated_hash)):
-                if calculated_hash[i] != stored_hash[i]:
-                    print(f"[{i}]"+calculated_hash[i] + ":" + stored_hash[i])
-                    psw_match = False
-                    break
 
-            # Successful login
-            if psw_match == True:
-                session['active'] = True
-                global active_user
-                active_user = username
-                return redirect('/')
-            # Wrong Password, Unsuccessful login
-            else:
-                flash("Wrong Password")
-                return redirect('/')
-        else:
-            flash("No Such User!")
-            return redirect('/')
+# @app.route('/registeraccount', methods=["POST"])
+# def registeraccount():
+#     if request.method == "POST":
+#         params = request.form
+#         # Get the comma separated commands as one string
+#         username = params.get("username")
+#         password = params.get("password")
+#         cfm_pass = params.get("password_confirm")
+
+#         # Call function to ensure we have the latest list of usernames
+#         updateRegisteredUsers()
+
+#         # If user account already exist
+#         if username in registered_users.keys():
+#             flash(f"User '{username}' already exists!")
+#             return redirect('/register')
+#         # Else, new user trying to register
+#         else:
+#             # If passwords match
+#             if password == cfm_pass:
+#                 # Generate random salt
+#                 salt = ''.join(random.choice(CHARACTERS) for i in range(16))
+
+#                 # Hash the salt + password using <SHA512>
+#                 hashed_password = hashlib.sha512(salt.encode('utf8') + password.encode('utf8')).hexdigest()
+
+#                 # Store the username, salt and hashed password in the file system
+#                 with open(CREDENTIALS_FILE, 'a') as f:
+#                     f.write(username+","+salt+","+hashed_password+"\n")
+
+#                 # Notify register account's success
+#                 flash(f"Registered '{username}' successfully")
+#                 return redirect('/register')
+
+#             # Passwords don't match (typo by user)
+#             else:
+#                 flash("Password mismatch. Try again!")
+#                 return redirect('/register')
+
+# @app.route('/login')
+# def loginpage():
+#     # Return page for dashboard
+#     return render_template('login.html')
+
+
+# @app.route('/login', methods=["POST"])
+# def login():
+#     if request.method == "POST":
+#         # Call function to ensure we have the latest list of usernames
+#         updateRegisteredUsers()
+
+#         # Get parameters from the POST form
+#         params = request.form
+#         # Get the comma separated commands as one string
+#         username = params.get("username")
+#         password = params.get("password")
+
+#         # If user exists
+#         if username in registered_users.keys():
+#             # Get the salt of the user
+#             stored_salt = registered_users[username]['salt']
+#             # Calculate the hash of user's specified password
+#             calculated_hash = hashlib.sha512(stored_salt.encode('utf8') + password.encode('utf8')).hexdigest()
+#             stored_hash = registered_users[username]['hash']
+
+#             psw_match = True
+
+#             for i in range(len(calculated_hash)):
+#                 if calculated_hash[i] != stored_hash[i]:
+#                     print(f"[{i}]"+calculated_hash[i] + ":" + stored_hash[i])
+#                     psw_match = False
+#                     break
+
+#             # Successful login
+#             if psw_match == True:
+#                 session['active'] = True
+#                 global active_user
+#                 active_user = username
+#                 return redirect('/')
+#             # Wrong Password, Unsuccessful login
+#             else:
+#                 flash("Wrong Password")
+#                 return redirect('/')
+#         else:
+#             flash("No Such User!")
+#             return redirect('/')
 
 
 @app.route("/logout")
@@ -188,7 +234,7 @@ def internal_server_error(e):
 def home():
     # # Check for Session
     if not session.get('active'):
-        return render_template('login.html')
+        return redirect('/')
 
     # Return page for dashboard
     return render_template('home.html', active_user=active_user)
@@ -198,7 +244,7 @@ def home():
 def profile():
     # # Check for Session
     if not session.get('active'):
-        return render_template('login.html')
+        return redirect('/')
 
     # Return page for profile
     return render_template('profile.html', active_user=active_user)
@@ -208,7 +254,7 @@ def profile():
 def dashboard():
     # # Check for Session
     if not session.get('active'):
-        return render_template('login.html')
+        return redirect('/')
 
     # Return page for profile
     return render_template('dashboard.html', active_user=active_user)
@@ -218,7 +264,7 @@ def dashboard():
 def hardwarespecs():
     # # Check for Session
     if not session.get('active'):
-        return render_template('login.html')
+        return redirect('/')
 
     # Return page for profile
     return render_template('hardwarespecs.html', active_user=active_user)
@@ -227,7 +273,7 @@ def hardwarespecs():
 def leaderboard():
     # # Check for Session
     if not session.get('active'):
-        return render_template('login.html')
+        return redirect('/')
 
     # Return page for profile
     return render_template('leaderboard.html', active_user=active_user)
@@ -236,7 +282,7 @@ def leaderboard():
 def feature():
     # # Check for Session
     if not session.get('active'):
-        return render_template('feature.html')
+        return redirect('/')
 
     # Return page for profile
     return render_template('feature.html', active_user=active_user)
@@ -245,7 +291,7 @@ def feature():
 def control():
     # # Check for Session
     if not session.get('active'):
-        return render_template('control.html')
+        return redirect('/')
 
     # Return page for profile
     return render_template('control.html', active_user=active_user)
@@ -254,7 +300,7 @@ def control():
 def control2():
     # # Check for Session
     if not session.get('active'):
-        return render_template('control2.html')
+        return redirect('/')
 
     # Return page for profile
     return render_template('control2.html', active_user=active_user)
@@ -268,6 +314,11 @@ def getcars():
 # Function to get the all status info of a specific car (e.g. speed, is_upright etc...)
 @app.route('/getcarinfo/<id>')
 def getcarinfo(id):
+    a = list()
+    with open("leaderboardtxtfile", "r") as f:
+        a = f.readlines()
+    return a
+
     info_list = dict()
     # Get the information of the specific car into a temp dictionary
     info_list["UPRIGHT"] = c2_comms_obj.connections[id]["UPRIGHT"]
