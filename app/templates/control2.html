@@ -2,6 +2,7 @@
 <html>
     {% include 'controlbase.html' %}
     <link href="../static/css/tooltip.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/virtualmap.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
     <style>
         body {
@@ -325,6 +326,21 @@
                 </div>-->
         </section>
 
+         <!--Virtual Map Panel-->
+        <section id="virtualmap-panel">
+            <div class=" card border-dark ">
+                <div class="card text-dark bg-light ">
+                    <div class="row justify-content-md-start">
+                        <div class="col-auto">
+                            <h4>Virtual Map</h4>
+                        </div>
+	                        <div class="grid-size__container">
+	                            <canvas id="map"width="300" height="300"></canvas>
+	                        </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
         <!--Instruction Panel-->
 
         <section id="instruction-panel">
@@ -658,7 +674,8 @@
     <p><em>Copyright &copy; Little Runner Car Control 2021.</em></p>
 </footer>
 <!-- Tooltip Javascripts -->
-<script src="../static/js/tour.js"></script>
+    <script src="../static/js/tour.js"></script>
+    <script src="../static/js/virtualmap.js"></script>
 <script>
   const tour = new Tour("demo");
   tour.inittooltip();
