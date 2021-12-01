@@ -2,6 +2,8 @@
 .gitattributes
 .idea
 *.zip
+app/libraries/settings.txt
+app/libraries/records.txt
 
 ### macOS ###
 # General

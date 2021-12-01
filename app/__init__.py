@@ -1,7 +1,7 @@
 """
 Author:  @ Ho Xiu Qi
 Date:    12th September 2021
-Updated: 27th November 2021
+Updated: 28th November 2021
 
 Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions.
 Form Validation with WTForms.
@@ -16,29 +16,49 @@ from flask import Flask, render_template, request, redirect, flash, session, jso
 from flask_wtf.csrf import CSRFProtect
 
 # Custom Script Imports
-from .libraries.Listener import *  # C2 Comms (e.g. Handle Pi connections to C2)
+from .libraries.Listener import *            # C2 Comms (e.g. Handle Pi connections to C2)
+from .libraries.DatabaseManagement import *  # DB Management (e.g. retrieval & saving of challenge settings / records)
+from .libraries.Administrator import *       # Administrator account logon management
+from .libraries.ChallengeSettings import *   # ChallengeSettings management
+from .libraries.Challenge import *           # Challenge management
+from .libraries.Student import *             # Student management
+
+# DatabaseManagement Object
+db_conn = DatabaseManagement()
+
+# Administrator Object
+adm = Administrator()
+# AdministratorManagement Object
+adm_manager = AdministratorManagement()
+
+# ChallengeSettingsMangement Object
+settings_manager = ChallengeSettingsManagement()
+
+# ChallengeManagement Object
+challenge_manager = ChallengeManagement()
+
+# LeaderboardManagement Object
+leaderboard_manager = LeaderboardManagement()
+
+# StudentManagement & StudentActionManagement Object
+student_manager = StudentManagement()
+student_action_manager = StudentActionManagement()
 
 # C2 server (listener) object
 c2_q = queue.Queue()
 c2_comms_obj = C2Server(c2_q)
 c2_comms_obj.onThread(c2_comms_obj.start())
 
-# Setup
+# Flask Setup
 app = Flask(__name__)   # initialise the flask app
 app.config['SECRET_KEY'] = os.urandom(24)  # create the secret key
 
 csrf = CSRFProtect(app) # protect the app from CSRF
 csrf.init_app(app)      # initialise csrf protection for the app
 
-
-# # Ensure credentials file is created
-# if not os.path.isfile(CREDENTIALS_FILE):
-#     with open(CREDENTIALS_FILE, 'w') as f:
-#         pass
-
 # Global Variables
-# registered_users = dict()     # list to contain all registered users for the Web UI
-active_user = ""           # string var to contain name of currently logged in user
+active_user = ""           # string var to contain username of currently logged in user
+active_student = None      # var to store active "Student" account
 
 
 # Index page route handler (direct to register page if no session, else direct to feature page)
@@ -52,12 +72,10 @@ def index():
         try:
             return redirect('/feature')
 
-        except:
+        except Exception:
             # if session expire, set the session to False
             session['active'] = False
-            flash('Session Expire')
             return redirect('/')
-
 
 # Function that queues commands received from WebUI into the C2 server's "commands" list
 @app.route('/register', methods=["POST"])
@@ -71,12 +89,66 @@ def register():
         session['active'] = True
 
         # Create new Student object with given name
-
+        global active_student
+        active_student = student_manager.registerPlayerName(student)
 
         # Set active Student's name
         global active_user
         active_user = student
         return redirect('/')
+
+
+# Function to handle requests for the admin login page
+@app.route('/adminlogin')
+def adminlogin():
+    global active_user
+
+    # Check for Session
+    if not session.get('active'):
+        return render_template('adminlogin.html')
+
+    # Logged on user is Administrator
+    elif session.get('active') and active_user == ADMIN_NAME:
+        try:
+            return redirect('/feature')     # change to editchallengesettings.html
+
+        except Exception:
+            # if session expire, set the session to False
+            session['active'] = False
+            return redirect('/')
+
+    # Logged on user is NOT Administrator
+    elif session.get('active') and active_user != ADMIN_NAME:
+        try:
+            return redirect('/feature')
+
+        except Exception:
+            # if session expire, set the session to False
+            session['active'] = False
+            return redirect('/')
+
+
+# Function that handles Administrator login
+@app.route('/login', methods=["POST"])
+def login():
+    if request.method == "POST":
+        params = request.form
+        # Get the comma separated commands as one string
+        username = params.get("username")
+        password = params.get("password")
+
+        # Create new Administrator object with given name
+        if adm_manager.login(adm, username, password) == True:
+            # Set active Student's name
+            global active_user
+            active_user = username
+
+            # Create the session
+            session['active'] = True
+
+            return redirect('/feature')
+        else:
+            return redirect('/adminlogin')
 
 # @app.route('/register_player')
 # def register_player():
@@ -199,9 +271,12 @@ def register():
 
 @app.route("/logout")
 def logout():
-    session['active'] = False
     global active_user
     active_user = ""
+    global active_student
+    active_student = None
+    session['active'] = False
+
     return redirect('/')
 
 @app.errorhandler(404)
@@ -270,7 +345,8 @@ def feature():
         return redirect('/')
 
     # Return page for profile
-    print(active_user)
+    # global active_student
+    # print_info(active_student.getPlayerName())
     return render_template('feature.html', active_user=active_user)
 
 @app.route('/control')
@@ -289,18 +365,25 @@ def control2():
         return redirect('/')
 
     # Return page for profile
-    print("[!] Session: "+str(session.get('active')))
     return render_template('control2.html', active_user=active_user)
 
 # Function to get a list of all connected cars
 @app.route('/getcars')
 def getcars():
+    # # Check for Session
+    if not session.get('active'):
+        return redirect('/')
+
     return jsonify(c2_comms_obj.connections.keys())
 
 
 # Function to get the all status info of a specific car (e.g. speed, is_upright etc...)
 @app.route('/getcarinfo/<id>')
 def getcarinfo(id):
+    # # Check for Session
+    if not session.get('active'):
+        return redirect('/')
+
     a = list()
     with open("leaderboardtxtfile", "r") as f:
         a = f.readlines()
