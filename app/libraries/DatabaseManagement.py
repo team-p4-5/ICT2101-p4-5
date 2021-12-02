@@ -80,11 +80,11 @@ class DatabaseManagement():
 		# Return parsed settings if they exist
 		if len(f_contents) >= 1:
 			list_of_settings = f_contents[0].split(',')
-			return {'easy':int(list_of_settings[0]), 'medium':int(list_of_settings[1]), 'hard':int(list_of_settings[2])}
+			return {EASY_MODE:int(list_of_settings[0]), MEDIUM_MODE:int(list_of_settings[1]), HARD_MODE:int(list_of_settings[2])}
 		# Else return default settings
 		else:
 			default_list_of_settings = DEFAULT_CHALLENGE_SETTINGS.split(',')
-			return {'easy':int(default_list_of_settings[0]), 'medium':int(default_list_of_settings[1]), 'hard':default_list_of_settings[2]}
+			return {EASY_MODE:int(default_list_of_settings[0]), MEDIUM_MODE:int(default_list_of_settings[1]), HARD_MODE:default_list_of_settings[2]}
 
 	def saveChallengeSettings(self, newChallengeSettings):
 		"""
