@@ -29,9 +29,9 @@ class ChallengeSettings():
 		challenge_settings = db_conn.getChallengeSettings()
 
 		# Initialise checkpoint counts for difficulty levels using values from db
-		self.easyModeCheckpoints = int(challenge_settings["easy"])
-		self.mediumModeCheckpoints = int(challenge_settings["medium"])
-		self.hardModeCheckpoints = int(challenge_settings["hard"])
+		self.easyModeCheckpoints = int(challenge_settings[EASY_MODE])
+		self.mediumModeCheckpoints = int(challenge_settings[MEDIUM_MODE])
+		self.hardModeCheckpoints = int(challenge_settings[HARD_MODE])
 
 	def getEasyModeCheckpoints(self):
 		"""
