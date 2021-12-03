@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     {% include 'controlbase.html' %}
-
+    <link href="../static/css/tooltip.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
     <style>
         body {
             background-color: #fff;
@@ -13,6 +14,8 @@
             font-size: 140%;
         }
     </style>
+
+
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
     <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="startup.logo" height="70"></a>
@@ -44,6 +47,8 @@
 
     <!--Background wallpaper-->
     <section id="backimage">
+        <div class="container">
+
         <div id="backimage-caption"></div>
 
         <!--Challenge panel -->
@@ -53,13 +58,14 @@
                     <div class="row">
                         <div class="col-auto">
                             <h4>Challenge</h4>
+                            <button class="btn btn-primary" onClick="window.location.reload()">Start instruction manual again</button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body text-dark bg-light mb-2">
                     <div class="row">
                         <div class="menu">
-                            <label for="selection">Select :</label><!--Select challenge difficulty-->
+                            <label class="second" for="selection">Select :</label><!--Select challenge difficulty-->
 
                             <select id="selection">
 
@@ -151,10 +157,23 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row gx-5">
+
+                    <!-- History Link-->
+                    <div class="col">
+                    <a href="" class="fourth" data-bs-toggle="modal" data-bs-target="#staticBackdrop">History </a>
+                    </div>
+                    <!-- Leaderboard Link-->
+                    <div class="col">
+                    <a href="" class="fifth" style="text-align: right;">Leaderboard </a>
+                    </div>
+                    </div>
+
                 </div>
-                <!-- History Link-->
-                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">History </a>
+
             </div>
+
         </section>
 
         <!-- History DashBoard popup  -->
@@ -316,7 +335,7 @@
                             <h4>Instruction</h4>
                         </div>
                         <div class="row justify-content-center">
-                            <!--    <div class="col-auto">
+                            <!--    <div class="col-auto">-->
                             <!-- Rounded switch to toggle to pair with car-->
                             <!--         <h7>Pair</h7>
                                      <input type="checkbox" id="switch"class="checkbox"/>
@@ -327,9 +346,9 @@
                             <!--Car pairing selection-->
                             <div class="col-auto">
                                 <div class="available">
-                                    <label for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
+                                    <label class="first" for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
 
-                                    <select id="selection">
+                                    <select id="carSelection">
 
                                         <option selected>Car ID</option>
                                         <option value="carId1">Car A</option>
@@ -368,6 +387,7 @@
                         <button onclick="showCode1()">Show Python</button>
                         <button onclick="runCode()">Test code</button>
                     </p>
+                    <div class="third"></div>
 
                     <div id="blocklyDiv" style="height: 450px; width: 450px;"></div>
                     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
@@ -629,7 +649,7 @@
         </section>
         </div>
 
-
+    </div>
     </section>
 </body>
 
@@ -637,6 +657,15 @@
 <footer>
     <p><em>Copyright &copy; Little Runner Car Control 2021.</em></p>
 </footer>
+<!-- Tooltip Javascripts -->
+<script src="../static/js/tour.js"></script>
+<script>
+  const tour = new Tour("demo");
+  tour.inittooltip();
+  tour.start();
+</script>
+
+<!-- Block Javascripts -->
 <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
         {

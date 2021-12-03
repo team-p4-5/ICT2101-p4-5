@@ -34,7 +34,7 @@
 
 ## Team P4-5's Workflow
 ## Rules
-Any changes to the repository MUST be first done on a `ui/<feature_name>`, `backend/<feature_name>`, or `documentation/<feature_name>` branch, before merging it with `dev` branch, followed by `main` branch
+Any changes to the repository MUST be first done on a `ui/<feature_name>`, `backend/<feature_name>`, or `management/<feature_name>` branch, before merging it with `dev` branch, followed by `main` branch
 ### Issue Management
 1. An issue **MUST** be created for each assigned feature
 2. Issues for feature components are **ADVICED** to be created to help with tracking feature progress
