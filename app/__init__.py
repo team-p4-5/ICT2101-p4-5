@@ -32,6 +32,7 @@ adm = Administrator()
 adm_manager = AdministratorManagement()
 
 # ChallengeSettingsMangement Object
+settings = ChallengeSettings(db_conn)
 settings_manager = ChallengeSettingsManagement()
 
 # ChallengeManagement Object
@@ -110,7 +111,7 @@ def adminlogin():
     # Logged on user is Administrator
     elif session.get('active') and active_user == ADMIN_NAME:
         try:
-            return redirect('/feature')     # change to editchallengesettings.html
+            return redirect('/editchallengesettings')     # change to editchallengesettings.html
 
         except Exception:
             # if session expire, set the session to False
@@ -146,10 +147,53 @@ def login():
             # Create the session
             session['active'] = True
 
-            return redirect('/feature')
+            return redirect('/editchallengesettings')
         else:
             return redirect('/adminlogin')
 
+
+# Function to serve the edit challenge settings page if user is logged on
+@app.route('/editchallengesettings')
+def editchallengesettings():
+    # Check for Session
+    if not session.get('active'):
+        return redirect('adminlogin')
+
+    # Return page for editing challenge settings (# of checkpoints)
+    return render_template('editchallengesettings.html')
+
+
+# Function to handle GET requests for default challenge settings
+@app.route('/getDefaultSettings')
+def getDefaultSettings():
+    # Check for Session
+    if not session.get('active'):
+        return redirect('adminlogin')
+
+    # Retreive challenge settings from DB using the settings_manager
+    current_settings_list = settings_manager.getAllCheckpointCounts(settings)
+    return jsonify({EASY_MODE:current_settings_list[EASY], MEDIUM_MODE:current_settings_list[MEDIUM], 
+        HARD_MODE:current_settings_list[HARD]})
+
+
+# Function to handle POST requests for changing the challenge settings
+@app.route('/updateDefaultSettings', methods=["POST"])
+def updateDefaultSettings():
+    # Retreive challenge settings from DB using the settings_manager
+    if request.method == "POST":
+        params = request.form
+        # Get the different checkpoint values for all difficulty modes
+        easy = params.get("easy")
+        medium = params.get("medium")
+        hard = params.get("hard")
+
+        # If settings successfully modified, return success message
+        if settings_manager.modifyCheckpointCounts(settings, db_conn, [easy,medium,hard]):
+            return make_response(jsonify({"msg": "OK"}), 200)
+        else:
+            return make_response(jsonify({"msg": "NOT ALLOWED"}), 405)
+
+    
 # @app.route('/register_player')
 # def register_player():
 
@@ -272,11 +316,15 @@ def login():
 @app.route("/logout")
 def logout():
     global active_user
+    # Track the originally logged on user
+    temp = active_user
     active_user = ""
     global active_student
     active_student = None
     session['active'] = False
 
+    if temp == ADMIN_NAME:
+        return redirect('/adminlogin')
     return redirect('/')
 
 @app.errorhandler(404)
