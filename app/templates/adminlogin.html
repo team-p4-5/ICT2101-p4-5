@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" name="adminhtml" id="adminhtml">
+    {% include 'adminbase.html' %}
+
+    <body name="admin-body" id="admin-body">
+            <nav class="navbar navbar-expand-lg navbar-dark" id="admin-nav" name="admin-nav">
+                <a class="navbar-brand" href="{{ url_for('index') }}" name="admin-logo" id="admin-logo"><img src="../static/images/logo.png" alt="../static/images/startup.logo" height="70"></a>
+            </nav>
+            <main class="container" id="admin-content-container" name="admin-content-container">
+
+                <div class = "row justify-content-center" id="admin-content-row-size" name="admin-content-row-size">
+                    <div class="col-6 text-white rounded my-auto " id="admin-login-form" name="admin-login-form" >
+
+                        <form action="{{ url_for('login') }}" method="post">
+                            <h2 class="text-center" style="margin-top: 25px;">Admin Login</h2>
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input class="form-control" type="text" id="username"
+                                       name="username" placeholder="Enter Username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input class="form-control" type="password" id="password"
+                                       name="password" placeholder="Enter Password" required>
+                            </div>
+                            <div class="form-group text-center">
+                                <button class="btn btn-primary" type="submit">Login</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </main>
+
+        <footer name="admin-footer" id="admin-footer">
+        <p><em>Copyright &copy; Robotic Coding Car Control 2021.</em></p>
+        </footer>
+    </body>
+
+
+</html>
