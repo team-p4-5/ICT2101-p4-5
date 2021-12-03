@@ -33,15 +33,12 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
         </form>
     </div>
 </nav>
 <body>
-
-
-
     <!--Background wallpaper-->
     <section id="backimage">
         <div class="container">
@@ -62,82 +59,21 @@
                     <div class="card-body text-dark bg-light mb-2">
                         <div class="row">
                             <div class="menu">
-                                <label class="second" for="selection">Select :</label><!--Select challenge difficulty-->
-
+                                <label class="second" for="selection">Difficulty :</label><!--Select challenge difficulty-->
                                 <select id="selection">
-
-                                    <option selected>level </option>
-                                    <option value="Easy">Easy</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Hard">Hard</option>
-
+                                    <option value="3" id="easy" selected>Easy</option>
+                                    <option value="4" id="medium">Medium</option>
+                                    <option value="5" id="hard">Hard</option>
                                 </select>
                             </div>
                             <div class="col">
-                                <button type="button" id="generateButton" class=" btn-success me-sm-2">Generate</button>
-                                <button type="button" id="startButton" class=" btn-info me-sm-2 started">Start</button>
-                                <button type="button" id="stopButton" class=" btn-danger me-sm-2">Stop</button>
+                                <button type="button" id="createButton" class=" btn-success me-sm-2">Create Challenge</button>
+                                <button type="button" id="startButton" class=" btn-info me-sm-2 started" disabled>Start Challenge</button>
                             </div>
                         </div>
                         <div class="content">
-                            <div id="Easy" class="data">
-                                <!--Challenge Easy dropdown-->
+                            <div id="checkpoint_list" class="data">
                                 <div class="row justify-content-start">
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="Medium" class="data">
-                                <!--Challenge Medium dropdown-->
-                                <div class="row justify-content-start">
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="Hard" class="data">
-                                <!--Challenge Hard dropdown-->
-                                <div class="row justify-content-start">
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
                                     <div class="col-auto">
                                         <div class="led-box">
                                             <h6> </h6>
@@ -662,9 +598,10 @@
     tour.start();
 </script>
 <script>
-
-    initlistener();
-
+    // Call JS function from 'challenge.js' to init challenge features
+    // initlistener()
+    initChallengeFeatures();
+    // initChallengeFeatures2();
 </script>
 
 <!-- Block Javascripts -->

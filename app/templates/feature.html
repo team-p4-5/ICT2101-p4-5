@@ -26,12 +26,6 @@
                      <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('control') }}">ControlDashBoard</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('feature') + '#feature'}}">Components</a>
-                    </li>
-                    <li     class="nav-item">
-                        <a class="nav-link" href="{{ url_for('feature') + '#about'}}">About Us</a>
-                    </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

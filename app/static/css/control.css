@@ -28,6 +28,33 @@ body
     background:#F00;
 }
 
+#createButton:disabled,
+#createButton[disabled]{
+  background-color: #cccccc;
+  border-color: #cccccc;
+  color: #ffffff;
+}
+
+#createButton:enabled,
+#createButton[enabled]{
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #ffffff;
+}
+
+#startButton:disabled,
+#startButton[disabled]{
+  background-color: #cccccc;
+  border-color: #cccccc;
+  color: #ffffff;
+}
+
+#startButton:enabled,
+#startButton[enabled]{
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  color: #ffffff;
+}
 
 
 /*component.html image profile*/
