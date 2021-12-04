@@ -319,7 +319,6 @@
                                 <div class="col">
                                     <button type="execute" class="btn btn-success me-md-2">Execute</button>
                                     <button type="submit" class="btn btn-primary">Clear</button>
-                                    <button type="Brake" class="btn btn-danger">E-Brake</button>
                                 </div>
                             </div>
                         </div>
@@ -352,33 +351,27 @@
                                 <div class="col-auto">
                                     <div class="available">
                                         <label class="first" for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
-
                                         <select id="carSelection">
-
-                                            <option selected>Car ID</option>
-                                            <option value="carId1">Car A</option>
-                                            <option value="carId2">Car B</option>
-                                            <option value="carId3">Car C</option>
-                                            <option value="carId4">Car D</option>
+                                            <option selected>----</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row justify-content-md-start">
                                     <div class="col">
-                                        <button type="pair" class="btn btn-success me-md-2">Pair</button>
+                                        <button type="pair" class="btn btn-success me-md-2" id="pairButton">Pair</button>
                                     </div>
                                     <!--- Pairing light status-->
                                     <div class="row justify-content-end">
                                         <div class="col-auto">
                                             <div class="led-box">
-                                                <div class="led-green"></div>
+                                                <div class="led-red" id="pairing_led"></div>
                                             </div>
                                         </div>
-                                        <div class="col-auto">
+                                        <!-- <div class="col-auto">
                                             <div class="led-box">
                                                 <div class="led-red"></div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -671,9 +664,9 @@
 </script>
 <script>
     // Call JS function from 'challenge.js' to init challenge features
-    // initlistener()
     initChallengeFeatures();
-    // initChallengeFeatures2();
+    initPairingFeatures();
+    
 </script>
 
 <!-- Block Javascripts -->
