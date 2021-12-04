@@ -60,6 +60,7 @@ csrf.init_app(app)      # initialise csrf protection for the app
 # Global Variables
 active_user = ""           # string var to contain username of currently logged in user
 active_student = None      # var to store active "Student" account
+active_challenge = None    # var to store active "Challenge" instance
 
 
 # Index page route handler (direct to register page if no session, else direct to feature page)
@@ -179,7 +180,6 @@ def getDefaultSettings():
 # Function to handle POST requests for changing the challenge settings
 @app.route('/updateDefaultSettings', methods=["POST"])
 def updateDefaultSettings():
-    # Retreive challenge settings from DB using the settings_manager
     if request.method == "POST":
         params = request.form
         # Get the different checkpoint values for all difficulty modes
@@ -193,7 +193,60 @@ def updateDefaultSettings():
         else:
             return make_response(jsonify({"msg": "NOT ALLOWED"}), 405)
 
-    
+
+# Function to handle POST requests for creating a new Challenge
+@app.route('/createChallenge', methods=["POST"])
+def createChallenge():
+    if request.method == "POST":
+        params = request.form
+        # Get the list of checkpoints
+        difficulty = params.get("difficulty")
+        checkpoints = params.get("checkpoints").split(',')
+        checkpoint_count = len(checkpoints)
+
+        # Create the Challenge object instanace
+        global active_user
+        global active_challenge
+        # print_success(f"Player: {active_user}\nDifficulty: {difficulty}\nCheckpoints: {checkpoints}\nCheckpoint Count: {checkpoint_count}")
+        active_challenge = challenge_manager.createChallenge(active_user, difficulty, checkpoint_count, checkpoints)
+        return make_response(jsonify({"msg": "OK"}), 200)
+
+
+# Function to handle POST requests for starting a Challenge
+@app.route('/startChallenge', methods=["POST"])
+def startChallenge():
+    if request.method == "POST":
+        # Call function to set the 'active' state for the challenge
+        try:
+            global active_challenge
+            challenge_manager.startChallenge(active_challenge)
+            return make_response(jsonify({"msg": "OK"}), 200)
+        except Exception:
+            return make_response(jsonify({"msg": "NOT ALLOWED"}), 405)
+        
+
+
+# Function to handle POST requests for saving a completed challenge's record time
+@app.route('/saveChallenge', methods=["POST"])
+def saveChallenge():
+    if request.method == "POST":
+        params = request.form
+        # Get the different checkpoint values for all difficulty modes
+        record_time = params.get("record_time")
+
+        # Call 'challenge_manager's function to save the time elapsed into Challenge object instance
+        global active_challenge
+        challenge_manager.completeChallenge(active_challenge, record_time)
+
+        # Call 'leaderboard_manager's function to save a record of the completed challenge into DB
+        leaderboard_manager.saveChallenge(db_conn, active_challenge)
+        # Reset (clear) the active challenge
+        active_challenge = None
+
+        # Save the record time into challenge object
+        return make_response(jsonify({"msg": "OK"}), 200)
+
+
 # @app.route('/register_player')
 # def register_player():
 
@@ -406,14 +459,14 @@ def control():
     # Return page for profile
     return render_template('control.html', active_user=active_user)
 
-@app.route('/control2')
-def control2():
-    # # Check for Session
-    if not session.get('active'):
-        return redirect('/')
+# @app.route('/control2')
+# def control2():
+#     # # Check for Session
+#     if not session.get('active'):
+#         return redirect('/')
 
-    # Return page for profile
-    return render_template('control2.html', active_user=active_user)
+#     # Return page for profile
+#     return render_template('control2.html', active_user=active_user)
 
 # Function to get a list of all connected cars
 @app.route('/getcars')

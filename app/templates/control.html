@@ -29,22 +29,16 @@
                 <a class="nav-link" href="{{ url_for('feature') }}">Main</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('control') }}">Children Mode</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('leaderboard') }}">LeaderBoard</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
         </form>
     </div>
 </nav>
 <body>
-
-
-
     <!--Background wallpaper-->
     <section id="backimage">
         <div class="container">
@@ -65,95 +59,46 @@
                     <div class="card-body text-dark bg-light mb-2">
                         <div class="row">
                             <div class="menu">
-                                <label class="second" for="selection">Select :</label><!--Select challenge difficulty-->
-
+                                <label class="second" for="selection">Difficulty :</label><!--Select challenge difficulty-->
                                 <select id="selection">
-
-                                    <option selected>level </option>
-                                    <option value="Easy">Easy</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Hard">Hard</option>
-
+                                    <option value="3" id="easy" selected>Easy</option>
+                                    <option value="4" id="medium">Medium</option>
+                                    <option value="5" id="hard">Hard</option>
                                 </select>
                             </div>
                             <div class="col">
-                                <button type="enter" class="btn btn-success me-md-2">Enter</button>
+                                <button type="button" id="createButton" class=" btn-success me-sm-2">Create Challenge</button>
+                                <button type="button" id="startButton" class=" btn-info me-sm-2 started" disabled>Start Challenge</button>
                             </div>
                         </div>
                         <div class="content">
-                            <div id="Easy" class="data">
-                                <!--Challenge Easy dropdown-->
+                            <div id="checkpoint_list" class="data">
                                 <div class="row justify-content-start">
                                     <div class="col-auto">
                                         <div class="led-box">
-                                            <div class="led-green"></div>
+                                            <h6> </h6>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="led-box">
-                                            <div class="led-red"></div>
+                                            <h6> </h6>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="led-box">
-                                            <div class="led-blue"></div>
+                                            <h6> </h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="Medium" class="data">
-                                <!--Challenge Medium dropdown-->
-                                <div class="row justify-content-start">
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-green"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-blue"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-purple"></div>
-                                        </div>
-                                    </div>
+                            <div class="watch">
+                                <div class="minuteDiv">
+                                    <h1 class="minute_time">00</h1>
+                                    <p class="minuteTitle">Min :</p>
                                 </div>
-                            </div>
-                            <div id="Hard" class="data">
-                                <!--Challenge Hard dropdown-->
-                                <div class="row justify-content-start">
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-green"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-blue"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-purple"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-green"></div>
-                                        </div>
-                                    </div>
+                                <div class="secondDiv">
+                                    <h1 class="second_time">00</h1>
+                                    <p class="secondTitle">: Sec</p>
                                 </div>
                             </div>
                         </div>
@@ -304,18 +249,6 @@
                                     <button type="submit" class="btn btn-primary">Clear</button>
                                     <button type="Brake" class="btn btn-danger">E-Brake</button>
                                 </div>
-                                <ul>
-                                    <li>
-                                        <div class="content" data-bs-placement="bottom">
-                                            <h5>Tooltips</h5>
-
-                                            <p>Select the available car in the dropdown selection to Pair at Instruction Panel. Then press PAIR button to pair with the robotic car</p>
-                                            <p>Select different levels.(Easy,Medium or Hard)</p>
-                                            <p>Drag icons and set in the Control Panel. Click button EXECUTE to execute the commands</p>
-                                            <p>Click on the HISTORY link at the Challenge Dashboard to view the History </p>
-                                        </div>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -672,6 +605,12 @@
     const tour = new Tour("demo");
     tour.inittooltip();
     tour.start();
+</script>
+<script>
+    // Call JS function from 'challenge.js' to init challenge features
+    // initlistener()
+    initChallengeFeatures();
+    // initChallengeFeatures2();
 </script>
 
 <!-- Block Javascripts -->
