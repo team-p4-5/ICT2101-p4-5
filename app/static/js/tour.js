@@ -1,121 +1,121 @@
 class Tour {
-    inittooltip(){
+    inittooltip() {
         tour.addStep('step1', {
-        title: "Step 1",
-        text: "Select the available car in the dropdown selection to Pair at Instruction Panel. Then press 'PAIR' button to pair with the robotic car\n",
-        hook: ".first",
-        timer: 10000, // will show for 10 seconds before going to the next step
-        onShow: function() {
+            title: "Step 1",
+            text: "Select the available car in the dropdown selection to Pair at Instruction Panel. Then press 'PAIR' button to pair with the robotic car\n",
+            hook: ".first",
+            timer: 10000, // will show for 10 seconds before going to the next step
+            onShow: function () {
 
-        },
-        onHide: function() {
-
-        },
-        buttons: [
-            {
-                text: "Skip",
-                action: "tour.previous()"
             },
-            {
-                text: "Next",
-                action: "tour.next()"
-            }
-        ],
-        links: [
+            onHide: function () {
 
-        ]
-    });
-      tour.addStep('step2', {
-        title: "Step 2",
-        text: "Select different levels. (Easy, Medium or Hard)",
-        hook: ".second",
-        timer: 10000, // will show for 10 seconds before going to the next step
-        onShow: function() {
-
-        },
-        onHide: function() {
-
-        },
-        buttons: [
-            {
-                text: "Previous",
-                action: "tour.previous()"
             },
-            {
-                text: "Next",
-                action: "tour.next()"
-            }
-        ],
-        links: [
+            buttons: [
+                {
+                    text: "Skip",
+                    action: "tour.previous()"
+                },
+                {
+                    text: "Next",
+                    action: "tour.next()"
+                }
+            ],
+            links: [
 
-        ]
-    });
-      tour.addStep('step3', {
-        title: "Step 3",
-        text: "Drag icons and set in the Control Panel. Click button EXECUTE to execute the commands",
-        hook: ".third",
-        timer: 10000, // will show for 10 seconds before going to the next step
-        onHide: function() {
+            ]
+        });
+        tour.addStep('step2', {
+            title: "Step 2",
+            text: "Select different levels. (Easy, Medium or Hard)",
+            hook: ".second",
+            timer: 10000, // will show for 10 seconds before going to the next step
+            onShow: function () {
 
-        },
-        buttons: [
-            {
-                text: "Previous",
-                action: "tour.previous()"
             },
-            {
-                text: "Next",
-                action: "tour.next()"
-            }
-        ],
-        links: [
+            onHide: function () {
 
-        ]
-    });
+            },
+            buttons: [
+                {
+                    text: "Previous",
+                    action: "tour.previous()"
+                },
+                {
+                    text: "Next",
+                    action: "tour.next()"
+                }
+            ],
+            links: [
+
+            ]
+        });
+        tour.addStep('step3', {
+            title: "Step 3",
+            text: "Drag icons and set in the Control Panel. Click button EXECUTE to execute the commands",
+            hook: ".third",
+            timer: 10000, // will show for 10 seconds before going to the next step
+            onHide: function () {
+
+            },
+            buttons: [
+                {
+                    text: "Previous",
+                    action: "tour.previous()"
+                },
+                {
+                    text: "Next",
+                    action: "tour.next()"
+                }
+            ],
+            links: [
+
+            ]
+        });
         tour.addStep('step4', {
-        title: "Step 4", // will show for 10 seconds before going to the next step
-        text: "Click on the 'History' button to view past commands that you sent to the car",
-        hook: ".fourth",
-        timer: 10000,
-        onHide: function() {
+            title: "Step 4", // will show for 10 seconds before going to the next step
+            text: "Click on the 'History' button to view past commands that you sent to the car",
+            hook: ".fourth",
+            timer: 10000,
+            onHide: function () {
 
-        },
-        buttons: [
-            {
-                text: "Previous",
-                action: "tour.previous()"
             },
-            {
-                text: "Next",
-                action: "tour.next()"
-            }
-        ],
-        links: [
+            buttons: [
+                {
+                    text: "Previous",
+                    action: "tour.previous()"
+                },
+                {
+                    text: "Next",
+                    action: "tour.next()"
+                }
+            ],
+            links: [
 
-        ]
-    });
+            ]
+        });
         tour.addStep('step5', {
-        title: "Step 5", // will show for 10 seconds before going to the next step
-        text: "Click on the 'Leaderboardâ€™ button to view past record times by others!",
-        hook: ".fifth",
-        timer: 10000,
-        onHide: function() {
+            title: "Step 5", // will show for 10 seconds before going to the next step
+            text: "Click on the 'Leaderboard’ button to view past record times by others!",
+            hook: ".fifth",
+            timer: 10000,
+            onHide: function () {
 
-        },
-        buttons: [
-            {
-                text: "Previous",
-                action: "tour.previous()"
             },
-            {
-                text: "Finish",
-                action: "tour.stop()"
-            }
-        ],
-        links: [
+            buttons: [
+                {
+                    text: "Previous",
+                    action: "tour.previous()"
+                },
+                {
+                    text: "Finish",
+                    action: "tour.stop()"
+                }
+            ],
+            links: [
 
-        ]
-    });
+            ]
+        });
 
     }
     constructor(name) {
@@ -187,7 +187,7 @@ class Tour {
         $(this.box).animate({
             marginTop: "50px",
             opacity: "0"
-        }, 300, function() {
+        }, 300, function () {
             box.remove();
         });
 
@@ -213,7 +213,7 @@ class Tour {
             this.steps[stepIndex].onShow();
         };
 
-        $.fn.isInViewport = function() {
+        $.fn.isInViewport = function () {
             var elementTop = $(this).offset().top;
             var elementBottom = elementTop + $(this).outerHeight();
 
@@ -226,7 +226,7 @@ class Tour {
         if (!$(hook).isInViewport() && this.getScroll()) {
             $('html,body').animate({
                 scrollTop: $(this.steps[stepIndex].hook).offset().top
-            },'slow');
+            }, 'slow');
         };
 
         this.box = $("<div class='tour'></div>");
@@ -270,7 +270,7 @@ class Tour {
 
         var self = this;
         if (this.steps[stepIndex].timer != undefined) {
-            this.timeout = setTimeout(function() {
+            this.timeout = setTimeout(function () {
                 self.next();
             }, this.steps[stepIndex].timer);
         }

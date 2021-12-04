@@ -1,0 +1,25 @@
+﻿
+
+.watch {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: lighter;
+    color: #006;
+    display: flex;
+}
+
+.minuteDiv,
+.secondDiv,
+{
+    border-bottom-left-radius: 0.2px;
+    border-bottom-right-radius: 0.2px;
+}
+
+.minuteTitle,
+.secondTitle,
+{
+    font-size: 0.2rem;
+    font-weight: bold;
+    border-bottom-left-radius: 0.5px;
+    border-bottom-right-radius: 0.5px;
+}
