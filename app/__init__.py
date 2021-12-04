@@ -293,6 +293,16 @@ def depairWithCar():
             return make_response(jsonify({"msg": "OK"}), 200)
 
 
+# Function to handle requests for retrieving leaderboard information
+@app.route('/getLeaderboard')
+def getLeaderboard():
+    # Check for Session
+    if not session.get('active'):
+        return redirect('/')
+
+    return jsonify(leaderboard_manager.getPastChallenges(db_conn))
+
+
 # @app.route('/register_player')
 # def register_player():
 
@@ -511,11 +521,6 @@ def getcarinfo(id):
     # # Check for Session
     if not session.get('active'):
         return redirect('/')
-
-    a = list()
-    with open("leaderboardtxtfile", "r") as f:
-        a = f.readlines()
-    return a
 
     info_list = dict()
     # Get the information of the specific car into a temp dictionary

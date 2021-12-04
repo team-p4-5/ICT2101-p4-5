@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     {% include 'controlbase.html' %}
-<link href="../static/css/tooltip.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
 <style>
     body {
@@ -26,10 +25,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{{ url_for('feature') }}">Main</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('leaderboard') }}">LeaderBoard</a>
+                <a class="nav-link" href="{{ url_for('feature') }}">Home</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
@@ -111,7 +107,7 @@
                             </div>
                             <!-- Leaderboard Link-->
                             <div class="col">
-                                <a href="" class="fifth" style="text-align: right;">Leaderboard </a>
+                                <a href="" class="fifth" style="text-align: right;" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Leaderboard </a>
                             </div>
                         </div>
 
@@ -232,7 +228,77 @@
                     </div>
                 </div>
             </div>
+  <!-- Leaderboard DashBoard popup  -->
+            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" id="leaderboardwindow">
+                        <div class="modal-header popupheader">
+                            <h5 class="modal-title" id="staticBackdropLabel1">Leaderboard</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    <div class="modal-body">
+                        <div class="lbcontainer">
+                        <div class="lbbox">
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab1" checked>
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab2">
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab3">
+                            <ul class="tab-list">
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab1" id="easytab">Easy</label>
+                                </li>
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab2" id="mediumtab">Medium</label>
+                                </li>
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab3" id="hardtab">Hard</label>
+                                </li>
+                            </ul>
 
+                            <div class="tab-container">
+                            <div class="tab-content">
+                            <table id="easyleaderboard" width="100%">
+                            <thead>
+                                <th>Player Name</th>
+                                <th>Record Time</th>
+                                <th>Difficulty</th>
+                            </thead>
+                        <tbody id="easytbody">
+                        </tbody>
+                        </table>
+                            </div>
+                            <div class="tab-content">
+                                 <table id="mediumleaderboard" width="100%">
+                            <thead>
+                                <th>Player Name</th>
+                                <th>Record Time</th>
+                                <th>Difficulty</th>
+                            </thead>
+                        <tbody id="mediumtbody">
+                        </tbody>
+                        </table>
+                            </div>
+                            <div class="tab-content">
+                             <table id="hardleaderboard" width="100%">
+                            <thead>
+                                <th>Player Name</th>
+                                <th>Record Time</th>
+                                <th>Difficulty</th>
+                            </thead>
+                        <tbody id="hardtbody">
+                        </tbody>
+                        </table>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
             <!--Control Panel-->
             <section id="control-panel">
 
@@ -594,7 +660,7 @@
     // Call JS function from 'challenge.js' to init challenge features
     initChallengeFeatures();
     initPairingFeatures();
-    
+    initLeaderboard();
 </script>
 
 <!-- Block Javascripts -->

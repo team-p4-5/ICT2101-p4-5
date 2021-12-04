@@ -193,7 +193,13 @@ function completeChallenge() {
     // Display "Challenge Completed!" message with "Time Taken: \nMM:SS" message below
     record_time_array = time_elapsed.split(":");
     alert("Challenge Completed!\nRecord Time: " + record_time_array[0] + "min " + record_time_array[1] + "sec");
+
+    // Call function to de-pair student with the car
     depairWithCar();
+    
+    // Call function to retrieve latest leaderboard information from server 
+    retrieveLeaderboard();
+
 }
 
 
