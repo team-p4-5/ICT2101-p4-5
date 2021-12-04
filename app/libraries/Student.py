@@ -22,7 +22,7 @@ Class Definition for 'Student' entity class
 class Student():
 	def __init__(self, playerName):
 		self.playerName = playerName
-		self.pairedRoboticCarID = str()
+		self.pairedRoboticCarID = ""
 		self.commandHistory = []
 
 	def getPlayerName(self):
@@ -74,7 +74,7 @@ class StudentManagement():
 		"""
 		Function to register (create) a Student object for the user with given playerName
 		:param playerName: String representation of player name supplied by user
-		:return: Returns True if logon success (correct credentials), else False
+		:return: Returns a Student object instance on success
 		"""
 		return Student(playerName)
 
@@ -88,12 +88,28 @@ class StudentActionManagement():
 
 	def pairWithRoboticCar(self, student, carID):
 		"""
-		Function to register (create) a Student object for the user with given playerName
+		Function to register (pair) a Student object with a corresponding carID
 		:param student: Student object instance
 		:param carID: String representation of robotic car ID that Student paired with
-		:return: Returns nothing
+		:return: Returns True if pair successful, else False
 		"""
-		student.setRoboticCarID(carID)
+		try:
+			student.setRoboticCarID(carID)
+			return True
+		except Exception:
+			return False
+
+	def depairRoboticCar(self, student):
+		"""
+		Function to de-register (de-pair) a Student object with any carID it is currently paired with
+		:param student: Student object instance
+		:return: Returns True if de-pair successful, else False
+		"""
+		try:
+			student.setRoboticCarID("")
+			return True
+		except Exception:
+			return False
 
 	def addCommandToHistory(self, student, command):
 		"""
@@ -105,3 +121,5 @@ class StudentActionManagement():
 		cmd_history = student.getCommandHistory()
 		cmd_history.append(command)
 		student.setCommandHistory(cmd_history)
+
+	# To Add: Function to allow retrieval of command history
