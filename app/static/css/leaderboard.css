@@ -3,6 +3,10 @@
   margin: 30px auto;
 }
 
+#leaderboardwindow {
+  height:  80vh;
+}
+
 .lbbox {
   box-shadow: 0 3px 12px rgba(0,0,0,0.15);
   background-color: #fff;

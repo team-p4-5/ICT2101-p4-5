@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
     {% include 'controlbase.html' %}
-    <link href="../static/css/tooltip.css" rel="stylesheet" type="text/css">
-    <link href="../static/css/leaderboard.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
 <style>
     body {
@@ -27,10 +25,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{{ url_for('feature') }}">Main</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('leaderboard') }}">LeaderBoard</a>
+                <a class="nav-link" href="{{ url_for('feature') }}">Home</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
@@ -236,9 +231,9 @@
   <!-- Leaderboard DashBoard popup  -->
             <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content" id="leaderboardwindow">
                         <div class="modal-header popupheader">
-                            <h5 class="modal-title" id="staticBackdropLabel1">Leaderboard Dashboard</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel1">Leaderboard</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     <div class="modal-body">
@@ -283,7 +278,7 @@
                         </table>
                             </div>
                             <div class="tab-content">
-                             <table id="difficultleaderboard" width="100%">
+                             <table id="hardleaderboard" width="100%">
                             <thead>
                                 <th>Player Name</th>
                                 <th>Record Time</th>
@@ -296,7 +291,6 @@
                             </div>
                         </div>
                     </div>
-                            <script src="../static/js/leaderboard.js"></script>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -666,7 +660,7 @@
     // Call JS function from 'challenge.js' to init challenge features
     initChallengeFeatures();
     initPairingFeatures();
-    
+    initLeaderboard();
 </script>
 
 <!-- Block Javascripts -->
