@@ -1,69 +1,90 @@
-Blockly.Blocks['moveup'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Move Up");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(150);
-  }
+Blockly.Blocks['moveForward'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Move Forward");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(230);
+    }
 };
 
 
-Blockly.JavaScript['moveup'] = function(block) {
-	gridSystem.moveUp();
-	return 'moveUp()\n';
+Blockly.JavaScript['moveForward'] = function (block) {
+    gridSystem.moveForward();
+    return 'moveForward()\n';
 };
 
 
-Blockly.Blocks['movedown'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Move Down");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(150);
-  }
+Blockly.Blocks['reverse'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("reverse");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(230);
+    }
 };
 
 
-Blockly.JavaScript['movedown'] = function(block) {
-
+Blockly.JavaScript['reverse'] = function (block) {
+    gridSystem.reverse();
+    return 'reverse()\n';
 };
 
 
-Blockly.Blocks['moveleft'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Move Left");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(150);
-  }
+Blockly.Blocks['moveLeft'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Move Left");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(230);
+    }
 };
 
 
-Blockly.JavaScript['moveleft'] = function(block) {
-
+Blockly.JavaScript['moveLeft'] = function (block) {
+    gridSystem.moveLeft();
+    return 'moveLeft()\n';
 };
 
 
-Blockly.Blocks['moveright'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Move Right");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(150);
-  }
+Blockly.Blocks['moveRight'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Move Right");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(230);
+    }
 };
 
 
-Blockly.JavaScript['moveright'] = function(block) {
-
+Blockly.JavaScript['moveRight'] = function (block) {
+    gridSystem.moveRight();
+    return 'moveRight()\n';
 };
 
 
+Blockly.Blocks['stop'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("stop");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(230);
+    }
+};
+
+
+Blockly.JavaScript['stop'] = function (block) {
+    gridSystem.stop();
+    return 'stop()\n';
+};
+
+// JavaScript source code
