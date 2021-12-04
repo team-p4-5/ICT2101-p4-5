@@ -13,6 +13,13 @@ from rich.prompt import Prompt
 from rich.console import Console
 
 """
+TESTING MODE FLAG
+"""
+# For defining whether product's functionality should be ran in 'testing' mode
+TESTING_MODE = True
+
+
+"""
 Initialises Console and Prompt objects from rich library.
 Used for printing and formatting
 """
@@ -53,6 +60,20 @@ C2_PORT = 47656
 C2_SOCKET_BUFSIZE = 1024
 PING_INTERVAL = 10
 NORMAL_RESPONSE = "Z"
+
+"""
+Car Commands
+"""
+MOVE_FORWARD = "moveForward"
+MOVE_BACKWARD = "moveBackward"
+TURN_LEFT = "turnLeft"
+TURN_RIGHT = "turnRight"
+NULL_RESPONSE = "0"
+
+
+"""
+Custom Development 'print()' formatting
+"""
 
 def print_divider(message):
     console.rule(message)

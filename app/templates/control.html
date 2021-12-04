@@ -15,7 +15,6 @@
 </style>
 
 
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
     <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="startup.logo" height="70"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,15 +44,16 @@
             <section id="challenge-panel">
                 <div class=" card border-dark">
                     <div class="card text-dark bg-light">
-                        <div class="row">
+                        <div class="d-flex flex-row bd-highlight mb-3">
                             <div class="col-auto">
                                 <h4>Challenge</h4>
-                                <button class="btn btn-primary" onClick="window.location.reload()">Start instruction manual again</button>
+                                <button class="fifth btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" style="float: left;">Leaderboard</button>
+                                <button class="btn btn-primary" onClick="window.location.reload()" style="float: right; margin-left: 5px;">View Guide</button>
                             </div>
                         </div>
                     </div>
                     <div class="card-body text-dark bg-light mb-2">
-                        <div class="row">
+                        <div class="d-flex flex-row bd-highlight mb-3">
                             <div class="menu">
                                 <label class="second" for="selection">Difficulty :</label><!--Select challenge difficulty-->
                                 <select id="selection">
@@ -67,50 +67,28 @@
                                 <button type="button" id="startButton" class=" btn-info me-sm-2 started" disabled>Start Challenge</button>
                             </div>
                         </div>
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="watch">
+                                <div>
+                                    <p>Time Elapsed</p>                                
+                                </div>
+                                <div class="minuteDiv" style="margin-left: 10px;">
+                                    <h1 class="minute_time">00</h1>
+                                    <!-- <p class="minuteTitle">Min :</p> -->
+                                </div>
+                                <p>:</p>
+                                <div class="secondDiv">
+                                    <h1 class="second_time">00</h1>
+                                    <!-- <p class="secondTitle">: Sec</p> -->
+                                </div>
+                            </div>
+                        </div>
                         <div class="content">
                             <div id="checkpoint_list" class="data">
                                 <div class="row justify-content-start">
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <h6> </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="watch">
-                                <div class="minuteDiv">
-                                    <h1 class="minute_time">00</h1>
-                                    <p class="minuteTitle">Min :</p>
-                                </div>
-                                <div class="secondDiv">
-                                    <h1 class="second_time">00</h1>
-                                    <p class="secondTitle">: Sec</p>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row gx-5">
-
-                            <!-- History Link-->
-                            <div class="col">
-                                <a href="" class="fourth" data-bs-toggle="modal" data-bs-target="#staticBackdrop">History </a>
-                            </div>
-                            <!-- Leaderboard Link-->
-                            <div class="col">
-                                <a href="" class="fifth" style="text-align: right;" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Leaderboard </a>
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
@@ -120,107 +98,13 @@
             <!-- History DashBoard popup  -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content" style="height: 80vh;">
                         <div class="modal-header popupheader">
                             <h5 class="modal-title" id="staticBackdropLabel">History Dashboard</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            Hello, are you ready for another bout? I mean obstacle course, I am waiting for your challenge.
-                            Please don't disappoint me. Don't be afraid. Take the challenge. That does not kill you, will make
-                            you stronger. Even Superman has his weakness, come and exploit my weakness and conquer your fear.
-                            Never say never, because limits, like fears, are often just an illusion. So don't think too long.
-                            Take the challenge and clear all obstacles. You can do it. Yeah!!! Click me and select a challenge.
-                            Failures are part of the journey to success.
-                            (Think about um, the generations
-                            And ah, say we want to make it a better place for our children
-                            And our children's children so that they, they
-                            They, they know it's a better world for them
-                            And think if they can make it a better place)
-                            There's a place in your heart
-                            And I know that it is love
-                            And this place it was brighter than tomorrow
-                            And if you really try
-                            You'll find there's no need to cry
-                            In this place you'll feel there's no hurt or sorrow
-                            There are ways to get there
-                            If you care enough for the living
-                            Make a little space
-                            Make a better place
-                            Heal the world
-                            Make it a better place
-                            For you and for me, and the entire human race
-                            There are people dying
-                            If you care enough for the living
-                            Make a better place for you and for me
-                            If you want to know why
-                            There's love that cannot lie
-                            Love is strong
-                            It only cares of joyful giving
-                            If we try we shall see
-                            In this bliss we cannot feel
-                            Fear of dread, we stop existing and start living
-                            Then it feels that always
-                            Love's enough for us growing
-                            Make a better world
-                            So make a better world
-                            Heal the world
-                            Make it a better place
-                            For you and for me, and the entire human race
-                            There are people dying
-                            If you care enough for the living
-                            Make a better place for you and for me
-                            And the dream we were conceived in will reveal a joyful face
-                            And the world we once believed in will shine again in grace
-                            Then why do we keep strangling life
-                            Wound this earth, crucify its soul?
-                            Though it's plain to see, this world is heavenly
-                            Be god's glow
-                            We could fly so high
-                            Let our spirits never die
-                            In my heart I feel you are all my brothers
-                            Create a world with no fear
-                            Together we cry happy tears
-                            See the nations turn their swords into plowshares
-                            We could really get there
-                            If you cared enough for the living
-                            Make a little space
-                            To make a better place
-                            Heal the world
-                            Make it a better place
-                            For you and for me, and the entire human race
-                            There are people dying
-                            If you care enough for the living
-                            Make a better place for you and for me
-                            Heal the world
-                            Make it a better place
-                            For you and for me, and the entire human race
-                            There are people dying
-                            If you care enough for the living
-                            Make a better place for you and for me
-                            Heal the world (heal the world)
-                            Make it a better place
-                            For you and for me, and the entire human race
-                            There are people dying
-                            If you care enough for the living
-                            Make a better place for you and for me
-                            There are people dying
-                            If you care enough for the living
-                            Make a better place for you and for me
-                            There are people dying
-                            If you care enough for the living
-                            Make a better place for you and for me
-                            You and for me (for a better place)
-                            You and for me (make a better place)
-                            You and for me (make a better place)
-                            You and for me (heal the world we live in)
-                            You and for me (save it for our children)
-                            You and for me (heal the world we live in)
-                            You and for me (save it for our children)
-                            You and for me (heal the world we live in)
-                            You and for me (save it for our children)
-                            You and for me (heal the world we live in)
-                            You and for me (save it for our children)
+                        <div class="modal-body" id="commandHistory">
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -301,19 +185,11 @@
             </div>
             <!--Control Panel-->
             <section id="control-panel">
-
                 <div class="card border-dark">
-                    <div class="card text-dark bg-warning border-dark">
-                        <div class="row ">
-
+                    <div class="card text-dark bg-light">
+                        <div class="d-flex flex-row bd-highlight mb-3">
                             <div class="col-auto">
-                                <h4>Control Panel</h4>
-                            </div>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <div class="col">
-                                    <button type="execute" class="btn btn-success me-md-2">Execute</button>
-                                    <button type="submit" class="btn btn-primary">Clear</button>
-                                </div>
+                                <h4>Virtual Map</h4>
                             </div>
                         </div>
                     </div>
@@ -332,324 +208,63 @@
                             <div class="col-auto">
                                 <h4>Instruction</h4>
                             </div>
-                            <div class="row justify-content-center">
-                                <!--    <div class="col-auto">-->
-                                <!-- Rounded switch to toggle to pair with car-->
-                                <!--         <h7>Pair</h7>
-                 <input type="checkbox" id="switch"class="checkbox"/>
-                 <label for="switch" class="toggle">
-                     <p>OFF  /  ON</p>
-                 </label>
-             </div>-->
-                                <!--Car pairing selection-->
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row bd-highlight mb-3" style="margin-top: 10px;">
+                        <!--Car pairing selection-->
+                        <div class="col-auto">
+                            <div class="available">
+                                <label class="first" for="selection"> Available Cars:</label><!--Available cars to select which has detected within the area-->
+                                <select id="carSelection">
+                                    <option selected>----</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-start">
+                            <div class="col">
+                                <button type="pair" class="btn btn-success" id="pairButton">Pair</button>
+                            </div>
+                            <!--- Pairing light status-->
+                            <div class="row justify-content-end">
                                 <div class="col-auto">
-                                    <div class="available">
-                                        <label class="first" for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
-                                        <select id="carSelection">
-                                            <option selected>----</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-md-start">
-                                    <div class="col">
-                                        <button type="pair" class="btn btn-success me-md-2" id="pairButton">Pair</button>
-                                    </div>
-                                    <!--- Pairing light status-->
-                                    <div class="row justify-content-end">
-                                        <div class="col-auto">
-                                            <div class="led-box">
-                                                <div class="led-red" id="pairing_led"></div>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="col-auto">
-                                            <div class="led-box">
-                                                <div class="led-red"></div>
-                                            </div>
-                                        </div> -->
+                                    <div class="led-box">
+                                        <div class="led-red" id="pairing_led"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!--commands icons to drag over-->
                     <div class="card-body text-dark bg-light mb-2">
                         <p>
-                            <button onclick="showCode()">Show JavaScript</button>
-                            <button onclick="showCode1()">Show Python</button>
-                            <button onclick="runCode()">Test code</button>
+                            <button class="btn btn-primary" onclick="showCode()" id="showJsBtn" disabled>Show JavaScript</button>
+                            <button class="fourth btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="commandHistoryBtn" style="float: right;" disabled>Command History</button>
+                            <button class="btn btn-success" onclick="runCode()" id="executeBtn" disabled>Execute</button>
                         </p>
+                    </div>
+                    <!--commands icons to drag over-->
+                    <div class="card-body text-dark bg-light mb-2">
                         <div class="third"></div>
                         <div class="d-flex flex-row bd-highlight mb-3">
                             <div id="blocklyDiv" style="height: 500px; width: 650px; object-fit:cover;"></div>
                             <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-                                <!--Car Movement Commands -->
-                                <category name="Movement" colour="%{BKY_LOGIC_HUE}">
-                                    <block type="moveForward"></block>
-                                    <block type="reverse"></block>
-                                    <block type="moveLeft"></block>
-                                    <block type="moveRight"></block>
-                                    <block type="stop"></block>
-                                </category>
-                                <category name="Logic" colour="%{BKY_LOGIC_HUE}">
-                                    <!--      If logic blocks -->
-                                    <category name="If">
-                                        
-                                        <block type="controls_if"></block>
-                                        <block type="controls_if">
-                                            <mutation else="1"></mutation>
+                                <block type="moveForward"></block>
+                                <block type="moveBackward"></block>
+                                <block type="turnLeft"></block>
+                                <block type="turnRight"></block>
+                                <block type="controls_repeat_ext">
+                                    <value name="TIMES">
+                                        <block type="math_number">
+                                            <field name="NUM">10</field>
                                         </block>
-                                        <block type="controls_if">
-                                            <mutation elseif="1" else="1"></mutation>
-                                        </block>
-                                    </category>
-                                    <!--Boolean logic blocks -->
-                                    <category name="Boolean" colour="%{BKY_LOGIC_HUE}">
-                                        <block type="logic_compare"></block>
-                                        <block type="logic_operation"></block>
-                                        <block type="logic_negate"></block>
-                                        <block type="logic_boolean"></block>
-                                        <block type="logic_null"></block>
-                                        <block type="logic_ternary"></block>
-                                    </category>
-                                </category>
-                                <!-- Loops logic blocks-->
-                                <category name="Loops" colour="%{BKY_LOOPS_HUE}">
-                                    <block type="controls_repeat_ext">
-                                        <value name="TIMES">
-                                            <block type="math_number">
-                                                <field name="NUM">10</field>
-                                            </block>
-                                        </value>
-                                    </block>
-                                    <block type="controls_whileUntil"></block>
-                                    <block type="controls_for">
-                                        <field name="VAR">i</field>
-                                        <value name="FROM">
-                                            <block type="math_number">
-                                                <field name="NUM">1</field>
-                                            </block>
-                                        </value>
-                                        <value name="TO">
-                                            <block type="math_number">
-                                                <field name="NUM">10</field>
-                                            </block>
-                                        </value>
-                                        <value name="BY">
-                                            <block type="math_number">
-                                                <field name="NUM">1</field>
-                                            </block>
-                                        </value>
-                                    </block>
-                                    <block type="controls_forEach"></block>
-                                    <block type="controls_flow_statements"></block>
-                                </category>
-                                <!--    Arithmetical logic blocks -->
-                                <category name="Math" colour="%{BKY_MATH_HUE}">
-                                    <block type="math_number">
-                                        <field name="NUM">123</field>
-                                    </block>
-                                    <block type="math_arithmetic"></block>
-                                    <block type="math_single"></block>
-                                    <block type="math_trig"></block>
-                                    <block type="math_constant"></block>
-                                    <block type="math_number_property"></block>
-                                    <block type="math_round"></block>
-                                    <block type="math_on_list"></block>
-                                    <block type="math_modulo"></block>
-                                    <block type="math_constrain">
-                                        <value name="LOW">
-                                            <block type="math_number">
-                                                <field name="NUM">1</field>
-                                            </block>
-                                        </value>
-                                        <value name="HIGH">
-                                            <block type="math_number">
-                                                <field name="NUM">100</field>
-                                            </block>
-                                        </value>
-                                    </block>
-                                    <block type="math_random_int">
-                                        <value name="FROM">
-                                            <block type="math_number">
-                                                <field name="NUM">1</field>
-                                            </block>
-                                        </value>
-                                        <value name="TO">
-                                            <block type="math_number">
-                                                <field name="NUM">100</field>
-                                            </block>
-                                        </value>
-                                    </block>
-                                    <block type="math_random_float"></block>
-                                    <block type="math_atan2"></block>
-                                </category>
-                                <!--                        &lt;!&ndash; Lists logic blocks &ndash;&gt;-->
-                                <!--                        <category name="Lists" colour="%{BKY_LISTS_HUE}">-->
-                                <!--                            <block type="lists_create_empty"></block>-->
-                                <!--                            <block type="lists_create_with"></block>-->
-                                <!--                            <block type="lists_repeat">-->
-                                <!--                                <value name="NUM">-->
-                                <!--                                    <block type="math_number">-->
-                                <!--                                        <field name="NUM">5</field>-->
-                                <!--                                    </block>-->
-                                <!--                                </value>-->
-                                <!--                            </block>-->
-                                <!--                            <block type="lists_length"></block>-->
-                                <!--                            <block type="lists_isEmpty"></block>-->
-                                <!--                            <block type="lists_indexOf"></block>-->
-                                <!--                            <block type="lists_getIndex"></block>-->
-                                <!--                            <block type="lists_setIndex"></block>-->
-                                <!--                        </category>-->
-                                <sep></sep>
-                                <!--    create Variables logic blocks-->
-                                <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
-                                </category>
-                                <category name="Functions" custom="PROCEDURE" colour="%{BKY_PROCEDURES_HUE}">
-                                </category>
-                                <category name="Text" colour="%{BKY_TEXTS_HUE}">
-                                    <block type="text"></block>
-                                    <block type="text_length"></block>
-                                    <block type="text_print"></block>
-                                </category>
-                                <!--                        <sep></sep>
-                                                        &lt;!&ndash; Library logic block &ndash;&gt;
-                                                        <category name="Library" expanded="true">
-                                                           <category name="Randomize">
-                                                                <block type="procedures_defnoreturn">
-                                                                    <mutation>
-                                                                        <arg name="list"></arg>
-                                                                   </mutation>
-                                                                    <field name="NAME">randomize</field>
-                                                                    <statement name="STACK">
-                                                                        <block type="controls_for" inline="true">
-                                                                            <field name="VAR">x</field>
-                                                                            <value name="FROM">
-                                                                                <block type="math_number">
-                                                                                    <field name="NUM">1</field>
-                                                                                </block>
-                                                                            </value>
-                                                                            <value name="TO">
-                                                                                <block type="lists_length" inline="false">
-                                                                                    <value name="VALUE">
-                                                                                        <block type="variables_get">
-                                                                                            <field name="VAR">list</field>
-                                                                                        </block>
-                                                                                    </value>
-                                                                                </block>
-                                                                            </value>
-                                                                            <value name="BY">
-                                                                               <block type="math_number">
-                                                                                    <field name="NUM">1</field>
-                                                                                </block>
-                                                                            </value>
-                                                                            <statement name="DO">
-                                                                                <block type="variables_set" inline="false">
-                                                                                    <field name="VAR">y</field>
-                                                                                    <value name="VALUE">
-                                                                                        <block type="math_random_int" inline="true">
-                                                                                            <value name="FROM">
-                                                                                                <block type="math_number">
-                                                                                                    <field name="NUM">1</field>
-                                                                                                </block>
-                                                                                            </value>
-                                                                                            <value name="TO">
-                                                                                                <block type="lists_length" inline="false">
-                                                                                                    <value name="VALUE">
-                                                                                                        <block type="variables_get">
-                                                                                                            <field name="VAR">list</field>
-                                                                                                        </block>
-                                                                                                    </value>
-                                                                                                </block>
-                                                                                            </value>
-                                                                                        </block>
-                                                                                    </value>
-                                                                                    <next>
-                                                                                        <block type="variables_set" inline="false">
-                                                                                            <field name="VAR">temp</field>
-                                                                                            <value name="VALUE">
-                                                                                                <block type="lists_getIndex" inline="true">
-                                                                                                    <mutation statement="false" at="true"></mutation>
-                                                                                                    <field name="MODE">GET</field>
-                                                                                                    <field name="WHERE">FROM_START</field>
-                                                                                                    <value name="AT">
-                                                                                                        <block type="variables_get">
-                                                                                                            <field name="VAR">y</field>
-                                                                                                        </block>
-                                                                                                    </value>
-                                                                                                    <value name="VALUE">
-                                                                                                        <block type="variables_get">
-                                                                                                            <field name="VAR">list</field>
-                                                                                                        </block>
-                                                                                                    </value>
-                                                                                                </block>
-                                                                                            </value>
-                                                                                            <next>
-                                                                                                <block type="lists_setIndex" inline="false">
-                                                                                                    <value name="AT">
-                                                                                                        <block type="variables_get">
-                                                                                                            <field name="VAR">y</field>
-                                                                                                        </block>
-                                                                                                    </value>
-                                                                                                    <value name="LIST">
-                                                                                                        <block type="variables_get">
-                                                                                                            <field name="VAR">list</field>
-                                                                                                        </block>
-                                                                                                    </value>
-                                                                                                    <value name="TO">
-                                                                                                        <block type="lists_getIndex" inline="true">
-                                                                                                            <mutation statement="false" at="true"></mutation>
-                                                                                                            <field name="MODE">GET</field>
-                                                                                                            <field name="WHERE">FROM_START</field>
-                                                                                                            <value name="AT">
-                                                                                                                <block type="variables_get">
-                                                                                                                    <field name="VAR">x</field>
-                                                                                                                </block>
-                                                                                                            </value>
-                                                                                                            <value name="VALUE">
-                                                                                                                <block type="variables_get">
-                                                                                                                    <field name="VAR">list</field>
-                                                                                                                </block>
-                                                                                                            </value>
-                                                                                                        </block>
-                                                                                                    </value>
-                                                                                                    <next>
-                                                                                                        <block type="lists_setIndex" inline="false">
-                                                                                                            <value name="AT">
-                                                                                                                <block type="variables_get">
-                                                                                                                    <field name="VAR">x</field>
-                                                                                                                </block>
-                                                                                                            </value>
-                                                                                                            <value name="LIST">
-                                                                                                                <block type="variables_get">
-                                                                                                                    <field name="VAR">list</field>
-                                                                                                                </block>
-                                                                                                            </value>
-                                                                                                            <value name="TO">
-                                                                                                                <block type="variables_get">
-                                                                                                                    <field name="VAR">temp</field>
-                                                                                                                </block>
-                                                                                                            </value>
-                                                                                                        </block>
-                                                                                                    </next>
-                                                                                                </block>
-                                                                                            </next>
-                                                                                        </block>
-                                                                                   </next>
-                                                                                </block>
-                                                                            </statement>
-                                                                        </block>
-                                                                    </statement>
-                                                                </block>
-                                                            </category>
-                                                       </category>-->
+                                    </value>
+                                </block>
                             </xml>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
-
         </div>
     </section>
 </body>
@@ -670,6 +285,7 @@
     initChallengeFeatures();
     initPairingFeatures();
     initLeaderboard();
+    initInstructionFeatures();
 </script>
 
 <!-- Block Javascripts -->
@@ -677,10 +293,9 @@
     var demoWorkspace = Blockly.inject('blocklyDiv',
         {
             media: '../static/media/',
+            trashcan: true,
             toolbox: document.getElementById('toolbox')
         });
-    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
-        demoWorkspace);
 
     function showCode() {
         // Generate JavaScript code and display it.
@@ -696,34 +311,6 @@
             'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
         var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
         Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-        try {
-            eval(code);
-        } catch (e) {
-            alert(e);
-        }
-    }
-    var demoWorkspace1 = Blockly.inject('blocklyDiv',
-        {
-            media: '../static/media/',
-            toolbox: document.getElementById('toolbox')
-        });
-    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
-        demoWorkspace1);
-
-    function showCode1() {
-        // Generate Python code and display it.
-        Blockly.Python.INFINITE_LOOP_TRAP = null;
-        var code = Blockly.Python.workspaceToCode(demoWorkspace1);
-        alert(code);
-    }
-
-    function runCode1() {
-        // Generate Python code and run it.
-        window.LoopTrap = 1000;
-        Blockly.Python.INFINITE_LOOP_TRAP =
-            'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
-        var code = Blockly.Python.workspaceToCode(demoWorkspace1);
-        Blockly.Python.INFINITE_LOOP_TRAP = null;
         try {
             eval(code);
         } catch (e) {

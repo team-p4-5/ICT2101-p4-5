@@ -120,30 +120,43 @@ function createChallenge() {
 
 // Function to handle the starting of a challenge
 function startChallenge() {
-    // POST generated checkpoints to server
-    // Get CSRF token from controldashboard's DOM
-    let csrf_token = document.getElementById("csrf_token").value;
+    if (document.getElementById('carSelection').value != "----"){
+        // Get CSRF token from controldashboard's DOM
+        let csrf_token = document.getElementById("csrf_token").value;
 
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                }
             }
-        }
-    });
+        });
 
-    // Make POST request to server to signify start of challenge
-    $.ajax({
-        url: "/startChallenge",
-        type: "POST",
-        dataType: "json",
-        success: function (response) {
-            // On success, start timer and disable button (error SHOULD NOT happen here)
-            Timer.changeTimer();
-            let startBtn = document.getElementById("startButton");
-            startBtn.disabled = true;
-        }
-    });
+        // Make POST request to server to signify start of challenge
+        $.ajax({
+            url: "/startChallenge",
+            type: "POST",
+            dataType: "json",
+            success: function (response) {
+                // On success, start timer and disable button (error SHOULD NOT happen here)
+                Timer.changeTimer();
+                let startBtn = document.getElementById("startButton");
+                startBtn.disabled = true;
+
+                // Enable 'Show JavaScript' & 'Execute' button
+                let showJsBtn = document.getElementById("showJsBtn");
+                let executeBtn = document.getElementById("executeBtn");
+                let commandHistoryBtn = document.getElementById("commandHistoryBtn");
+                showJsBtn.disabled = false;
+                executeBtn.disabled = false;
+                commandHistoryBtn.disabled = false;
+
+            }
+        });
+    }
+    else {
+        alert("Please pair with a car first!");
+    }
 }
 
 
@@ -187,6 +200,14 @@ function completeChallenge() {
     createBtn.disabled = false;
     selection.disabled = false;
 
+    // Disable 'Show JavaScript' & 'Execute' button
+    let showJsBtn = document.getElementById("showJsBtn");
+    let executeBtn = document.getElementById("executeBtn");
+    let commandHistoryBtn = document.getElementById("commandHistoryBtn");
+    showJsBtn.disabled = true;
+    executeBtn.disabled = true;
+    commandHistoryBtn.disabled = true;
+
     // Call function to upload new challenge record
     saveChallengeRecord();
 
@@ -196,10 +217,12 @@ function completeChallenge() {
 
     // Call function to de-pair student with the car
     depairWithCar();
+    // Reset pairing
+    let pairingBtn = document.getElementById('carSelection');
+    pairingBtn.value = "----";
     
     // Call function to retrieve latest leaderboard information from server 
     retrieveLeaderboard();
-
 }
 
 
