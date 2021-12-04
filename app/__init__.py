@@ -247,6 +247,52 @@ def saveChallenge():
         return make_response(jsonify({"msg": "OK"}), 200)
 
 
+# Function to handle equests for ID of car connected to server (assumed to be connected)
+@app.route('/getCarID')
+def getCarID():
+    # Check for Session
+    if not session.get('active'):
+        return redirect('/')
+
+    return jsonify({"id":"Lil' Runner"})
+
+
+# Function to handle requests for pairing with a specific car
+@app.route('/pairWithCar', methods=["POST"])
+def pairWithCar():
+    if request.method == "POST":
+        params = request.form
+        car_id = params.get("id")
+
+        global active_student
+        # If student has not paired with any car
+        if active_student.getRoboticCarID() == "":
+            student_action_manager.pairWithRoboticCar(active_student, car_id)
+            return make_response(jsonify({"msg": "OK"}), 200)
+
+        # Else If student is already paired with car
+        else:
+            return make_response(jsonify({"msg": "NOT ALLOWED"}), 405)
+
+
+# Function to handle requests for de-pairing with a specific car
+@app.route('/depairWithCar', methods=["POST"])
+def depairWithCar():
+    if request.method == "POST":
+        params = request.form
+        car_id = params.get("id")
+
+        global active_student
+        # If student has not paired with any car
+        if active_student.getRoboticCarID() == "":
+            return make_response(jsonify({"msg": "NOT ALLOWED"}), 405)
+            
+        # Else If student is already paired with car
+        else:
+            student_action_manager.depairRoboticCar(active_student)
+            return make_response(jsonify({"msg": "OK"}), 200)
+
+
 # @app.route('/register_player')
 # def register_player():
 
@@ -458,25 +504,6 @@ def control():
 
     # Return page for profile
     return render_template('control.html', active_user=active_user)
-
-# @app.route('/control2')
-# def control2():
-#     # # Check for Session
-#     if not session.get('active'):
-#         return redirect('/')
-
-#     # Return page for profile
-#     return render_template('control2.html', active_user=active_user)
-
-# Function to get a list of all connected cars
-@app.route('/getcars')
-def getcars():
-    # # Check for Session
-    if not session.get('active'):
-        return redirect('/')
-
-    return jsonify(c2_comms_obj.connections.keys())
-
 
 # Function to get the all status info of a specific car (e.g. speed, is_upright etc...)
 @app.route('/getcarinfo/<id>')
