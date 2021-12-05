@@ -72,7 +72,7 @@ def index():
 
     else:
         try:
-            return redirect('/feature')
+            return redirect('/controldashboard')
 
         except Exception:
             # if session expire, set the session to False
@@ -318,10 +318,18 @@ def issueCommand():
         try:
             # Get car's response
             car_response = None
+
+            """
+            -----------------------------------------------------------------------------
+            [NOTE]
+            - Since the team does not have a car to work with, we defaulted to 
+            sending "1" as the car's "response" to simulate successful command execution
+            -----------------------------------------------------------------------------
+            """
             if TESTING_MODE:
                 car_response = "1"
             else:
-                car_response = "1"      # placeholder for function call to send command to connected car
+                car_response = "1"      # Placeholder for function call to send command to connected car
 
             # Assume command was sent successfully to car
             if car_response is not None:
@@ -389,101 +397,115 @@ def internal_server_error(e):
     # note that we set the 500 status explicitly
     return render_template('500.html'), 500
 
-@app.route('/home')
-def home():
-    # # Check for Session
-    if not session.get('active'):
-        return redirect('/')
+# @app.route('/home')
+# def home():
+#     # # Check for Session
+#     if not session.get('active'):
+#         return redirect('/')
 
-    # Return page for dashboard
-    return render_template('home.html', active_user=active_user)
+#     # Return page for dashboard
+#     return render_template('home.html', active_user=active_user)
 
 
-@app.route('/profile')
-def profile():
+# @app.route('/profile')
+# def profile():
+#     # # Check for Session
+#     if not session.get('active'):
+#         return redirect('/')
+
+#     # Return page for profile
+#     return render_template('profile.html', active_user=active_user)
+
+
+# @app.route('/dashboard')
+# def dashboard():
+#     # # Check for Session
+#     if not session.get('active'):
+#         return redirect('/')
+
+#     # Return page for profile
+#     return render_template('dashboard.html', active_user=active_user)
+
+
+# @app.route('/hardwarespecs')
+# def hardwarespecs():
+#     # # Check for Session
+#     if not session.get('active'):
+#         return redirect('/')
+
+#     # Return page for profile
+#     return render_template('hardwarespecs.html', active_user=active_user)
+
+# @app.route('/leaderboard')
+# def leaderboard():
+#     # # Check for Session
+#     if not session.get('active'):
+#         return redirect('/')
+
+#     # Return page for profile
+#     return render_template('leaderboard.html', active_user=active_user)
+
+# @app.route('/feature')
+# def feature():
+#     # # Check for Session
+#     if not session.get('active'):
+#         return redirect('/')
+
+#     # Return page for profile
+#     # global active_student
+#     # print_info(active_student.getPlayerName())
+#     return render_template('feature.html', active_user=active_user)
+
+@app.route('/controldashboard')
+def controldashboard():
     # # Check for Session
     if not session.get('active'):
         return redirect('/')
 
     # Return page for profile
-    return render_template('profile.html', active_user=active_user)
+    return render_template('controldashboard.html', active_user=active_user)
 
-
-@app.route('/dashboard')
-def dashboard():
-    # # Check for Session
-    if not session.get('active'):
-        return redirect('/')
-
-    # Return page for profile
-    return render_template('dashboard.html', active_user=active_user)
-
-
-@app.route('/hardwarespecs')
-def hardwarespecs():
-    # # Check for Session
-    if not session.get('active'):
-        return redirect('/')
-
-    # Return page for profile
-    return render_template('hardwarespecs.html', active_user=active_user)
-
-@app.route('/leaderboard')
-def leaderboard():
-    # # Check for Session
-    if not session.get('active'):
-        return redirect('/')
-
-    # Return page for profile
-    return render_template('leaderboard.html', active_user=active_user)
-
-@app.route('/feature')
-def feature():
-    # # Check for Session
-    if not session.get('active'):
-        return redirect('/')
-
-    # Return page for profile
-    # global active_student
-    # print_info(active_student.getPlayerName())
-    return render_template('feature.html', active_user=active_user)
-
-@app.route('/control')
-def control():
-    # # Check for Session
-    if not session.get('active'):
-        return redirect('/')
-
-    # Return page for profile
-    return render_template('control.html', active_user=active_user)
-
+"""
+------------------------------------------------------------------------------------------------
+[NOTE]
+- The following are app.routes for handling communication with and to the non-existent robotic car
+- They are left here to show the team's effort in at least providing possible 'interfaces' for data
+  to be retrieved and sent to the car despite a lack of one.
+------------------------------------------------------------------------------------------------
 # Function to get the all status info of a specific car (e.g. speed, is_upright etc...)
-@app.route('/getcarinfo/<id>')
-def getcarinfo(id):
-    # # Check for Session
-    if not session.get('active'):
-        return redirect('/')
+# @app.route('/getcarinfo/<id>')
+# def getcarinfo(id):
+#     # # Check for Session
+#     if not session.get('active'):
+#         return redirect('/')
 
-    info_list = dict()
-    # Get the information of the specific car into a temp dictionary
-    info_list["UPRIGHT"] = c2_comms_obj.connections[id]["UPRIGHT"]
-    info_list["MOVING"] = c2_comms_obj.connections[id]["MOVING"]
-    info_list["SPEED"] = c2_comms_obj.connections[id]["SPEED"]
-    info_list["OBSTACLE"] = c2_comms_obj.connections[id]["OBSTACLE"]
-    info_list["WIFI"] = c2_comms_obj.connections[id]["WIFI"]
+#     info_list = dict()
+#     # Get the information of the specific car into a temp dictionary
+#     info_list["UPRIGHT"] = c2_comms_obj.connections[id]["UPRIGHT"]
+#     info_list["MOVING"] = c2_comms_obj.connections[id]["MOVING"]
+#     info_list["SPEED"] = c2_comms_obj.connections[id]["SPEED"]
+#     info_list["OBSTACLE"] = c2_comms_obj.connections[id]["OBSTACLE"]
+#     info_list["WIFI"] = c2_comms_obj.connections[id]["WIFI"]
 
-    # Return dictionary in JSON format (more easy to read statuses on the Web UI using JS)
-    return jsonify(c2_comms_obj.connections[id])
+#     # Return dictionary in JSON format (more easy to read statuses on the Web UI using JS)
+#     return jsonify(c2_comms_obj.connections[id])
 
 
 # Function that queues commands received from WebUI into the C2 server's "commands" list
-@app.route('/queuecommands', methods=["POST"])
-def queuecommands():
-    if request.method == "POST":
-        params = request.form
-        # Get the comma separated commands as one string
-        commands = params.get("commands")
+# @app.route('/queuecommands', methods=["POST"])
+# def queuecommands():
+#     if request.method == "POST":
+#         params = request.form
+#         # Get the comma separated commands as one string
+#         commands = params.get("commands")
 
-        # Append the newly received commands from Web UI into the comms object's "commands" list
-        for command in commands.split(','):
-            c2_comms_obj.commands.append(command)
+#         # Append the newly received commands from Web UI into the comms object's "commands" list
+#         for command in commands.split(','):
+#             c2_comms_obj.commands.append(command)
+
+
+"""
+
+
+
+

@@ -319,16 +319,16 @@ function drawGame()
 	let direction_indicator = document.getElementById("direction");
 	// Update the direction display
 	if (direction == NORTH) {
-		direction_indicator.innerHTML = "Car's Current Direction: NORTH"
+		direction_indicator.innerHTML = "Car's Current Direction: <b>NORTH<b/>"
 	}
 	else if (direction == SOUTH) {
-		direction_indicator.innerHTML = "Car's Current Direction: SOUTH"
+		direction_indicator.innerHTML = "Car's Current Direction: <b>SOUTH<b/>"
 	}
 	else if (direction == EAST) {
-		direction_indicator.innerHTML = "Car's Current Direction: EAST"
+		direction_indicator.innerHTML = "Car's Current Direction: <b>EAST<b/>"
 	}
 	else if (direction == WEST) {
-		direction_indicator.innerHTML = "Car's Current Direction: WEST"
+		direction_indicator.innerHTML = "Car's Current Direction: <b>WEST<b/>"
 	}
 
 	lastFrameTime = currentFrameTime;
