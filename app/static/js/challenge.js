@@ -243,25 +243,26 @@ function initChallengeFeatures() {
         let selectionList = document.getElementById("selection");
         let checkpointCount = selectionList.value
 
-        let numbersArray = createArrayOfNumbers(1, checkpointCount);
+        // Create N checkpoints (1..N) in ascending order
+        checkpoint_list = createArrayOfNumbers(1, checkpointCount);
+        randomizeCheckpointPlacements();
+        // checkpoint_list = [];       //reset the list first
+        // while (checkpoint_list.length != numbersArray.length) {
+        //     let randomIndex = getRandomNumber(0, numbersArray.length - 1);
 
-        checkpoint_list = [];       //reset the list fisrt
-        while (checkpoint_list.length != numbersArray.length) {
-            let randomIndex = getRandomNumber(0, numbersArray.length - 1);
-
-            if (checkpoint_list.includes(numbersArray[randomIndex]))
-                continue;
-            checkpoint_list.push(numbersArray[randomIndex]);
-        }
+        //     if (checkpoint_list.includes(numbersArray[randomIndex]))
+        //         continue;
+        //     checkpoint_list.push(numbersArray[randomIndex]);
+        // }
 
         // Build the random checkpoint sequence (string)
-        var str = '';
-        for (i = 0; i < checkpoint_list.length; i++) {
-            str += checkpoint_list[i] + ' ';
-        }
+        // var str = '';
+        // for (i = 0; i < checkpoint_list.length; i++) {
+        //     str += checkpoint_list[i] + ' ';
+        // }
 
         // Add the randomly generated sequence of checkpoint numbers into the page
-        $('#checkpoint_list').text(str);
+        // $('#checkpoint_list').text(str);
 
         // Call function to create the challenge on the server
         createChallenge();

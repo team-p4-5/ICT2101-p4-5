@@ -42,13 +42,19 @@
 
             <!--Challenge panel -->
             <section id="challenge-panel">
-                <div class=" card border-dark">
-                    <div class="card text-dark bg-light">
-                        <div class="d-flex flex-row bd-highlight mb-3">
+                <div class="card border-dark">
+                    <div class="text-dark bg-light">
+                        <div class="card d-flex flex-row bd-highlight mb-3" style="margin-bottom: 0;">
                             <div class="col-auto">
                                 <h4>Challenge</h4>
-                                <button class="fifth btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" style="float: left;">Leaderboard</button>
-                                <button class="btn btn-primary" onClick="window.location.reload()" style="float: right; margin-left: 5px;">View Guide</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body text-dark bg-light mb-2">
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="col-auto">
+                                <button class="sixth btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" style="float: left;">Leaderboard</button>
+                                <button class="seventh btn btn-primary" onClick="window.location.reload()" style="float: right; margin-left: 5px;">View Guide</button>
                             </div>
                         </div>
                     </div>
@@ -74,25 +80,15 @@
                                 </div>
                                 <div class="minuteDiv" style="margin-left: 10px;">
                                     <h1 class="minute_time">00</h1>
-                                    <!-- <p class="minuteTitle">Min :</p> -->
                                 </div>
                                 <p>:</p>
                                 <div class="secondDiv">
                                     <h1 class="second_time">00</h1>
-                                    <!-- <p class="secondTitle">: Sec</p> -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <div id="checkpoint_list" class="data">
-                                <div class="row justify-content-start">
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </section>
 
             <!-- History DashBoard popup  -->
@@ -183,35 +179,26 @@
                 </div>
             </div>
             </div>
-            <!--Control Panel-->
-            <section id="control-panel">
-                <div class="card border-dark">
-                    <div class="card text-dark bg-light">
-                        <div class="d-flex flex-row bd-highlight mb-3">
-                            <div class="col-auto">
-                                <h4>Virtual Map</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- for future development
-                    <div class="card-body text-dark bg-warning mb-2" >
-
-                    </div>-->
-            </section>
 
          <!--Virtual Map Panel-->
             <section id="virtualmap-panel">
                 <div class="card border-dark">
-                    <div class="card text-dark bg-light ">
-                        <article class="media content-section" style="height: 500px; width: 650px; object-fit:cover;">
-						<div class="media-body">
-							<h2><a class="article-title">Virtual Map</a></h2>
-								<div id="virtualMap">
-                                    <canvas id="game" width="400" height="400"></canvas>
-									<script src="../static/js/virtualmap.js"></script>
-								</div>
-						</div>
-					</article>
+                    <div class="text-dark bg-light ">
+                        <div class="card d-flex flex-row bd-highlight mb-3">
+                            <div class="col-auto">
+                                <h4 class="fifth">Virtual Map</h4>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="col-auto">
+                                <h6 id="direction">Car's Current Direction: </h6>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-row bd-highlight mb-3" style="padding: 0px;">
+                            <div class="col-auto" id="virtualMap" style="padding: 0px; margin: 0 auto;">
+                                <canvas id="game" width="400" height="400"></canvas>
+                            </div>
+                        </div>
                     </div>
                     <!-- for future development -->
             </section>
@@ -220,8 +207,8 @@
 
             <section id="instruction-panel">
                 <div class=" card border-dark ">
-                    <div class="card text-dark bg-light ">
-                        <div class="d-flex flex-row bd-highlight mb-3">
+                    <div class="text-dark bg-light ">
+                        <div class="card d-flex flex-row bd-highlight mb-3" style="margin-bottom: 0;">
                             <div class="col-auto">
                                 <h4>Instruction</h4>
                             </div>
@@ -231,7 +218,7 @@
                         <!--Car pairing selection-->
                         <div class="col-auto">
                             <div class="available">
-                                <label class="first" for="selection"> Available Cars:</label><!--Available cars to select which has detected within the area-->
+                                <label class="first" for="selection"> Available Cars:</label><!--Available cars to select -->
                                 <select id="carSelection">
                                     <option selected>----</option>
                                 </select>
@@ -253,17 +240,22 @@
                     </div>
 
                     <div class="card-body text-dark bg-light mb-2">
-                        <p>
-                            <button class="btn btn-primary" onclick="showCode()" id="showJsBtn" disabled>Show JavaScript</button>
-                            <button class="fourth btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="commandHistoryBtn" style="float: right;" disabled>Command History</button>
-                            <button class="btn btn-success" onclick="runCode()" id="executeBtn" disabled>Execute</button>
-                        </p>
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="col-auto">
+                                <button class="fourth btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="commandHistoryBtn" disabled>Command History</button>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="col-auto" style="margin-right: auto;">
+                                <button class="btn btn-primary" onclick="showCode()" id="showJsBtn" disabled>Show JavaScript</button>
+                                <button class="btn btn-success" onclick="runCode()" id="executeBtn" disabled>Execute</button>
+                            </div>
+                        </div>
                     </div>
                     <!--commands icons to drag over-->
                     <div class="card-body text-dark bg-light mb-2">
-                        <div class="third"></div>
                         <div class="d-flex flex-row bd-highlight mb-3">
-                            <div id="blocklyDiv" style="height: 500px; width: 650px; object-fit:cover;"></div>
+                            <div class="third" id="blocklyDiv" style="height: 500px; width: 650px; object-fit:cover;"></div>
                             <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
                                 <block type="moveForward"></block>
                                 <block type="moveBackward"></block>
