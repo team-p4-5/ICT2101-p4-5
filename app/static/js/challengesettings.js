@@ -38,6 +38,11 @@ function validateInputFields() {
 	if ((easy % 1 != 0) || (medium % 1 != 0) || (hard % 1 != 0)){
 		return false;
 	}
+
+	// If number is not >0, return 'false'
+	if ((easy <= 0) || (medium <= 0) || (hard <= 0)){
+		return false;
+	}	
 	return true;
 }
 
@@ -71,6 +76,6 @@ function updateDefaultSettings(csrf_token) {
 	}
 	// Else if any user input is invalid
 	else {
-		alert("Invalid input detected!\nWhole numbers only.")
+		alert("Invalid input detected!\nWhole numbers > 0 only.")
 	}
 }

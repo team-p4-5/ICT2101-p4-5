@@ -141,16 +141,20 @@ class ChallengeManagement():
 		"""
 		Function to set a given challenge object's active status to true
 		:param challenge: Challenge object instance
-		:return: Returns nothing
+		:return: Returns True if successfully set Challenge's state to active, else False
 		"""
-		challenge.setActiveState(True)
+		try:
+			challenge.setActiveState(True)
+			return True
+		except Exception:
+			return False
 
 	def removeCheckpoint(self, challenge, checkpoint):
 		"""
 		Function to remove a checkpoint from the challenge's remaining checkpoints
 		:param challenge: Challenge object instance
 		:param checkpoint: Checkpoint to be removed from remainingCheckpoints of given challenge
-		:return: Returns nothing
+		:return: Returns True if successfully removed a checkpoint, else False
 		"""
 		remaining = challenge.getRemainingCheckpoints();
 		# Remove checkpoint if it is the first remaining checkpoint of given challenge
@@ -158,6 +162,8 @@ class ChallengeManagement():
 			if checkpoint == remaining[0]:
 				remaining.remove(checkpoint)
 				challenge.setRemainingCheckpoints(remaining)
+				return True
+		return False
 
 	def getRemainingCheckpoints(self, challenge):
 		"""
@@ -171,13 +177,17 @@ class ChallengeManagement():
 		"""
 		Function to set a given challenge object's active status to false and save the challenge as a record
 		:param challenge: Challenge object instance
-		:return: Returns an updated copy of the Challenge object instance
+		:return: Returns True if challenge record time was successfully saved, else False
 		"""
-		# Set flag to indicate challenge completion
-		challenge.setActiveState(False)
+		try:
+			# Set flag to indicate challenge completion
+			challenge.setActiveState(False)
 
-		# Track challenge completion (record) time
-		challenge.setRecordTime(recordTime)
+			# Track challenge completion (record) time
+			challenge.setRecordTime(recordTime)
+			return True
+		except Exception:
+			return False
 
 
 """

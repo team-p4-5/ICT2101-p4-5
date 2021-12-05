@@ -1,471 +1,647 @@
-<!--
-    Created on : 27 Oct 2021, 12:52:00
-    Author     : Bernard
--->
-
-<!-- control.html -->
-
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html>
     {% include 'controlbase.html' %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+<style>
+    body {
+        background-color: #fff;
+        font-family: sans-serif;
+    }
 
-<body>
-    <div class="pos-f-t">
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-dark p-4">
-                <h4 class="text-white">Collapsed content</h4>
-                <span class="text-muted">Toggleable via the navbar brand.</span>
-            </div>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
-            <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="../static/images/startup.logo" height="70"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    h1 {
+        font-weight: normal;
+        font-size: 140%;
+    }
+</style>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ url_for('feature') }}">Main</a>
-                    </li><!-- comment -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('control2') }}">Student Mode</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('leaderboard') }}">LeaderBoard</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
-                </form>
 
-            </div>
-        </nav>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
+    <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="startup.logo" height="70"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('feature') }}">Home</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
+            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+        </form>
     </div>
-
+</nav>
+<body>
     <!--Background wallpaper-->
     <section id="backimage">
-        <div id="backimage-caption"></div>
+        <div class="container">
 
-        <!--Challenge panel -->
-        <section id="challenge-panel">
-            <div class=" card border-dark">
-                <div class="card text-dark bg-light">
-                    <div class="row">
-                        <div class="col-auto">
-                            <h4>Challenge</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body text-dark bg-light mb-2">
-                    <div class="row">
-                        <div class="menu">
-                            <label for="selection">Select :</label><!--Select challenge difficulty-->
+            <div id="backimage-caption"></div>
 
-                            <select id="selection">
-
-                                <option selected>level </option>
-                                <option value="Easy">Easy</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hard">Hard</option>
-
-                            </select>
-                        </div>
-                        <div class="col">
-                            <button type="enter" class="btn btn-success me-md-2">Enter</button>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="Easy" class="data">
-                            <!--Challenge Easy dropdown-->
-                            <div class="row justify-content-start">
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-green"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-red"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-blue"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="Medium" class="data">
-                            <!--Challenge Medium dropdown-->
-                            <div class="row justify-content-start">
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-green"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-red"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-blue"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-purple"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="Hard" class="data">
-                            <!--Challenge Hard dropdown-->
-                            <div class="row justify-content-start">
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-green"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-red"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-blue"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-purple"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="led-box">
-                                        <div class="led-green"></div>
-                                    </div>
-                                </div>
+            <!--Challenge panel -->
+            <section id="challenge-panel">
+                <div class=" card border-dark">
+                    <div class="card text-dark bg-light">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h4>Challenge</h4>
+                                <button class="btn btn-primary" onClick="window.location.reload()">Start instruction manual again</button>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- History Link-->
-                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">History </a>
-            </div>
-        </section>
-
-        <!-- History DashBoard popup  -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header popupheader">
-                        <h5 class="modal-title" id="staticBackdropLabel">History Dashboard</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Hello, are you ready for another bout? I mean obstacle course, I am waiting for your challenge.
-                        Please don't disappoint me. Don't be afraid. Take the challenge. That does not kill you, will make
-                        you stronger. Even Superman has his weakness, come and exploit my weakness and conquer your fear.
-                        Never say never, because limits, like fears, are often just an illusion. So don't think too long.
-                        Take the challenge and clear all obstacles. You can do it. Yeah!!! Click me and select a challenge.
-                        Failures are part of the journey to success.
-                        (Think about um, the generations
-                        And ah, say we want to make it a better place for our children
-                        And our children's children so that they, they
-                        They, they know it's a better world for them
-                        And think if they can make it a better place)
-                        There's a place in your heart
-                        And I know that it is love
-                        And this place it was brighter than tomorrow
-                        And if you really try
-                        You'll find there's no need to cry
-                        In this place you'll feel there's no hurt or sorrow
-                        There are ways to get there
-                        If you care enough for the living
-                        Make a little space
-                        Make a better place
-                        Heal the world
-                        Make it a better place
-                        For you and for me, and the entire human race
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        If you want to know why
-                        There's love that cannot lie
-                        Love is strong
-                        It only cares of joyful giving
-                        If we try we shall see
-                        In this bliss we cannot feel
-                        Fear of dread, we stop existing and start living
-                        Then it feels that always
-                        Love's enough for us growing
-                        Make a better world
-                        So make a better world
-                        Heal the world
-                        Make it a better place
-                        For you and for me, and the entire human race
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        And the dream we were conceived in will reveal a joyful face
-                        And the world we once believed in will shine again in grace
-                        Then why do we keep strangling life
-                        Wound this earth, crucify its soul?
-                        Though it's plain to see, this world is heavenly
-                        Be god's glow
-                        We could fly so high
-                        Let our spirits never die
-                        In my heart I feel you are all my brothers
-                        Create a world with no fear
-                        Together we cry happy tears
-                        See the nations turn their swords into plowshares
-                        We could really get there
-                        If you cared enough for the living
-                        Make a little space
-                        To make a better place
-                        Heal the world
-                        Make it a better place
-                        For you and for me, and the entire human race
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        Heal the world
-                        Make it a better place
-                        For you and for me, and the entire human race
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        Heal the world (heal the world)
-                        Make it a better place
-                        For you and for me, and the entire human race
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        There are people dying
-                        If you care enough for the living
-                        Make a better place for you and for me
-                        You and for me (for a better place)
-                        You and for me (make a better place)
-                        You and for me (make a better place)
-                        You and for me (heal the world we live in)
-                        You and for me (save it for our children)
-                        You and for me (heal the world we live in)
-                        You and for me (save it for our children)
-                        You and for me (heal the world we live in)
-                        You and for me (save it for our children)
-                        You and for me (heal the world we live in)
-                        You and for me (save it for our children)
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Control Panel-->
-        <section id="control-panel">
-
-            <div class="card border-dark">
-                <div class="card text-dark bg-warning border-dark">
-                    <div class="row ">
-
-                        <div class="col-auto">
-                            <h4>Control Panel</h4>
-                        </div>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <div class="card-body text-dark bg-light mb-2">
+                        <div class="row">
+                            <div class="menu">
+                                <label class="second" for="selection">Difficulty :</label><!--Select challenge difficulty-->
+                                <select id="selection">
+                                    <option value="3" id="easy" selected>Easy</option>
+                                    <option value="4" id="medium">Medium</option>
+                                    <option value="5" id="hard">Hard</option>
+                                </select>
+                            </div>
                             <div class="col">
-                                <button type="execute" class="btn btn-success me-md-2">Execute</button>
-                                <button type="submit" class="btn btn-primary">Clear</button>
-                                <button type="Brake" class="btn btn-danger">E-Brake</button>
+                                <button type="button" id="createButton" class=" btn-success me-sm-2">Create Challenge</button>
+                                <button type="button" id="startButton" class=" btn-info me-sm-2 started" disabled>Start Challenge</button>
                             </div>
-                            <ul>
-                                <li>
-                                    <div class="content" data-bs-placement="bottom">
-                                        <h5>Tooltips</h5>
-
-                                        <p>Select the available car in the dropdown selection to Pair at Instruction Panel. Then press PAIR button to pair with the robotic car</p>
-                                        <p>Select different levels.(Easy,Medium or Hard)</p>
-                                        <p>Drag icons and set in the Control Panel. Click button EXECUTE to execute the commands</p>
-                                        <p>Click on the HISTORY link at the Challenge Dashboard to view the History </p>
+                        </div>
+                        <div class="content">
+                            <div id="checkpoint_list" class="data">
+                                <div class="row justify-content-start">
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
                                     </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="led-box">
+                                            <h6> </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch">
+                                <div class="minuteDiv">
+                                    <h1 class="minute_time">00</h1>
+                                    <p class="minuteTitle">Min :</p>
+                                </div>
+                                <div class="secondDiv">
+                                    <h1 class="second_time">00</h1>
+                                    <p class="secondTitle">: Sec</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gx-5">
+
+                            <!-- History Link-->
+                            <div class="col">
+                                <a href="" class="fourth" data-bs-toggle="modal" data-bs-target="#staticBackdrop">History </a>
+                            </div>
+                            <!-- Leaderboard Link-->
+                            <div class="col">
+                                <a href="" class="fifth" style="text-align: right;" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Leaderboard </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- History DashBoard popup  -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header popupheader">
+                            <h5 class="modal-title" id="staticBackdropLabel">History Dashboard</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Hello, are you ready for another bout? I mean obstacle course, I am waiting for your challenge.
+                            Please don't disappoint me. Don't be afraid. Take the challenge. That does not kill you, will make
+                            you stronger. Even Superman has his weakness, come and exploit my weakness and conquer your fear.
+                            Never say never, because limits, like fears, are often just an illusion. So don't think too long.
+                            Take the challenge and clear all obstacles. You can do it. Yeah!!! Click me and select a challenge.
+                            Failures are part of the journey to success.
+                            (Think about um, the generations
+                            And ah, say we want to make it a better place for our children
+                            And our children's children so that they, they
+                            They, they know it's a better world for them
+                            And think if they can make it a better place)
+                            There's a place in your heart
+                            And I know that it is love
+                            And this place it was brighter than tomorrow
+                            And if you really try
+                            You'll find there's no need to cry
+                            In this place you'll feel there's no hurt or sorrow
+                            There are ways to get there
+                            If you care enough for the living
+                            Make a little space
+                            Make a better place
+                            Heal the world
+                            Make it a better place
+                            For you and for me, and the entire human race
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            If you want to know why
+                            There's love that cannot lie
+                            Love is strong
+                            It only cares of joyful giving
+                            If we try we shall see
+                            In this bliss we cannot feel
+                            Fear of dread, we stop existing and start living
+                            Then it feels that always
+                            Love's enough for us growing
+                            Make a better world
+                            So make a better world
+                            Heal the world
+                            Make it a better place
+                            For you and for me, and the entire human race
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            And the dream we were conceived in will reveal a joyful face
+                            And the world we once believed in will shine again in grace
+                            Then why do we keep strangling life
+                            Wound this earth, crucify its soul?
+                            Though it's plain to see, this world is heavenly
+                            Be god's glow
+                            We could fly so high
+                            Let our spirits never die
+                            In my heart I feel you are all my brothers
+                            Create a world with no fear
+                            Together we cry happy tears
+                            See the nations turn their swords into plowshares
+                            We could really get there
+                            If you cared enough for the living
+                            Make a little space
+                            To make a better place
+                            Heal the world
+                            Make it a better place
+                            For you and for me, and the entire human race
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            Heal the world
+                            Make it a better place
+                            For you and for me, and the entire human race
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            Heal the world (heal the world)
+                            Make it a better place
+                            For you and for me, and the entire human race
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            There are people dying
+                            If you care enough for the living
+                            Make a better place for you and for me
+                            You and for me (for a better place)
+                            You and for me (make a better place)
+                            You and for me (make a better place)
+                            You and for me (heal the world we live in)
+                            You and for me (save it for our children)
+                            You and for me (heal the world we live in)
+                            You and for me (save it for our children)
+                            You and for me (heal the world we live in)
+                            You and for me (save it for our children)
+                            You and for me (heal the world we live in)
+                            You and for me (save it for our children)
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  <!-- Leaderboard DashBoard popup  -->
+            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" id="leaderboardwindow">
+                        <div class="modal-header popupheader">
+                            <h5 class="modal-title" id="staticBackdropLabel1">Leaderboard</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    <div class="modal-body">
+                        <div class="lbcontainer">
+                        <div class="lbbox">
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab1" checked>
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab2">
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab3">
+                            <ul class="tab-list">
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab1" id="easytab">Easy</label>
+                                </li>
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab2" id="mediumtab">Medium</label>
+                                </li>
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab3" id="hardtab">Hard</label>
                                 </li>
                             </ul>
+
+                            <div class="tab-container">
+                            <div class="tab-content">
+                            <table id="easyleaderboard" width="100%">
+                            <thead>
+                                <th>Player Name</th>
+                                <th>Record Time</th>
+                                <th>Difficulty</th>
+                            </thead>
+                        <tbody id="easytbody">
+                        </tbody>
+                        </table>
+                            </div>
+                            <div class="tab-content">
+                                 <table id="mediumleaderboard" width="100%">
+                            <thead>
+                                <th>Player Name</th>
+                                <th>Record Time</th>
+                                <th>Difficulty</th>
+                            </thead>
+                        <tbody id="mediumtbody">
+                        </tbody>
+                        </table>
+                            </div>
+                            <div class="tab-content">
+                             <table id="hardleaderboard" width="100%">
+                            <thead>
+                                <th>Player Name</th>
+                                <th>Record Time</th>
+                                <th>Difficulty</th>
+                            </thead>
+                        <tbody id="hardtbody">
+                        </tbody>
+                        </table>
+                            </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--Set Command box 1 to 10-->
-                <div class="card-body text-dark bg-warning mb-2">
-                    <div id="setbox1">
-
-                        <div class="col-auto">
-                            <p>Set here</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
-                    <div id="setbox2">
-                        <div class="col-auto">
-                            <p>Set here</p>
-                        </div>
-                    </div>
-                    <div id="setbox3">
-
-                        <div class="col-auto">
-                            <p>Set here</p>
-                        </div>
-
-                    </div>
-                    <div id="setbox4">
-
-                        <div class="col-auto">
-                            <p>Set here</p>
-                        </div>
-
-                    </div>
-
-                    <div id="setbox5">
-
-                        <div class="col-auto">
-                            <p>Set here</p>
-                        </div>
-
-                    </div>
-                    <!--
-                                        <div id="setbox6">
-
-                                            <div class="col-auto">
-                                                <p>Set here</p>
-                                            </div>
-
-                                        </div>
-
-                                        <div id="setbox7">
-
-                                            <div class="col-auto">
-                                                <p>Set here</p>
-                                            </div>
-
-                                        </div>
-                                        <div id="setbox8">
-
-                                            <div class="col-auto">
-                                                <p>Set here</p>
-                                            </div>
-
-                                        </div>
-
-                                        <div id="setbox9">
-
-                                            <div class="col-auto">
-                                                <p>Set here</p>
-                                            </div>
-
-                                        </div>
-                                        <div id="setbox10">
-
-                                            <div class="col-auto">
-                                                <p>Set here</p>
-                                            </div>
-
-                                        </div>
-                    -->
                 </div>
             </div>
-        </section>
+            </div>
+            <!--Control Panel-->
+            <section id="control-panel">
 
-        <!--Instruction Panel-->
+                <div class="card border-dark">
+                    <div class="card text-dark bg-warning border-dark">
+                        <div class="row ">
 
-        <section id="instruction-panel">
-            <div class=" card border-dark ">
-                <div class="card text-dark bg-light ">
-                    <div class="row justify-content-md-start">
-                        <div class="col-auto">
-                            <h4>Instruction</h4>
-                        </div>
-                        <div class="row justify-content-center">
-                            <!--    <div class="col-auto">
-                            <!-- Rounded switch to toggle to pair with car-->
-                            <!--         <h7>Pair</h7>
-                                     <input type="checkbox" id="switch"class="checkbox"/>
-                                     <label for="switch" class="toggle">
-                                         <p>OFF  /  ON</p>
-                                     </label>
-                                 </div>-->
-                            <!--Car pairing selection-->
                             <div class="col-auto">
-                                <div class="available">
-                                    <label for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
-
-                                    <select id="selection">
-
-                                        <option selected>Car ID</option>
-                                        <option value="carId1">Car A</option>
-                                        <option value="carId2">Car B</option>
-                                        <option value="carId3">Car C</option>
-                                        <option value="carId4">Car D</option>
-                                    </select>
+                                <h4>Control Panel</h4>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <div class="col">
+                                    <button type="execute" class="btn btn-success me-md-2">Execute</button>
+                                    <button type="submit" class="btn btn-primary">Clear</button>
                                 </div>
                             </div>
-                            <div class="row justify-content-md-start">
-                                <div class="col">
-                                    <button type="pair" class="btn btn-success me-md-2">Pair</button>
-                                </div>
-                                <!--- Pairing light status-->
-                                <div class="row justify-content-end">
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-green"></div>
-                                        </div>
+                        </div>
+                    </div>
+                    <!-- for future development
+                    <div class="card-body text-dark bg-warning mb-2" >
+
+                    </div>-->
+            </section>
+
+            <!--Instruction Panel-->
+
+            <section id="instruction-panel">
+                <div class=" card border-dark ">
+                    <div class="card text-dark bg-light ">
+                        <div class="row justify-content-md-start">
+                            <div class="col-auto">
+                                <h4>Instruction</h4>
+                            </div>
+                            <div class="row justify-content-center">
+                                <!--    <div class="col-auto">-->
+                                <!-- Rounded switch to toggle to pair with car-->
+                                <!--         <h7>Pair</h7>
+                                         <input type="checkbox" id="switch"class="checkbox"/>
+                                         <label for="switch" class="toggle">
+                                             <p>OFF  /  ON</p>
+                                         </label>
+                                     </div>-->
+                                <!--Car pairing selection-->
+                                <div class="col-auto">
+                                    <div class="available">
+                                        <label class="first" for="selection"> Available:</label><!--Available cars to select which has detected within the area-->
+                                        <select id="carSelection">
+                                            <option selected>----</option>
+                                        </select>
                                     </div>
-                                    <div class="col-auto">
-                                        <div class="led-box">
-                                            <div class="led-red"></div>
+                                </div>
+                                <div class="row justify-content-md-start">
+                                    <div class="col">
+                                        <button type="pair" class="btn btn-success me-md-2" id="pairButton">Pair</button>
+                                    </div>
+                                    <!--- Pairing light status-->
+                                    <div class="row justify-content-end">
+                                        <div class="col-auto">
+                                            <div class="led-box">
+                                                <div class="led-red" id="pairing_led"></div>
+                                            </div>
                                         </div>
+                                        <!-- <div class="col-auto">
+                                            <div class="led-box">
+                                                <div class="led-red"></div>
+                                            </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!--commands icons to drag over-->
-                <div class="card-body text-dark bg-light mb-2">
-                    <div>
-                        <img id="car" src="../static/images/uparrow.png">
-                        <img id="car" src="../static/images/downarrow.png">
-                        <img id="car" src="../static/images/rightarrow.png">
-                        <img id="car" src="../static/images/leftarrow.png">
-                        <img id="car" src="../static/images/stop.jpg">
-                        <img id="car" src="../static/images/speedup.jpg">
-                        <img id="car" src="../static/images/slow.jpg">
+                    <!--commands icons to drag over-->
+                    <div class="card-body text-dark bg-light mb-2">
+                        <p>
+                            <button onclick="showCode()">Show JavaScript</button>
+                            <button onclick="showCode1()">Show Python</button>
+                            <button onclick="runCode()">Test code</button>
+                        </p>
+                        <div class="third"></div>
+
+                        <div id="blocklyDiv" style="height: 450px; width: 450px;"></div>
+                        <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+                            <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+                                <!-- If logic blocks -->
+                                <category name="If">
+                                    <block type="controls_if"></block>
+                                    <block type="controls_if">
+                                        <mutation else="1"></mutation>
+                                    </block>
+                                    <block type="controls_if">
+                                        <mutation elseif="1" else="1"></mutation>
+                                    </block>
+                                </category>
+                                <!-- Boolean logic blocks -->
+                                <category name="Boolean" colour="%{BKY_LOGIC_HUE}">
+                                    <block type="logic_compare"></block>
+                                    <block type="logic_operation"></block>
+                                    <block type="logic_negate"></block>
+                                    <block type="logic_boolean"></block>
+                                    <block type="logic_null"></block>
+                                    <block type="logic_ternary"></block>
+                                </category>
+                            </category>
+                            <!-- Loops logic blocks -->
+                            <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+                                <block type="controls_repeat_ext">
+                                    <value name="TIMES">
+                                        <block type="math_number">
+                                            <field name="NUM">10</field>
+                                        </block>
+                                    </value>
+                                </block>
+                                <block type="controls_whileUntil"></block>
+                                <block type="controls_for">
+                                    <field name="VAR">i</field>
+                                    <value name="FROM">
+                                        <block type="math_number">
+                                            <field name="NUM">1</field>
+                                        </block>
+                                    </value>
+                                    <value name="TO">
+                                        <block type="math_number">
+                                            <field name="NUM">10</field>
+                                        </block>
+                                    </value>
+                                    <value name="BY">
+                                        <block type="math_number">
+                                            <field name="NUM">1</field>
+                                        </block>
+                                    </value>
+                                </block>
+                                <block type="controls_forEach"></block>
+                                <block type="controls_flow_statements"></block>
+                            </category>
+                            <!-- Arithmetical logic blocks -->
+                            <category name="Math" colour="%{BKY_MATH_HUE}">
+                                <block type="math_number">
+                                    <field name="NUM">123</field>
+                                </block>
+                                <block type="math_arithmetic"></block>
+                                <block type="math_single"></block>
+                                <block type="math_trig"></block>
+                                <block type="math_constant"></block>
+                                <block type="math_number_property"></block>
+                                <block type="math_round"></block>
+                                <block type="math_on_list"></block>
+                                <block type="math_modulo"></block>
+                                <block type="math_constrain">
+                                    <value name="LOW">
+                                        <block type="math_number">
+                                            <field name="NUM">1</field>
+                                        </block>
+                                    </value>
+                                    <value name="HIGH">
+                                        <block type="math_number">
+                                            <field name="NUM">100</field>
+                                        </block>
+                                    </value>
+                                </block>
+                                <block type="math_random_int">
+                                    <value name="FROM">
+                                        <block type="math_number">
+                                            <field name="NUM">1</field>
+                                        </block>
+                                    </value>
+                                    <value name="TO">
+                                        <block type="math_number">
+                                            <field name="NUM">100</field>
+                                        </block>
+                                    </value>
+                                </block>
+                                <block type="math_random_float"></block>
+                                <block type="math_atan2"></block>
+                            </category>
+                            <!-- Lists logic blocks -->
+                            <category name="Lists" colour="%{BKY_LISTS_HUE}">
+                                <block type="lists_create_empty"></block>
+                                <block type="lists_create_with"></block>
+                                <block type="lists_repeat">
+                                    <value name="NUM">
+                                        <block type="math_number">
+                                            <field name="NUM">5</field>
+                                        </block>
+                                    </value>
+                                </block>
+                                <block type="lists_length"></block>
+                                <block type="lists_isEmpty"></block>
+                                <block type="lists_indexOf"></block>
+                                <block type="lists_getIndex"></block>
+                                <block type="lists_setIndex"></block>
+                            </category>
+                            <sep></sep>
+                            <!-- create Variables logic blocks-->
+                            <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
+                            </category>
+                            <category name="Functions" custom="PROCEDURE" colour="%{BKY_PROCEDURES_HUE}">
+                            </category>
+                            <category name="Text" colour="%{BKY_TEXTS_HUE}">
+                                <block type="text"></block>
+                                <block type="text_length"></block>
+                                <block type="text_print"></block>
+                            </category>
+                            <sep></sep>
+                            <!-- Library logic block -->
+                            <category name="Library" expanded="true">
+                                <category name="Randomize">
+                                    <block type="procedures_defnoreturn">
+                                        <mutation>
+                                            <arg name="list"></arg>
+                                        </mutation>
+                                        <field name="NAME">randomize</field>
+                                        <statement name="STACK">
+                                            <block type="controls_for" inline="true">
+                                                <field name="VAR">x</field>
+                                                <value name="FROM">
+                                                    <block type="math_number">
+                                                        <field name="NUM">1</field>
+                                                    </block>
+                                                </value>
+                                                <value name="TO">
+                                                    <block type="lists_length" inline="false">
+                                                        <value name="VALUE">
+                                                            <block type="variables_get">
+                                                                <field name="VAR">list</field>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </value>
+                                                <value name="BY">
+                                                    <block type="math_number">
+                                                        <field name="NUM">1</field>
+                                                    </block>
+                                                </value>
+                                                <statement name="DO">
+                                                    <block type="variables_set" inline="false">
+                                                        <field name="VAR">y</field>
+                                                        <value name="VALUE">
+                                                            <block type="math_random_int" inline="true">
+                                                                <value name="FROM">
+                                                                    <block type="math_number">
+                                                                        <field name="NUM">1</field>
+                                                                    </block>
+                                                                </value>
+                                                                <value name="TO">
+                                                                    <block type="lists_length" inline="false">
+                                                                        <value name="VALUE">
+                                                                            <block type="variables_get">
+                                                                                <field name="VAR">list</field>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </value>
+                                                        <next>
+                                                            <block type="variables_set" inline="false">
+                                                                <field name="VAR">temp</field>
+                                                                <value name="VALUE">
+                                                                    <block type="lists_getIndex" inline="true">
+                                                                        <mutation statement="false" at="true"></mutation>
+                                                                        <field name="MODE">GET</field>
+                                                                        <field name="WHERE">FROM_START</field>
+                                                                        <value name="AT">
+                                                                            <block type="variables_get">
+                                                                                <field name="VAR">y</field>
+                                                                            </block>
+                                                                        </value>
+                                                                        <value name="VALUE">
+                                                                            <block type="variables_get">
+                                                                                <field name="VAR">list</field>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </value>
+                                                                <next>
+                                                                    <block type="lists_setIndex" inline="false">
+                                                                        <value name="AT">
+                                                                            <block type="variables_get">
+                                                                                <field name="VAR">y</field>
+                                                                            </block>
+                                                                        </value>
+                                                                        <value name="LIST">
+                                                                            <block type="variables_get">
+                                                                                <field name="VAR">list</field>
+                                                                            </block>
+                                                                        </value>
+                                                                        <value name="TO">
+                                                                            <block type="lists_getIndex" inline="true">
+                                                                                <mutation statement="false" at="true"></mutation>
+                                                                                <field name="MODE">GET</field>
+                                                                                <field name="WHERE">FROM_START</field>
+                                                                                <value name="AT">
+                                                                                    <block type="variables_get">
+                                                                                        <field name="VAR">x</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <value name="VALUE">
+                                                                                    <block type="variables_get">
+                                                                                        <field name="VAR">list</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </value>
+                                                                        <next>
+                                                                            <block type="lists_setIndex" inline="false">
+                                                                                <value name="AT">
+                                                                                    <block type="variables_get">
+                                                                                        <field name="VAR">x</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <value name="LIST">
+                                                                                    <block type="variables_get">
+                                                                                        <field name="VAR">list</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <value name="TO">
+                                                                                    <block type="variables_get">
+                                                                                        <field name="VAR">temp</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </next>
+                                                                    </block>
+                                                                </next>
+                                                            </block>
+                                                        </next>
+                                                    </block>
+                                                </statement>
+                                            </block>
+                                        </statement>
+                                    </block>
+                                </category>
+                            </category>
+                        </xml>
+
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         </div>
 
-        <!--
-                <br>
-                <section id ="historybox">
-                    <div class="card text-white bg-secondary mb-3">
-                        <div class="card-header">
-                            History Panel
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">- History Offline- </h5>
-                            <p class="card-text">NO connections. Please check. Hello world nice to meet you. See yo soon!!!</p>
-                        </div>
-                    </div>
-                </section>
-        -->
+        </div>
     </section>
 </body>
 
@@ -473,3 +649,79 @@
 <footer>
     <p><em>Copyright &copy; Little Runner Car Control 2021.</em></p>
 </footer>
+<!-- Tooltip Javascripts -->
+<script src="../static/js/tour.js"></script>
+<script>
+    const tour = new Tour("demo");
+    tour.inittooltip();
+    tour.start();
+</script>
+<script>
+    // Call JS function from 'challenge.js' to init challenge features
+    initChallengeFeatures();
+    initPairingFeatures();
+    initLeaderboard();
+</script>
+
+<!-- Block Javascripts -->
+<script>
+    var demoWorkspace = Blockly.inject('blocklyDiv',
+        {
+            media: '../static/media/',
+            toolbox: document.getElementById('toolbox')
+        });
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+        demoWorkspace);
+
+    function showCode() {
+        // Generate JavaScript code and display it.
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+        alert(code);
+    }
+
+    function runCode() {
+        // Generate JavaScript code and run it.
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP =
+            'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try {
+            eval(code);
+        } catch (e) {
+            alert(e);
+        }
+    }
+    var demoWorkspace1 = Blockly.inject('blocklyDiv',
+        {
+            media: '../static/media/',
+            toolbox: document.getElementById('toolbox')
+        });
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+        demoWorkspace1);
+
+    function showCode1() {
+        // Generate Python code and display it.
+        Blockly.Python.INFINITE_LOOP_TRAP = null;
+        var code = Blockly.Python.workspaceToCode(demoWorkspace1);
+        alert(code);
+    }
+
+    function runCode1() {
+        // Generate Python code and run it.
+        window.LoopTrap = 1000;
+        Blockly.Python.INFINITE_LOOP_TRAP =
+            'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.Python.workspaceToCode(demoWorkspace1);
+        Blockly.Python.INFINITE_LOOP_TRAP = null;
+        try {
+            eval(code);
+        } catch (e) {
+            alert(e);
+        }
+    }
+</script>
+
+</body>
+</html>
