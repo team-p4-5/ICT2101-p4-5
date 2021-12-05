@@ -46,9 +46,9 @@ student_manager = StudentManagement()
 student_action_manager = StudentActionManagement()
 
 # C2 server (listener) object
-c2_q = queue.Queue()
-c2_comms_obj = C2Server(c2_q)
-c2_comms_obj.onThread(c2_comms_obj.start())
+# c2_q = queue.Queue()
+# c2_comms_obj = C2Server(c2_q)
+# c2_comms_obj.onThread(c2_comms_obj.start())
 
 # Flask Setup
 app = Flask(__name__)   # initialise the flask app
@@ -240,8 +240,13 @@ def saveChallenge():
 
         # Call 'leaderboard_manager's function to save a record of the completed challenge into DB
         leaderboard_manager.saveChallenge(db_conn, active_challenge)
+        
         # Reset (clear) the active challenge
         active_challenge = None
+
+        # Reset Command History of Student
+        global active_student
+        student_action_manager.resetStudentCommandHistory(active_student)
 
         # Save the record time into challenge object
         return make_response(jsonify({"msg": "OK"}), 200)
@@ -301,6 +306,57 @@ def getLeaderboard():
         return redirect('/')
 
     return jsonify(leaderboard_manager.getPastChallenges(db_conn))
+
+
+# Function to handle requests for issuing arbitrary commands to the car
+@app.route('/issueCommand', methods=["POST"])
+def issueCommand():
+    if request.method == "POST":
+        params = request.form
+        command = params.get("command")
+
+        try:
+            # Get next checkpoint to clear
+            global active_challenge
+            remaining = active_challenge.getRemainingCheckpoints()
+            if len(remaining) > 0:
+                next_cp = remaining[0]
+            else:
+                next_cp = NULL_RESPONSE
+
+            # Get car's response
+            if TESTING_MODE:
+                car_response = next_cp
+            else:
+                car_response = next_cp      # placeholder for function call to send command to connected car
+
+            # If still have checkpoints left
+            if next_cp != NULL_RESPONSE:
+                # Call function to remove crossed checkpoint
+                # Internal checks will be done to see if checkpoint that car crossed is the next checkpoint
+                challenge_manager.removeCheckpoint(active_challenge, car_response)
+
+            # Assume command was sent successfully to car
+            global active_student
+            student_action_manager.addCommandToHistory(active_student, command)
+
+            return make_response(jsonify({"msg": car_response}), 200)
+
+        except Exception:
+            return make_response(jsonify({"msg": "UNABLE TO SEND COMMAND"}), 405)
+
+
+# Function to handle requests for removing checkpoints from challenge (it was crossed by the car)
+@app.route('/getCommandHistory')
+def getCommandHistory():
+    # Check for Session
+    if not session.get('active'):
+        return redirect('/')
+    
+    global active_student
+    cmd_history = student_action_manager.getStudentCommandHistory(active_student)
+    return jsonify({"history":cmd_history})
+
 
 
 # @app.route('/register_player')

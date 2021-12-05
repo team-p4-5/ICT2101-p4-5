@@ -61,6 +61,7 @@ function pairWithCar() {
         data: {"id":car_id},
         async: false,
         success: function (response) {
+            console.log(response.msg);
             // Turn LED from red to green
             $('#pairing_led').removeClass('led-red');
             $('#pairing_led').removeClass('led-green').addClass('led-green');

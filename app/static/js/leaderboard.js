@@ -1,7 +1,13 @@
+/*
+JS File containing all functions related to populating leaderboard information
+
+Authors: Kah Wei & Xiu Qi
+Last Updated: 4th December 2021
+*/
+
+
 // Function to populate retreved leaderboard data into corresponding fields on the webpage
 function populateLeaderboard(data) {
-    console.log(data.items);
-
     var easytable = document.getElementById('easytbody');
     var mediumtable = document.getElementById('mediumtbody');
     var hardtable = document.getElementById('hardtbody');
@@ -24,7 +30,7 @@ function populateLeaderboard(data) {
         }
 
     var mediumdata = data.filter(m => m.difficulty === 'Medium');
-    console.log(mediumdata);
+
     for (var j = 0; j < mediumdata.length; j++){
         var row = `<tr>
                         <td>${mediumdata[j].name}</td>

@@ -122,4 +122,23 @@ class StudentActionManagement():
 		cmd_history.append(command)
 		student.setCommandHistory(cmd_history)
 
-	# To Add: Function to allow retrieval of command history
+	def getStudentCommandHistory(self, student):
+		"""
+		Function to get a list of command history from specific Student
+		:param student: Student object instance
+		:return: Returns a list of command histories of given Student object instance
+		"""
+		return student.getCommandHistory()
+
+	def resetStudentCommandHistory(self, student):
+		"""
+		Function to reset command history for specific Student
+		:param student: Student object instance
+		:return: Returns True if successfully reset command history of Student, else False
+		"""
+		try:
+			student.setCommandHistory([])
+			return True
+		except Exception:
+			return False
+
