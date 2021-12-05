@@ -2,7 +2,7 @@
 JS File containing all functions related to Create, Start & Stop Challenges
 
 Authors: Bernard & Xiu Qi
-Last Updated: 3rd December 2021
+Last Updated: 6th December 2021
 */
 
 // Global variables
@@ -246,23 +246,6 @@ function initChallengeFeatures() {
         // Create N checkpoints (1..N) in ascending order
         checkpoint_list = createArrayOfNumbers(1, checkpointCount);
         randomizeCheckpointPlacements();
-        // checkpoint_list = [];       //reset the list first
-        // while (checkpoint_list.length != numbersArray.length) {
-        //     let randomIndex = getRandomNumber(0, numbersArray.length - 1);
-
-        //     if (checkpoint_list.includes(numbersArray[randomIndex]))
-        //         continue;
-        //     checkpoint_list.push(numbersArray[randomIndex]);
-        // }
-
-        // Build the random checkpoint sequence (string)
-        // var str = '';
-        // for (i = 0; i < checkpoint_list.length; i++) {
-        //     str += checkpoint_list[i] + ' ';
-        // }
-
-        // Add the randomly generated sequence of checkpoint numbers into the page
-        // $('#checkpoint_list').text(str);
 
         // Call function to create the challenge on the server
         createChallenge();
@@ -275,10 +258,12 @@ function initChallengeFeatures() {
     });
 }
 
+// Function to generate a random number within given min/max range
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+// Function to generate an array of number in ascending order with given start/end values
 function createArrayOfNumbers(start, end) {
 
     let myArray = [];

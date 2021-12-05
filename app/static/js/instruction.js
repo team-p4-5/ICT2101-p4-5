@@ -2,7 +2,7 @@
 JS File containing all functions related to defining our own blockly blocks
 
 Authors: Bernard & Xiu Qi
-Last Updated: 5th December 2021
+Last Updated: 6th December 2021
 */
 
 // Constant Declarations
@@ -144,6 +144,7 @@ function retrieveCommandHistory()
     })
 }
 
+// Function to initialise all components required for the 'instruction' feature
 function initInstructionFeatures() {
     // Add event listener for "Command History" button
     $("#commandHistoryBtn").on('click', function () {

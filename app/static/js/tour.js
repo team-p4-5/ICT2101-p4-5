@@ -1,8 +1,16 @@
+/*
+JS File containing all functions related to the tooltip (tour) feature
+
+Authors: Vanna & Xiu Qi
+Last Updated: 6th December 2021
+*/
+
+// Definition for Tour class that will be used to display the webpage's tooltip windows
 class Tour {
     inittooltip() {
         tour.addStep('step1', {
-            title: "Step 1",
-            text: "Select a available car in the dropdown selection. Then press 'Pair' button to pair with the robotic car.",
+            title: "Step 1/10",
+            text: "Select a difficulty level (Easy, Medium or Hard).",
             hook: ".first",
             timer: 10000, // will show for 10 seconds before going to the next step
             onShow: function () {
@@ -26,8 +34,8 @@ class Tour {
             ]
         });
         tour.addStep('step2', {
-            title: "Step 2",
-            text: "Select different levels. (Easy, Medium or Hard).",
+            title: "Step 2/10",
+            text: "Press the 'Create Challenge' button to create a challenge instance of selected difficulty.",
             hook: ".second",
             timer: 10000, // will show for 10 seconds before going to the next step
             onShow: function () {
@@ -51,10 +59,13 @@ class Tour {
             ]
         });
         tour.addStep('step3', {
-            title: "Step 3",
-            text: "Drag command blocks and stack them in the Command Panel to craft your own chain of commands! Click 'Execute' button to issue them to the car.",
+            title: "Step 3/10",
+            text: "The virtual map will generate a number of checkpoints that you have to clear in ASCENDING order. \nUn-cleared checkpoints are displayed as red boxes, and cleared checkpoints are displayed as green boxes. The blue box reflects the car's position in real-life!",
             hook: ".third",
             timer: 10000, // will show for 10 seconds before going to the next step
+            onShow: function () {
+
+            },
             onHide: function () {
 
             },
@@ -73,10 +84,13 @@ class Tour {
             ]
         });
         tour.addStep('step4', {
-            title: "Step 4", // will show for 10 seconds before going to the next step
-            text: "Click on the 'Command History' button to view past commands that you sent to the car.",
+            title: "Step 4/10",
+            text: "You can also see the direction of which the car is currently facing.",
             hook: ".fourth",
-            timer: 10000,
+            timer: 10000, // will show for 10 seconds before going to the next step
+            onShow: function () {
+
+            },
             onHide: function () {
 
             },
@@ -95,10 +109,13 @@ class Tour {
             ]
         });
         tour.addStep('step5', {
-            title: "Step 5", // will show for 10 seconds before going to the next step
-            text: "This virtual map reflects the car's position in real-life! Uncaptured checkpoints are colored red, and captured ones are colored green. Once all checkpoints are captured, the challenge is completed and your record time is saved!",
+            title: "Step 5/10",
+            text: "Select an available car in the dropdown selection. Then press 'Pair' button to pair with the robotic car.",
             hook: ".fifth",
-            timer: 10000,
+            timer: 10000, // will show for 10 seconds before going to the next step
+            onShow: function () {
+
+            },
             onHide: function () {
 
             },
@@ -117,10 +134,13 @@ class Tour {
             ]
         });
         tour.addStep('step6', {
-            title: "Step 6", // will show for 10 seconds before going to the next step
-            text: "Click on the 'Leaderboard' button to view past record times by others!",
+            title: "Step 6/10",
+            text: "Press the 'Start Challenge' button to start the challenge timer and start playing!",
             hook: ".sixth",
-            timer: 10000,
+            timer: 10000, // will show for 10 seconds before going to the next step
+            onShow: function () {
+
+            },
             onHide: function () {
 
             },
@@ -139,9 +159,75 @@ class Tour {
             ]
         });
         tour.addStep('step7', {
-            title: "Step 7", // will show for 10 seconds before going to the next step
-            text: "Click on the 'View Guide' button to view this tour again!",
+            title: "Step 7/10",
+            text: "Drag command blocks and stack them in the Command Panel to craft your own chain of commands! Click the 'Execute' button to issue them to the car.",
             hook: ".seventh",
+            timer: 10000, // will show for 10 seconds before going to the next step
+            onHide: function () {
+
+            },
+            buttons: [
+                {
+                    text: "Previous",
+                    action: "tour.previous()"
+                },
+                {
+                    text: "Next",
+                    action: "tour.next()"
+                }
+            ],
+            links: [
+
+            ]
+        });
+        tour.addStep('step8', {
+            title: "Step 8/10", // will show for 10 seconds before going to the next step
+            text: "Click on the 'Command History' button to view past commands that you sent to the car.",
+            hook: ".eigth",
+            timer: 10000,
+            onHide: function () {
+
+            },
+            buttons: [
+                {
+                    text: "Previous",
+                    action: "tour.previous()"
+                },
+                {
+                    text: "Next",
+                    action: "tour.next()"
+                }
+            ],
+            links: [
+
+            ]
+        });
+        tour.addStep('step9', {
+            title: "Step 9/10", // will show for 10 seconds before going to the next step
+            text: "Click on the 'Leaderboard' button to view past record times by others!",
+            hook: ".ninth",
+            timer: 10000,
+            onHide: function () {
+
+            },
+            buttons: [
+                {
+                    text: "Previous",
+                    action: "tour.previous()"
+                },
+                {
+                    text: "Next",
+                    action: "tour.next()"
+                }
+            ],
+            links: [
+
+            ]
+        });
+        tour.addStep('step10', {
+            title: "Step 10/10", // will show for 10 seconds before going to the next step
+            text: "Click on the 'View Tooltip' button to view this tooltip tour again!",
+            hook: ".tenth",
             timer: 10000,
             onHide: function () {
 
@@ -159,6 +245,12 @@ class Tour {
             links: [
 
             ]
+        });
+
+        // Add event listener for "View Tooltip" button
+        $("#tooltipButton").on('click', function () {
+            // Start the tooltip tour
+            tour.start();
         });
 
     }

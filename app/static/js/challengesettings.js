@@ -1,3 +1,10 @@
+/*
+JS File containing all functions related to Create, Start & Stop Challenges
+
+Authors: Xiu Qi
+Last Updated: 6th December 2021
+*/
+
 // Function to query server for challenge settings once it is ready
 $(window).on('load', function() {
     getDefaultSettings();
