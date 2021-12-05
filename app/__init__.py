@@ -316,31 +316,21 @@ def issueCommand():
         command = params.get("command")
 
         try:
-            # Get next checkpoint to clear
-            global active_challenge
-            remaining = active_challenge.getRemainingCheckpoints()
-            if len(remaining) > 0:
-                next_cp = remaining[0]
-            else:
-                next_cp = NULL_RESPONSE
-
             # Get car's response
+            car_response = None
             if TESTING_MODE:
-                car_response = next_cp
+                car_response = "1"
             else:
-                car_response = next_cp      # placeholder for function call to send command to connected car
-
-            # If still have checkpoints left
-            if next_cp != NULL_RESPONSE:
-                # Call function to remove crossed checkpoint
-                # Internal checks will be done to see if checkpoint that car crossed is the next checkpoint
-                challenge_manager.removeCheckpoint(active_challenge, car_response)
+                car_response = "1"      # placeholder for function call to send command to connected car
 
             # Assume command was sent successfully to car
-            global active_student
-            student_action_manager.addCommandToHistory(active_student, command)
-
-            return make_response(jsonify({"msg": car_response}), 200)
+            if car_response is not None:
+                global active_student
+                # Add executed command to history
+                student_action_manager.addCommandToHistory(active_student, command)
+                return make_response(jsonify({"msg": car_response}), 200)
+            else:
+                return make_response(jsonify({"msg": "UNABLE TO SEND COMMAND"}), 405)    
 
         except Exception:
             return make_response(jsonify({"msg": "UNABLE TO SEND COMMAND"}), 405)
@@ -358,125 +348,21 @@ def getCommandHistory():
     return jsonify({"history":cmd_history})
 
 
+# Function to handle requests for removing a checkpoint
+@app.route('/removeCheckpoint', methods=["POST"])
+def removeCheckpoint():
+    if request.method == "POST":
+        params = request.form
+        checkpoint = params.get("checkpoint")
 
-# @app.route('/register_player')
-# def register_player():
+        global active_challenge
+        # If successfully removed the checkpoint    
+        if challenge_manager.removeCheckpoint(active_challenge, checkpoint):
+            return make_response(jsonify({"msg": "OK"}), 200)
 
-#     # Check for Session
-#     if not session.get('active'):
-#         return render_template('registerplayername.html')
-
-#     # Return page for register_player
-#     return render_template('registerplayername.html', active_user=active_user)
-
-
-# # Function to update list of registered usernames
-# def updateRegisteredUsers():
-#     with open(CREDENTIALS_FILE, 'r') as f:
-#         # Go through all users
-#         for credential in f.readlines():
-#             user = credential.split(',')[USERNAME]
-#             salt = credential.split(',')[SALT]
-#             hash = credential.split(',')[HASHED_PSW]
-
-#             # Add any registered user that is in CREDENTIALS_FILE but not in global var 'registered_users'
-#             if user not in registered_users.keys():
-#                 registered_users[user] = {'salt': salt, 'hash': hash}
-
-
-# @app.route('/register')
-# def register():
-#     # Return page for dashboard
-#     return render_template('register.html')
-
-
-# @app.route('/registeraccount', methods=["POST"])
-# def registeraccount():
-#     if request.method == "POST":
-#         params = request.form
-#         # Get the comma separated commands as one string
-#         username = params.get("username")
-#         password = params.get("password")
-#         cfm_pass = params.get("password_confirm")
-
-#         # Call function to ensure we have the latest list of usernames
-#         updateRegisteredUsers()
-
-#         # If user account already exist
-#         if username in registered_users.keys():
-#             flash(f"User '{username}' already exists!")
-#             return redirect('/register')
-#         # Else, new user trying to register
-#         else:
-#             # If passwords match
-#             if password == cfm_pass:
-#                 # Generate random salt
-#                 salt = ''.join(random.choice(CHARACTERS) for i in range(16))
-
-#                 # Hash the salt + password using <SHA512>
-#                 hashed_password = hashlib.sha512(salt.encode('utf8') + password.encode('utf8')).hexdigest()
-
-#                 # Store the username, salt and hashed password in the file system
-#                 with open(CREDENTIALS_FILE, 'a') as f:
-#                     f.write(username+","+salt+","+hashed_password+"\n")
-
-#                 # Notify register account's success
-#                 flash(f"Registered '{username}' successfully")
-#                 return redirect('/register')
-
-#             # Passwords don't match (typo by user)
-#             else:
-#                 flash("Password mismatch. Try again!")
-#                 return redirect('/register')
-
-# @app.route('/login')
-# def loginpage():
-#     # Return page for dashboard
-#     return render_template('login.html')
-
-
-# @app.route('/login', methods=["POST"])
-# def login():
-#     if request.method == "POST":
-#         # Call function to ensure we have the latest list of usernames
-#         updateRegisteredUsers()
-
-#         # Get parameters from the POST form
-#         params = request.form
-#         # Get the comma separated commands as one string
-#         username = params.get("username")
-#         password = params.get("password")
-
-#         # If user exists
-#         if username in registered_users.keys():
-#             # Get the salt of the user
-#             stored_salt = registered_users[username]['salt']
-#             # Calculate the hash of user's specified password
-#             calculated_hash = hashlib.sha512(stored_salt.encode('utf8') + password.encode('utf8')).hexdigest()
-#             stored_hash = registered_users[username]['hash']
-
-#             psw_match = True
-
-#             for i in range(len(calculated_hash)):
-#                 if calculated_hash[i] != stored_hash[i]:
-#                     print(f"[{i}]"+calculated_hash[i] + ":" + stored_hash[i])
-#                     psw_match = False
-#                     break
-
-#             # Successful login
-#             if psw_match == True:
-#                 session['active'] = True
-#                 global active_user
-#                 active_user = username
-#                 return redirect('/')
-#             # Wrong Password, Unsuccessful login
-#             else:
-#                 flash("Wrong Password")
-#                 return redirect('/')
-#         else:
-#             flash("No Such User!")
-#             return redirect('/')
-
+        # Else fail to remove checkpoint
+        else:
+            return make_response(jsonify({"msg": "UNABLE TO REMOVE checkpoint"}), 405)
 
 @app.route("/logout")
 def logout():

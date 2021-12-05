@@ -2,7 +2,7 @@
 JS File containing all functions related to defining our own blockly blocks
 
 Authors: Bernard & Xiu Qi
-Last Updated: 3rd December 2021
+Last Updated: 5th December 2021
 */
 
 // Constant Declarations
@@ -19,20 +19,7 @@ function moveForward() {
         console.log("[-] Could not send command to car");
     }
     else if (car_response != "0") {
-        console.log("[*] Car moved forward once, and crossed checkpoint \'" + car_response + "\'");
-        // If crossed checkpoint is the next in sequence
-        if (checkpoint_list.length > 0) {
-            if (parseInt(car_response) == checkpoint_list[0]) {
-                checkpoint_list.shift();        // update local js array of checkpoints
-                console.log("[!] Removed checkpoint "+car_response);
-                if (checkpoint_list.length == 0){
-                    completeChallenge();
-                }
-            }
-        }
-    }
-    else {
-        console.log("[*] Car moved forward once, but did not cross any checkpoint");   
+        appendCommand(FORWARD);
     }
 }
 
@@ -43,20 +30,7 @@ function moveBackward() {
         console.log("[-] Could not send command to car");
     }
     else if (car_response != "0") {
-        console.log("[*] Car moved backwards once, and crossed checkpoint \'" + car_response + "\'");
-        // If crossed checkpoint is the next in sequence
-        if (checkpoint_list.length > 0) {
-            if (parseInt(car_response) == checkpoint_list[0]) {
-                checkpoint_list.shift();        // update local js array of checkpoints
-                console.log("[!] Removed checkpoint "+car_response);
-                if (checkpoint_list.length == 0){
-                    completeChallenge();
-                }
-            }
-        }
-    }
-    else {
-        console.log("[*] Car moved backwards once, but did not cross any checkpoint");   
+        appendCommand(BACKWARD);
     }
 }
 
@@ -67,20 +41,7 @@ function turnLeft() {
         console.log("[-] Could not send command to car");  
     }
     else if (car_response != "0") {
-        console.log("[*] Car turned left, and crossed checkpoint \'" + car_response + "\'");
-        // If crossed checkpoint is the next in sequence
-        if (checkpoint_list.length > 0) {
-            if (parseInt(car_response) == checkpoint_list[0]) {
-                checkpoint_list.shift();        // update local js array of checkpoints
-                console.log("[!] Removed checkpoint "+car_response);
-                if (checkpoint_list.length == 0){
-                    completeChallenge();
-                }
-            }
-        }
-    }
-    else {
-        console.log("[*] Car turned left, but did not cross any checkpoint");   
+        appendCommand(LEFT);
     }
 }
 
@@ -91,20 +52,7 @@ function turnRight() {
         console.log("[-] Could not send command to car");
     }
     else if (car_response != "0") {
-        console.log("[*] Car turned right, and crossed checkpoint \'" + car_response + "\'");
-        // If crossed checkpoint is the next in sequence
-        if (checkpoint_list.length > 0) {
-            if (parseInt(car_response) == checkpoint_list[0]) {
-                checkpoint_list.shift();        // update local js array of checkpoints
-                console.log("[!] Removed checkpoint "+car_response);
-                if (checkpoint_list.length == 0){
-                    completeChallenge();
-                }
-            }
-        }
-    }
-    else {
-        console.log("[*] Car turned right, but did not cross any checkpoint");   
+        appendCommand(RIGHT);
     }
 }
 
@@ -131,7 +79,7 @@ function issueCommand(cmd) {
         data: {'command':cmd},
         async: false,
         success: function (data) {
-            console.log("[*] Data Response: " + data.msg);
+            // console.log("[*] Data Response: " + data.msg);
             car_response = data.msg;
         },
         error: function (response) {
