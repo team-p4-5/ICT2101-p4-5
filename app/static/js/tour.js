@@ -14,7 +14,7 @@ class Tour {
             buttons: [
                 {
                     text: "Skip",
-                    action: "tour.previous()"
+                    action: "tour.stop()"
                 },
                 {
                     text: "Next",
@@ -96,7 +96,7 @@ class Tour {
         });
         tour.addStep('step5', {
             title: "Step 5", // will show for 10 seconds before going to the next step
-            text: "Click on the 'Leaderboard’ button to view past record times by others!",
+            text: "Click on the 'Leaderboard' button to view past record times by others!",
             hook: ".fifth",
             timer: 10000,
             onHide: function () {
