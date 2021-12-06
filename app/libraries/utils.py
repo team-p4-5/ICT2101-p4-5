@@ -1,33 +1,42 @@
 import re
 import os
 import sys
-import time
+# import time
 import random
-import base64
-import hashlib
-import inspect
+# import inspect
 import threading
-import socket
-from rich import pretty
-from rich.prompt import Prompt
-from rich.console import Console
+# import socket
 
 """
-Initialises Console and Prompt objects from rich library.
-Used for printing and formatting 
+TESTING MODE FLAG
 """
-pretty.install()
-console = Console()
-prompt = Prompt()
+# For defining whether product's functionality should be ran in 'testing' mode
+TESTING_MODE = False
+
 
 """
-User Account Management
+Database Management
 """
-CHARACTERS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-CREDENTIALS_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), "creds.txt")
-USERNAME = 0        # first field for each credential stores username of a registered user
-SALT = 1            # second field for each credential stores the salt for this user's password
-HASHED_PSW = 2      # third field for each credential stores the SHA512 hashed password
+DEFAULT_CHALLENGE_SETTINGS = "3,4,5"
+CHALLENGE_SETTINGS_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), "settings.txt")
+CHALLENGE_RECORDS_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), "records.txt")
+
+"""
+Administrator
+"""
+ADMIN_NAME = "admin"
+ADMIN_PASS = "admin"
+
+
+"""
+ChallengeSettings
+"""
+EASY_MODE = "easy"
+MEDIUM_MODE = "medium"
+HARD_MODE = "hard"
+EASY = 0
+MEDIUM = 1
+HARD = 2
 
 """
 C2 Server Information
@@ -37,44 +46,13 @@ C2_HOSTIP = "0.0.0.0"
 C2_PORT = 47656
 C2_SOCKET_BUFSIZE = 1024
 PING_INTERVAL = 10
+NORMAL_RESPONSE = "Z"
 
-
-def print_divider(message):
-    console.rule(message)
-
-
-def parse_message(message, tabs=0, symbol=None, symbol_style=None):
-    if not symbol:
-        return "\t" * tabs + message
-    if symbol_style:
-        return "\t" * tabs + f"[{symbol_style}][{symbol}][/{symbol_style}] " + message
-    return "\t" * tabs + f"[{symbol}] " + message
-
-
-def print_success(message, tabs=0, symbol="*", symbol_style=None):
-    message = parse_message(message, tabs, symbol, symbol_style)
-    console.print(message, style="bold green")
-
-
-def print_info(message, tabs=0, symbol="*"):
-    message = parse_message(message, tabs, symbol)
-    console.print(message, style="bold cyan")
-
-
-def print_danger(message, tabs=0, symbol="!"):
-    message = parse_message(message, tabs, symbol)
-    console.print(message, style="bold red")
-
-
-def print_warning(message, tabs=0, symbol="*"):
-    message = parse_message(message, tabs, symbol)
-    console.print(message, style="bold yellow")
-
-
-def print_white(message, tabs=0):
-    message = parse_message(message, tabs, symbol="SENT")
-    console.print(message, style="bold white")
-
-
-def get_func_name():
-    return inspect.stack()
+"""
+Car Commands
+"""
+MOVE_FORWARD = "moveForward"
+MOVE_BACKWARD = "moveBackward"
+TURN_LEFT = "turnLeft"
+TURN_RIGHT = "turnRight"
+NULL_RESPONSE = "0"

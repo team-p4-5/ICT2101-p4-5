@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+    {% include 'controlbase.html' %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+<style>
+    body {
+        background-color: #fff;
+        font-family: sans-serif;
+    }
+
+    h1 {
+        font-weight: normal;
+        font-size: 140%;
+    }
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-info" id="nav-main">
+    <a class="navbar-brand" href="../static/images/logo.png"><img src="../static/images/logo.png" alt="startup.logo" height="70"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}">
+            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+    </div>
+</nav>
+<body>
+    <!--Background wallpaper-->
+    <section id="backimage">
+        <div class="container">
+
+            <div id="backimage-caption"></div>
+
+            <!--Challenge panel -->
+            <section id="challenge-panel">
+                <div class="card border-dark">
+                    <div class="text-dark bg-light">
+                        <div class="card d-flex flex-row bd-highlight mb-3" style="margin-bottom: 0;">
+                            <div class="col-auto">
+                                <h4>Challenge</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body text-dark bg-light mb-2">
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="col-auto">
+                                <button class="ninth btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Leaderboard</button>
+                            </div>
+                            <div class="col-auto">
+                                <button class="tenth btn btn-primary" id="tooltipButton" style="margin-left: 5px;">View Tooltip</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body text-dark bg-light mb-2">
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="menu">
+                                <label class="first" for="selection">Difficulty :</label><!--Select challenge difficulty-->
+                                <select id="selection">
+                                    <option value="3" id="easy" selected>Easy</option>
+                                    <option value="4" id="medium">Medium</option>
+                                    <option value="5" id="hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <div>
+                                    <button type="button" id="createButton" class="second btn-success me-sm-2" style="width: 160px;height: 25px;text-align: center;">Create Challenge</button>
+                                </div>
+                                <div>
+                                    <button type="button" id="startButton" class="sixth btn-info me-sm-2 started" style="width: 160px;height: 25px;text-align: center;" disabled>Start Challenge</button>    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="watch">
+                                <div>
+                                    <p>Time Elapsed</p>                                
+                                </div>
+                                <div class="minuteDiv" style="margin-left: 10px;">
+                                    <h1 class="minute_time">00</h1>
+                                </div>
+                                <p>:</p>
+                                <div class="secondDiv">
+                                    <h1 class="second_time">00</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History DashBoard popup  -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="height: 80vh;">
+                        <div class="modal-header popupheader">
+                            <h5 class="modal-title" id="staticBackdropLabel">History Dashboard</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="commandHistory">
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  <!-- Leaderboard DashBoard popup  -->
+            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" id="leaderboardwindow">
+                        <div class="modal-header popupheader">
+                            <h5 class="modal-title" id="staticBackdropLabel1">Leaderboard</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    <div class="modal-body">
+                        <div class="lbcontainer">
+                        <div class="lbbox">
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab1" checked>
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab2">
+                        <input type="radio" class="tab-toggle" name="tab-toggle" id="tab3">
+                            <ul class="tab-list">
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab1" id="easytab">Easy</label>
+                                </li>
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab2" id="mediumtab">Medium</label>
+                                </li>
+                                <li class="tab-item">
+                                <label class="tab-trigger" for="tab3" id="hardtab">Hard</label>
+                                </li>
+                            </ul>
+
+                            <div class="tab-container">
+                            <div class="tab-content">
+                            <table id="easyleaderboard" width="100%">
+                            <thead>
+                                <th>Player Name</th>
+                                <th>Record Time</th>
+                                <th>Difficulty</th>
+                            </thead>
+                        <tbody id="easytbody">
+                        </tbody>
+                        </table>
+                            </div>
+                            <div class="tab-content">
+                                 <table id="mediumleaderboard" width="100%">
+                            <thead>
+                                <th>Player Name</th>
+                                <th>Record Time</th>
+                                <th>Difficulty</th>
+                            </thead>
+                        <tbody id="mediumtbody">
+                        </tbody>
+                        </table>
+                            </div>
+                            <div class="tab-content">
+                             <table id="hardleaderboard" width="100%">
+                            <thead>
+                                <th>Player Name</th>
+                                <th>Record Time</th>
+                                <th>Difficulty</th>
+                            </thead>
+                        <tbody id="hardtbody">
+                        </tbody>
+                        </table>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+         <!--Virtual Map Panel-->
+            <section id="virtualmap-panel">
+                <div class="card border-dark">
+                    <div class="text-dark bg-light ">
+                        <div class="card d-flex flex-row bd-highlight mb-3">
+                            <div class="col-auto">
+                                <h4>Virtual Map</h4>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="col-auto">
+                                <h6 class="fourth" id="direction">Car's Current Direction: </h6>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-row bd-highlight mb-3" style="padding: 0px;">
+                            <div class="col-auto" id="virtualMap" style="padding: 0px; margin: 0 auto;">
+                                <canvas class="third" id="game" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- for future development -->
+            </section>
+
+            <!--Instruction Panel-->
+
+            <section id="instruction-panel">
+                <div class=" card border-dark ">
+                    <div class="text-dark bg-light ">
+                        <div class="card d-flex flex-row bd-highlight mb-3" style="margin-bottom: 0;">
+                            <div class="col-auto">
+                                <h4>Instruction</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row bd-highlight mb-3" style="margin-top: 10px;">
+                        <!--Car pairing selection-->
+                        <div class="col-auto">
+                            <div class="available">
+                                <label class="fifth" for="selection"> Available Cars:</label><!--Available cars to select -->
+                                <select id="carSelection">
+                                    <option selected>----</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-start">
+                            <div class="col">
+                                <button type="pair" class="btn btn-success" id="pairButton">Pair</button>
+                            </div>
+                            <!--- Pairing light status-->
+                            <div class="row justify-content-end">
+                                <div class="col-auto">
+                                    <div class="led-box">
+                                        <div class="led-red" id="pairing_led"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body text-dark bg-light mb-2">
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="col-auto">
+                                <button class="eigth btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="commandHistoryBtn" style="width: 160px;" disabled>Command History</button>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="col-auto" style="margin-right: auto;">
+                                <button class="btn btn-primary" onclick="showCode()" id="showJsBtn" style="width: 160px;" disabled>Show JavaScript</button>
+                                <button class="btn btn-success" onclick="runCode()" id="executeBtn" style="width: 160px; margin-left: 20px;" disabled>Execute</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--commands icons to drag over-->
+                    <div class="card-body text-dark bg-light mb-2">
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div id="blocklyDiv" style="height: 500px; width: 650px; object-fit:cover;"></div>
+                            <xml xmlns="https://developers.google.com/blockly/xml" class="seventh" id="toolbox" style="display: none">
+                                <block type="moveForward"></block>
+                                <block type="moveBackward"></block>
+                                <block type="turnLeft"></block>
+                                <block type="turnRight"></block>
+                                <block type="controls_repeat_ext">
+                                    <value name="TIMES">
+                                        <block type="math_number">
+                                            <field name="NUM">10</field>
+                                        </block>
+                                    </value>
+                                </block>
+                            </xml>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        </div>
+    </section>
+</body>
+
+
+<footer>
+    <p><em>Copyright &copy; Little Runner Car Control 2021.</em></p>
+</footer>
+<!-- Tooltip Javascripts -->
+<script src="../static/js/tour.js"></script>
+<script>
+    const tour = new Tour("demo");
+    tour.inittooltip();
+</script>
+<script>
+    // Call JS function from 'challenge.js' to init challenge features
+    initChallengeFeatures();
+    initPairingFeatures();
+    initLeaderboard();
+    initInstructionFeatures();
+</script>
+
+<!-- Block Javascripts -->
+<script>
+    var demoWorkspace = Blockly.inject('blocklyDiv',
+        {
+            media: '../static/media/',
+            trashcan: true,
+            toolbox: document.getElementById('toolbox')
+        });
+
+    function showCode() {
+        // Generate JavaScript code and display it.
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+        alert(code);
+    }
+
+    function runCode() {
+        // Generate JavaScript code and run it.
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP =
+            'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try {
+            eval(code);
+        } catch (e) {
+            alert(e);
+        }
+    }
+</script>
+
+</body>
+</html>
