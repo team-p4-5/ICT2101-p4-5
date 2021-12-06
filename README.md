@@ -149,7 +149,7 @@ git push
 ---
 ## User Acceptance Test (UAT)
 ### System State Diagram (Updated)
-The following is the project's updated System State Diagram, where refinements made have been highlighted in green.
+The following is the project's updated System State Diagram, where refinements made have been highlighted in green. For detailed information of the refinements made to the System State Diagram and System Test Cases, refer to the [UAT Manual](documentation/user_acceptance_testing/uat_user_manual.pdf).
 ![System State Diagram](documentation/user_acceptance_testing/ICT2x01_M3_SystemStateDiagram_P4-5.png)
 ### System Test (UAT) Environment Preparation
 Before performing the System Tests (UAT), the following changes need to be made to swap the product code into "TEST" mode
@@ -162,7 +162,6 @@ Before performing the System Tests (UAT), the following changes need to be made 
 ![pairing.js](documentation/user_acceptance_testing/ICT2x01_M3_UatSetupPairing_P4-5.png)
 
 ### System Test (UAT) Video
-For detailed information of the System Test Cases, refer to the [UAT Manual](documentation/user_acceptance_testing/uat_user_manual.pdf).
 [![System Test Video](https://i.ytimg.com/vi/GbVLMYQULxk/hqdefault.jpg)](https://youtu.be/GbVLMYQULxk)
 
 ---
@@ -186,7 +185,7 @@ The following test cases can be found under [app/libraries/testsuite.py](app/lib
 | `test_saveChallenge_feature()`        | Function to test if saving of a Challenge record in the database can be reliably allowed / rejected based on different conditions                                    |
 
 ### Code Coverage Statistics
-**`Statement Coverage`** analysis is performed using the [`coverage`](https://coverage.readthedocs.io/en/6.2/) python library to ensure that the test cases from [app/libraries/testsuite.py](app/libraries/testsuite.py) adequately covers the testing of the **`ChallengeManagement`** class and dependancies. Code coverage statistical reports are also _automatically generated_ under `app/libraries/htmlcov/`
+**Statement Coverage** analysis is performed using the [`coverage`](https://coverage.readthedocs.io/en/6.2/) python library to ensure that the test cases from [app/libraries/testsuite.py](app/libraries/testsuite.py) adequately covers the testing of the **`ChallengeManagement`** class and dependancies. Code coverage statistical reports are also _automatically generated_ under `app/libraries/htmlcov/`
 
 ![Code Coverage Stats Index](documentation/whitebox_testing/ICT2x01_M3_CodeCoverageStatisticsIndex_P4-5.png)
 
