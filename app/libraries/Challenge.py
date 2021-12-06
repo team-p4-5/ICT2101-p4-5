@@ -95,7 +95,6 @@ class ChallengeManagement():
 	def __init__(self):
 		pass
 
-	# def createChallenge(self, playerName, difficultyMode, checkpointCount, remainingCheckpoints):
 	def createChallenge(self, playerName, difficultyMode, remainingCheckpoints):
 		"""
 		Function to perform authentication for Administrator logon using provided credentials
@@ -105,7 +104,6 @@ class ChallengeManagement():
 		:param remainingCheckpoints: List containing remaining checkpoints that user has left to clear
 		:return: Returns a Challenge object instance
 		"""
-		# return Challenge(playerName, difficultyMode, checkpointCount, remainingCheckpoints)
 		return Challenge(playerName, difficultyMode, remainingCheckpoints)
 
 	def startChallenge(self, challenge):
