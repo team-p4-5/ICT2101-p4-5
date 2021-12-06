@@ -57,6 +57,13 @@ function randomizeCheckpointPlacements() {
 	}
 }
 
+// Function to manually generate a virtual map for System State Test + static checkpoint
+function generateTestMap() {
+	gameMap = Array(100).fill(0);
+	cleared_checkpoints = [];
+	gameMap[1] = 1;
+}
+
 function Car()
 {
 	this.tileFrom  = [1,1];

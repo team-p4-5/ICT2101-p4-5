@@ -247,6 +247,13 @@ function initChallengeFeatures() {
         checkpoint_list = createArrayOfNumbers(1, checkpointCount);
         randomizeCheckpointPlacements();
 
+        /* ------------------------------------------------------------ */
+        /* --- ENABLE THE FOLLOWING CODE FOR SYSTEM STATE TEST ONLY --- */
+        /* ------------------------------------------------------------ */
+        // checkpoint_list = [1];
+        // generateTestMap();
+        /* ------------------------------------------------------------ */
+
         // Call function to create the challenge on the server
         createChallenge();
     });

@@ -1,6 +1,6 @@
 """
 Author:  @ Ho Xiu Qi
-Date:    28th Novemeber 2021
+Date:    28th November 2021
 
 Class definitions for Student ENTITY class, StudentMangagement & StudentActionManagement CONTROL class
 For defining and managing Student sessions

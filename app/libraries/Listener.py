@@ -1,3 +1,10 @@
+"""
+Author:  @ Ho Xiu Qi
+Date:    6th December 2021
+
+Class definition for 'low-level' programming for communications with robotic car
+"""
+
 # Custom libraries
 try:
     from .utils import *

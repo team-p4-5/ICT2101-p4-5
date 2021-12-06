@@ -1,6 +1,6 @@
 """
 Author:  @ Ho Xiu Qi
-Date:    28th Novemeber 2021
+Date:    28th November 2021
 
 Class definition for DatabaseManagement CONTROL class for controlling the reading
 and writing data of data with database.
@@ -11,10 +11,13 @@ Imports
 """
 import os
 try:
-    from .utils import *
+    from utils import *
 except ModuleNotFoundError:
-    print("[!] Unable to import utils.py, exiting program now.")
-    sys.exit()
+    try:
+    	from .utils import *
+    except ModuleNotFoundError:
+    	print("[!] Unable to import utils.py, exiting program now.")
+    	sys.exit()
 
 """
 Class Definition for 'DatabaseManagement' control class
@@ -33,9 +36,9 @@ class DatabaseManagement():
 		"""
 		if not os.path.isfile(file_path):
 			with open(file_path, 'w') as f:
-				print_success(f"Creating \'{file_path}\'...")
+				print(f"Creating \'{file_path}\'...")
 				if file_path == CHALLENGE_SETTINGS_FILE:
-					print_info(f"Creating default challenge settings: {DEFAULT_CHALLENGE_SETTINGS}")
+					print(f"Creating default challenge settings: {DEFAULT_CHALLENGE_SETTINGS}")
 					f.write(DEFAULT_CHALLENGE_SETTINGS)
 
 	def readEverythingFromFile(self, file_path):
