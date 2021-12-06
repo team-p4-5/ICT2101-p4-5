@@ -1,31 +1,23 @@
 """
 Author:  @ Ho Xiu Qi
-Date:    28th Novemeber 2021
+Date:    28th November 2021
 
 Class definitions for Challenge ENTITY class and ChallengeManagement CONTROL class
 For defining and managing Challenge objects whenever new Challenges are started by students
 """
 
-"""
-Imports
-"""
-# import os
-# try:
-#     from .utils import *
-# except ModuleNotFoundError:
-#     print("[!] Unable to import utils.py, exiting program now.")
-#     sys.exit()
 
 """
 Class Definition for 'Challenge' entity class
 """
 class Challenge():
-	def __init__(self, playerName, difficultyMode, checkpointCount, remainingCheckpoints):
+	# def __init__(self, playerName, difficultyMode, checkpointCount, remainingCheckpoints):
+	def __init__(self, playerName, difficultyMode, remainingCheckpoints):
 		self.playerName = playerName
 		self.difficultyMode = difficultyMode
-		self.checkpointCount = checkpointCount
+		# self.checkpointCount = checkpointCount
 		self.remainingCheckpoints = remainingCheckpoints
-		self.recordTime = str()
+		self.recordTime = ""
 		self.active = False
 
 	def getPlayerName(self):
@@ -49,29 +41,6 @@ class Challenge():
 		:return: Returns string representation of current challenge's difficulty mode
 		"""
 		return self.difficultyMode
-
-	# def setDifficultyMode(self, difficultyMode):
-	# 	"""
-	# 	Function to set difficulty mode of this challenge
-	# 	:param difficultyMode: String representation of user's desired difficulty mode
-	# 	:return: Returns nothing
-	# 	"""
-	# 	self.difficultyMode = difficultyMode
-
-	def getCheckpointCount(self):
-		"""
-		Function to get total checkpoint count of this challenge
-		:return: Returns integer representation of current challenge's total checkpoint count
-		"""
-		return self.checkpointCount
-
-	# def setCheckpointCount(self, checkpointCount):
-	# 	"""
-	# 	Function to set total checkpoint count for this challenge
-	# 	:param checkpointCount: Integer representation of total number of checkpoints for currrent challenge
-	# 	:return: Returns nothing
-	# 	"""
-	# 	self.checkpointCount = checkpointCount
 
 	def getRemainingCheckpoints(self):
 		"""
@@ -114,7 +83,7 @@ class Challenge():
 		"""
 		Function to set active status of current challenge
 		:param flag: Boolean flag (True/False) to represent if challenge is active or not
-		:return: Returns True if challenge is active, else false
+		:return: Returns nothing
 		"""
 		self.active = flag
 
@@ -126,7 +95,8 @@ class ChallengeManagement():
 	def __init__(self):
 		pass
 
-	def createChallenge(self, playerName, difficultyMode, checkpointCount, remainingCheckpoints):
+	# def createChallenge(self, playerName, difficultyMode, checkpointCount, remainingCheckpoints):
+	def createChallenge(self, playerName, difficultyMode, remainingCheckpoints):
 		"""
 		Function to perform authentication for Administrator logon using provided credentials
 		:param playerName: String representation of user's player name
@@ -135,7 +105,8 @@ class ChallengeManagement():
 		:param remainingCheckpoints: List containing remaining checkpoints that user has left to clear
 		:return: Returns a Challenge object instance
 		"""
-		return Challenge(playerName, difficultyMode, checkpointCount, remainingCheckpoints)
+		# return Challenge(playerName, difficultyMode, checkpointCount, remainingCheckpoints)
+		return Challenge(playerName, difficultyMode, remainingCheckpoints)
 
 	def startChallenge(self, challenge):
 		"""
@@ -143,11 +114,10 @@ class ChallengeManagement():
 		:param challenge: Challenge object instance
 		:return: Returns True if successfully set Challenge's state to active, else False
 		"""
-		try:
-			challenge.setActiveState(True)
-			return True
-		except Exception:
+		challenge.setActiveState(True)
+		if challenge.getActiveState() != True:
 			return False
+		return True
 
 	def removeCheckpoint(self, challenge, checkpoint):
 		"""
@@ -177,17 +147,16 @@ class ChallengeManagement():
 		"""
 		Function to set a given challenge object's active status to false and save the challenge as a record
 		:param challenge: Challenge object instance
-		:return: Returns True if challenge record time was successfully saved, else False
+		:return: Returns True if challenge record was successfully completed and saved, else False
 		"""
-		try:
-			# Set flag to indicate challenge completion
-			challenge.setActiveState(False)
+		# Set flag to indicate challenge completion
+		challenge.setActiveState(False)
 
-			# Track challenge completion (record) time
-			challenge.setRecordTime(recordTime)
-			return True
-		except Exception:
+		# Track challenge completion (record) time
+		challenge.setRecordTime(recordTime)
+		if challenge.getRecordTime() == "":
 			return False
+		return True
 
 
 """
@@ -210,9 +179,12 @@ class LeaderboardManagement():
 		Function to save a completed challenge (record) into database
 		:param db_conn: DatabaseManagement object instance for interacting with database
 		:param challenge: Challenge object instance containing data of completed challenge
-		:return: Returns nothing
+		:return: Returns True if Challenge successfully saved, else False
 		"""
 		# Save a record of the challenge in the database (leaderboard) if challenge is completed
 		if not challenge.getActiveState():
 			db_conn.addChallengeRecord([challenge.getPlayerName(), challenge.getRecordTime(), 
 				challenge.getDifficultyMode()])
+			return True
+
+		return False

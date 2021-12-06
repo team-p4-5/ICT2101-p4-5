@@ -1,16 +1,11 @@
 import re
 import os
 import sys
-import time
+# import time
 import random
-import base64
-import hashlib
-import inspect
+# import inspect
 import threading
-import socket
-from rich import pretty
-from rich.prompt import Prompt
-from rich.console import Console
+# import socket
 
 """
 TESTING MODE FLAG
@@ -18,14 +13,6 @@ TESTING MODE FLAG
 # For defining whether product's functionality should be ran in 'testing' mode
 TESTING_MODE = True
 
-
-"""
-Initialises Console and Prompt objects from rich library.
-Used for printing and formatting
-"""
-pretty.install()
-console = Console()
-prompt = Prompt()
 
 """
 Database Management
@@ -69,48 +56,3 @@ MOVE_BACKWARD = "moveBackward"
 TURN_LEFT = "turnLeft"
 TURN_RIGHT = "turnRight"
 NULL_RESPONSE = "0"
-
-
-"""
-Custom Development 'print()' formatting
-"""
-
-def print_divider(message):
-    console.rule(message)
-
-
-def parse_message(message, tabs=0, symbol=None, symbol_style=None):
-    if not symbol:
-        return "\t" * tabs + message
-    if symbol_style:
-        return "\t" * tabs + f"[{symbol_style}][{symbol}][/{symbol_style}] " + message
-    return "\t" * tabs + f"[{symbol}] " + message
-
-
-def print_success(message, tabs=0, symbol="*", symbol_style=None):
-    message = parse_message(message, tabs, symbol, symbol_style)
-    console.print(message, style="bold green")
-
-
-def print_info(message, tabs=0, symbol="*"):
-    message = parse_message(message, tabs, symbol)
-    console.print(message, style="bold cyan")
-
-
-def print_danger(message, tabs=0, symbol="!"):
-    message = parse_message(message, tabs, symbol)
-    console.print(message, style="bold red")
-
-
-def print_warning(message, tabs=0, symbol="*"):
-    message = parse_message(message, tabs, symbol)
-    console.print(message, style="bold yellow")
-
-
-def print_white(message, tabs=0):
-    message = parse_message(message, tabs, symbol="SENT")
-    console.print(message, style="bold white")
-
-
-def get_func_name():
-    return inspect.stack()

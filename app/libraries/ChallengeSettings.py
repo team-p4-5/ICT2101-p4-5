@@ -1,6 +1,6 @@
 """
 Author:  @ Ho Xiu Qi
-Date:    28th Novemeber 2021
+Date:    28th November 2021
 
 Class definitions for ChallengeSettings ENTITY class and ChallengeSettingsManagement CONTROL class
 For defining and managing challenge settings retrieval and modifications methods

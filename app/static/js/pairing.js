@@ -74,6 +74,7 @@ function pairWithCar() {
         },
         error: function (response) {
             alert("Unable to pair with <"+car_id+">");
+            depairWithCar();
         }
     });
 }

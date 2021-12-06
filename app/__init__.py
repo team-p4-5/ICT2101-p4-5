@@ -202,13 +202,11 @@ def createChallenge():
         # Get the list of checkpoints
         difficulty = params.get("difficulty")
         checkpoints = params.get("checkpoints").split(',')
-        checkpoint_count = len(checkpoints)
 
         # Create the Challenge object instanace
         global active_user
         global active_challenge
-        # print_success(f"Player: {active_user}\nDifficulty: {difficulty}\nCheckpoints: {checkpoints}\nCheckpoint Count: {checkpoint_count}")
-        active_challenge = challenge_manager.createChallenge(active_user, difficulty, checkpoint_count, checkpoints)
+        active_challenge = challenge_manager.createChallenge(active_user, difficulty, checkpoints)
         return make_response(jsonify({"msg": "OK"}), 200)
 
 
@@ -397,64 +395,6 @@ def internal_server_error(e):
     # note that we set the 500 status explicitly
     return render_template('500.html'), 500
 
-# @app.route('/home')
-# def home():
-#     # # Check for Session
-#     if not session.get('active'):
-#         return redirect('/')
-
-#     # Return page for dashboard
-#     return render_template('home.html', active_user=active_user)
-
-
-# @app.route('/profile')
-# def profile():
-#     # # Check for Session
-#     if not session.get('active'):
-#         return redirect('/')
-
-#     # Return page for profile
-#     return render_template('profile.html', active_user=active_user)
-
-
-# @app.route('/dashboard')
-# def dashboard():
-#     # # Check for Session
-#     if not session.get('active'):
-#         return redirect('/')
-
-#     # Return page for profile
-#     return render_template('dashboard.html', active_user=active_user)
-
-
-# @app.route('/hardwarespecs')
-# def hardwarespecs():
-#     # # Check for Session
-#     if not session.get('active'):
-#         return redirect('/')
-
-#     # Return page for profile
-#     return render_template('hardwarespecs.html', active_user=active_user)
-
-# @app.route('/leaderboard')
-# def leaderboard():
-#     # # Check for Session
-#     if not session.get('active'):
-#         return redirect('/')
-
-#     # Return page for profile
-#     return render_template('leaderboard.html', active_user=active_user)
-
-# @app.route('/feature')
-# def feature():
-#     # # Check for Session
-#     if not session.get('active'):
-#         return redirect('/')
-
-#     # Return page for profile
-#     # global active_student
-#     # print_info(active_student.getPlayerName())
-#     return render_template('feature.html', active_user=active_user)
 
 @app.route('/controldashboard')
 def controldashboard():
@@ -503,9 +443,4 @@ def controldashboard():
 #         for command in commands.split(','):
 #             c2_comms_obj.commands.append(command)
 
-
 """
-
-
-
-
