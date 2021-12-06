@@ -11,7 +11,7 @@
 ---
 
 ## Project Pre-Requisites
-- [Python 3.X](https://www.python.org/downloads/)
+- [Python 3.9.7](https://www.python.org/downloads/)
 
 ---
 
@@ -27,7 +27,7 @@
 
 ### How to run
 1. Navigate to root directory of project (where run.py is)
-2. Execute the command `python run.py`
+2. Execute the command `python3 run.py`
 3. Open any web browser and navigate to `localhost`
 
 ---
@@ -59,6 +59,8 @@ Any changes to the repository MUST be first done on a `ui/<feature_name>`, `back
 2. Pull Requests (PR) to merge should be done through GitHub's web UI
 3. Pull Requests should be created by the **_Team Lead_** and assigned to exactly 4 other team mates for review and approval
 4. Final action to merge the feature branch with `dev` branch **MUST** be done by the **_Team Lead_** after receiving all 4 approvals
+
+---
 
 ## Standard Operating Procedures (SOP)
 ### I. Starting an Assigned Feature
@@ -145,15 +147,85 @@ git push
 6. Select the `Submit review` button
 
 ---
-## User Acceptance Test
-### Use Case Diagram
-### System State Diagram
-### Full System Test Video
+## User Acceptance Test (UAT)
+### System State Diagram (Updated)
+The following is the project's updated System State Diagram, where refinements made have been highlighted in green. For detailed information of the refinements made to the System State Diagram and System Test Cases, refer to the [UAT Manual](documentation/user_acceptance_testing/uat_user_manual.pdf).
+![System State Diagram](documentation/user_acceptance_testing/ICT2x01_M3_SystemStateDiagram_P4-5.png)
+### System Test (UAT) Environment Preparation
+Before performing the System Tests (UAT), the following changes need to be made to swap the product code into "TEST" mode
+
+1. Set `TESTING_MODE` constant to `True`
+![utils.py](documentation/user_acceptance_testing/ICT2x01_M3_UatSetupUtils_P4-5.png)
+2. Uncomment `checkpoint_list = [1]` and `generateTestMap()`
+![challenge.js](documentation/user_acceptance_testing/ICT2x01_M3_UatSetupChallenge_P4-5.png)
+3. Uncomment `depairWithCar()`
+![pairing.js](documentation/user_acceptance_testing/ICT2x01_M3_UatSetupPairing_P4-5.png)
+
+### System Test (UAT) Video
+[![System Test Video](https://i.ytimg.com/vi/GbVLMYQULxk/hqdefault.jpg)](https://youtu.be/GbVLMYQULxk)
 
 ---
 ## Whitebox Testing
 ### Selected Class for WB Testing Showcase
+The class that the team has decided to use for demonstrating Whitebox Testing code is the **`ChallengeManagement`** class.
+
+**`ChallengeManagement`** is a Control class that depends on the **`Challenge`** Entity class for managing challenge instances, and uses the **`LeaderboardManagement`** Control class for saving records of completed challenges. These classes can all be  found in [Challenge.py](app/libraries/Challenge.py).
+
 ### Whitebox Test Cases
-### Whitebox Test Suite Execution Instructions
-### Full Test Suite Execution Video
+The following test cases can be found under [app/libraries/testsuite.py](app/libraries/testsuite.py).
+| Test Case                             | Test Case Description                                                                                                                                                |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `test_challengeCreation_feature()`    | Function to test if Challenge objects can be instantiated properly                                                                                                   |
+| `test_playerName_methods()`           | Function to test if 'playerName' attribute of a Challenge object can be successfully retrieved and modified                                                          |
+| `test_difficultyMode_methods()`       | Function to test if 'difficultyMode' attribute of a Challenge object can be successfully retrieved                                                                   |
+| `test_startChallenge_feature()`       | Function to test the 'start challenge' logic of a Challenge object                                                                                                   |
+| `test_remainingCheckpoints_feature()` | Function to test retrieving of the 'remainingCheckpoints' list of a Challenge object                                                                                 |
+| `test_removeCheckpoint_feature()`     | Function to test if the removal of checkpoints from a Challenge object's remainingCheckpoints list can be reliably rejected / accepted based on different conditions |
+| `test_completeChallenge_feature()`    | Function to test challenge completion logic of a Challenge object                                                                                                    |
+| `test_saveChallenge_feature()`        | Function to test if saving of a Challenge record in the database can be reliably allowed / rejected based on different conditions                                    |
+
+### Code Coverage Statistics
+**Statement Coverage** analysis is performed using the [`coverage`](https://coverage.readthedocs.io/en/6.2/) python library to ensure that the test cases from [app/libraries/testsuite.py](app/libraries/testsuite.py) adequately covers the testing of the **`ChallengeManagement`** class and dependancies. Code coverage statistical reports are also _automatically generated_ under `app/libraries/htmlcov/`
+
+![Code Coverage Stats Index](documentation/whitebox_testing/ICT2x01_M3_CodeCoverageStatisticsIndex_P4-5.png)
+
+![Code Coverage Stats Overview](documentation/whitebox_testing/ICT2x01_M3_CodeCoverageStatisticsOverview_P4-5.png)
+
+For the detailed statistics, please see [`app/libraries/htmlcov/Challenge_py.html`](app/libraries/htmlcov/Challenge_py.html)
+
+### Whitebox Testing (Test Suite) Execution Instructions
+```bash
+# [1] Ensure you have installed python dependancies from 'requirements.txt' in the root project folder
+pip3 install -r requirements.txt
+
+# [2] Navigate to app/libraries
+cd app/libraries
+
+# [3] Run 'testsuite.py' in the directory to run unit tests
+python3 testsuite.py
+```
+
+### Whitebox Testing (Code Coverage Analysis) Execution Instructions
+```bash
+# [1] Ensure you have installed python dependancies from 'requirements.txt' in the root project folder
+pip3 install -r requirements.txt
+
+# [2] Ensure you have 'coverage' installed (https://coverage.readthedocs.io/en/6.2/)
+pip3 install coverage
+
+# [3] Navigate to app/libraries
+cd app/libraries
+
+# [4] Run 'coverage' in the directory to run unit tests in 'testsuite.py'
+coverage run -m unittest discover
+
+# [5] Generate the HTML Code Coverage Statistics report
+coverage html --omit="testsuite.py"
+
+# [6] Go to the sub-directory 'htmlcov' and open 'index.html'
+
+# [7] In the newly opened web browser page, navigate to 'Challenge.py' to view its detailed code coverage information
+```
+### Full Whitebox Test Suite Execution Video
+[![Whitebox Testing Video](https://i.ytimg.com/vi/OzhCye0v1v0/hqdefault.jpg)](https://youtu.be/OzhCye0v1v0)
 ___

@@ -11,7 +11,7 @@ import threading
 TESTING MODE FLAG
 """
 # For defining whether product's functionality should be ran in 'testing' mode
-TESTING_MODE = True
+TESTING_MODE = False
 
 
 """
